@@ -27,7 +27,7 @@
                 <li class="nav-item active">
                     <a data-bs-toggle="collapse" href="#mapa" class="collapsed" aria-expanded="false">
                         <i class="fas fa-map-marked-alt"></i>
-                        <p>Visualización del mapa</p>
+                        <p>Mapa</p>
                     </a>
                 </li>
                 <li class="nav-section">
@@ -67,27 +67,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tipotanque">
-                        <i class="fas fa-th-large"></i>
-                        <p>Tipo de tanques</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="tipotanque">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#tanques">
                         <i class="fas fa-fish"></i>
@@ -109,26 +89,11 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tipoactividades">
-                        <i class="fas fa-list-alt"></i>
-                        <p>Tipos de actividades</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="tipoactividades">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="forms/forms.html">
-                                    <span class="sub-item">Basic Form</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#actividades">
                         <i class="fas fa-pen-square"></i>
-                        <p>Actividades en tanques</p>
+                        <p>Seguimiento de tanques</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="actividades">
@@ -146,10 +111,50 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#tipotanque">
+                        <i class="fas fa-th-large"></i>
+                        <p>Tipo de tanques</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="tipotanque">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="sidebar-style-2.html">
+                                    <span class="sub-item">Sidebar Style 2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="icon-menu.html">
+                                    <span class="sub-item">Icon Menu</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#tipoactividades">
+                        <i class="fas fa-list-alt"></i>
+                        <p>Tipos de actividades</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="tipoactividades">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="forms/forms.html">
+                                    <span class="sub-item">Basic Form</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#usuarios">
                         <i class="fas fa-user"></i>
-                        <p>Gestión de usuarios</p>
+                        <p>Registro de usuarios</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="usuarios">
@@ -167,31 +172,11 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#rol">
-                        <i class="fas fa-users-cog"></i>
-                        <p>Gestión de roles</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="rol">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="maps/googlemaps.html">
-                                    <span class="sub-item">Google Maps</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/jsvectormap.html">
-                                    <span class="sub-item">Jsvectormap</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#configuracion">
                         <i class="fas fa-cog"></i>
-                        <p>Configuración</p>
+                        <p>Ajustes</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="configuracion">
@@ -233,7 +218,7 @@
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#info">
                         <i class="fas fa-info"></i>
-                        <p>Sobre AedesMap</p>
+                        <p>Autores</p>
                     </a>
                 </li>
             </ul>
