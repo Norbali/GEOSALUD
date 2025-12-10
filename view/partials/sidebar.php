@@ -144,9 +144,15 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="forms/forms.html">
-                                    <span class="sub-item">Basic Form</span>
+                                    <span class="sub-item">Registro de actividades</span>
                                 </a>
                             </li>
+                             <li>
+                                <a href="forms/forms.html">
+                                    <span class="sub-item">Consultar tipos de actividades</span>
+                                </a>
+                            </li>
+                            
                         </ul>
                     </div>
                 </li>
