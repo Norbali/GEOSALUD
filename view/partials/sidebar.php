@@ -246,7 +246,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="charts/sparkline.html">
+                                <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
                                     <span class="sub-item">Tanques por zoocriadero</span>
                                 </a>
                             </li>
