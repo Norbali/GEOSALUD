@@ -4,7 +4,7 @@
         <div class="logo-header" data-background-color="dark">
 
             <a href="index.html" class="logo">
-                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20">
+                <img src="assets/img/logoGEOSALUD.png" alt="navbar brand" class="navbar-brand" height="70">
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -78,13 +78,21 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
+                                    <span class="sub-item">Registro de tanques</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
+                                <a data-bs-toggle="collapse" href="#subConsultarTanques">
+                                    <span class="sub-item">Consultar tanques</span>
                                 </a>
+
+                                <div class="collapse" id="subConsultarTanques">
+                                    <ul class="nav nav-collapse">
+                                        <li><a href="#"><span class="sub-item">Ver Detalle de Tanques</span></a></li>
+                                        <li><a href="#"><span class="sub-item">Editar Tanques</span></a></li>
+                                        <li><a href="#"><span class="sub-item">Inhabilitar Tanques</span></a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -181,13 +189,33 @@
                     <div class="collapse" id="configuracion">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="charts/charts.html">
-                                    <span class="sub-item">Chart Js</span>
+                                <a href="../view/partials/actualizarInformacion.php">
+                                    <span class="sub-item">Actualizar Información</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="charts/sparkline.html">
-                                    <span class="sub-item">Sparkline</span>
+                                <a href="../view/partials/manualDeUsuario.php">
+                                    <span class="sub-item">Manual de Usuario</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../view/partials/manualDeInstalacion.php">
+                                    <span class="sub-item">Manual de Instalación</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../view/partials/manualDeSistema.php">
+                                    <span class="sub-item">Manual de Sistema</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../view/partials/autores.php">
+                                    <span class="sub-item">Autores</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../view/partials/videoManual.php">
+                                    <span class="sub-item">Video Manual</span>
                                 </a>
                             </li>
                         </ul>
