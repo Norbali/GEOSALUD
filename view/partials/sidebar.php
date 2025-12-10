@@ -202,13 +202,18 @@
                     <div class="collapse" id="reportes">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="charts/charts.html">
-                                    <span class="sub-item">Chart Js</span>
+                                <a href="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","getConsulta")?>">
+                                    <span class="sub-item">Seguimiento de actividades</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="charts/sparkline.html">
-                                    <span class="sub-item">Sparkline</span>
+                                    <span class="sub-item">Nacidos o muertos </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="charts/sparkline.html">
+                                    <span class="sub-item">Reporte 3</span>
                                 </a>
                             </li>
                         </ul>
