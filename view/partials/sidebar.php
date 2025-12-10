@@ -213,7 +213,7 @@
                             </li>
                             <li>
                                 <a href="charts/sparkline.html">
-                                    <span class="sub-item">Reporte 3</span>
+                                    <span class="sub-item">Tanques por zoocriadero</span>
                                 </a>
                             </li>
                         </ul>
