@@ -1,7 +1,7 @@
 <!-- Filtros -->
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title">Filtros del Reporte</h4>
+        <h4 class="card-title">Filtros Reporte Seguimiento de Tanques</h4>
     </div>
 
     <div class="card-body">
@@ -35,6 +35,10 @@
                 <label class="form-label">Zoocriadero</label>
                 <select name="zoocriadero" class="form-select">
                     <option value="">Todos</option>
+                    <?php foreach ($zoocriaderos as $zoocriadero) { ?>
+                        <option value="<?= $zoocriadero['id_zoocriadero'] ?>"><?= $act['nombre_zoocriadero'] ?></option>
+                    <?php } ?>
+                </select>
                 </select>
             </div>
 

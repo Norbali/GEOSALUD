@@ -1,7 +1,7 @@
 <!-- Filtros -->
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title">Filtros del Reporte</h4>
+        <h4 class="card-title">Filtros Reporte de Tanques por zoocriadero</h4>
     </div>
 
     <div class="card-body">
