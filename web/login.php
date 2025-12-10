@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Login – KaiAdmin</title>
+    <title>Login</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <link rel="stylesheet" href="../../web/assets/css/bootstrap.min.css">

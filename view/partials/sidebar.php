@@ -152,10 +152,9 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#usuarios">
+                    <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
                         <i class="fas fa-user"></i>
                         <p>Registro de usuarios</p>
-                        <span class="caret"></span>
                     </a>
                     <div class="collapse" id="usuarios">
                         <ul class="nav nav-collapse">
