@@ -1,4 +1,4 @@
-<h1 class="fw-bold text-center mt-4|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||">Autores</h1>
+<h1 class="fw-bold text-center mt-4">Autores</h1>
 <div class="container mt-5">
 
     <div class="card border-dark mb-4 p-4">
