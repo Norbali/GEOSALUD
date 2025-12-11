@@ -1,3 +1,9 @@
+<?php 
+
+    include_once '../lib/helpers.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,16 +27,23 @@
                 </a>
             </div>
 
-            <form>
+            <form actions="<?php echo getUrl("Acceso","Acceso","login", false, "ajax")?>" method="post">
                 <div class="form-group">
-                    <label class=""><b>Usuario</b></label>
-                    <input type="text" class="form-control">
+                    <label class=""><b>Documento</b></label>
+                    <input type="number" class="form-control" id="documento" name="documento">
                 </div>
 
                 <div class="form-group">
                     <label class=""><b>Contraseña</b></label>
-                    <input type="password" class="form-control">
+                    <input type="password" class="form-control" id="contraseña" name="contraseña">
                 </div>
+
+                <?php
+                    if(isset($_SESSION['error'])){
+                        echo "<div class='alert alert-danger'>".$_SESSION['error']."</div>";
+                        unset($_SESSION['error']);
+                    }
+                ?>
 
                 <div class="text-center">
                      <button class="btn btn-primary btn-block mt-3">Entrar</button>

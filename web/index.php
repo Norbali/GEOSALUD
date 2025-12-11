@@ -16,7 +16,7 @@
                         if(isset($_GET['modulo'])){
                             resolve();
                         }else{
-                            include_once '../view/partials/content.php';
+                            session_destroy();
                         }
                     echo "</div>";
                 echo "</div>";
