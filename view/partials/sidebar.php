@@ -135,33 +135,27 @@
                 </li>
                 
                 <li class="nav-item">
-    <a data-bs-toggle="collapse" href="#tipoactividades">
-        <i class="fas fa-list-alt"></i>
-        <p>Tipos de actividades</p>
-        <span class="caret"></span>
-    </a>
-
-    <div class="collapse" id="tipoactividades">
-        <ul class="nav nav-collapse">
-
-            <!-- ESTE ES TU LINK (FUNCIONA) -->
-            <li>
-                <a href="<?php echo getUrl("RegistroDeActividades","RegistroDeActividades","getCreate")?>">
-                    <span class="sub-item">Registrar actividad</span>
-                </a>
-            </li>
-
-            <!-- Esto ya lo tenías -->
-            <li>
-                <a href="RegistroDeActividades.php">
-                    <span class="sub-item">Consultar tipos de actividades</span>
-                </a>
-            </li>
-
-        </ul>
-    </div>
-</li>
-
+                    <a data-bs-toggle="collapse" href="#tipoactividades">
+                        <i class="fas fa-list-alt"></i>
+                        <p>Tipos de actividades</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="tipoactividades">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="forms/forms.html">
+                                    <span class="sub-item">Registro de actividades</span>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="forms/forms.html">
+                                    <span class="sub-item">Consultar tipos de actividades</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </li>
                 
                 <li class="nav-item">
                     <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
