@@ -4,7 +4,7 @@
         <div class="logo-header" data-background-color="dark">
 
             <a href="index.html" class="logo">
-                <img src="assets/img/logoGEOSALUD.png" alt="navbar brand" class="navbar-brand" height="70">
+                <img src="assets/img/logoGEOSALUD.png" alt="navbar brand" class="navbar-brand" height="130">
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -78,21 +78,15 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="sidebar-style-2.html">
+                                    <a href="<?php echo getUrl("Tanques","Tanques","getCreate")?>">
                                     <span class="sub-item">Registro de tanques</span>
                                 </a>
                             </li>
                             <li>
                                 <a data-bs-toggle="collapse" href="#subConsultarTanques">
+                                    <a href="<?php echo getUrl("Tanques","Tanques","list")?>">
                                     <span class="sub-item">Consultar tanques</span>
                                 </a>
-
-                                <div class="collapse" id="subConsultarTanques">
-                                    <ul class="nav nav-collapse">
-                                        <li><a href="#"><span class="sub-item">Ver Detalle de Tanques</span></a></li>
-                                        <li><a href="#"><span class="sub-item">Editar Tanques</span></a></li>
-                                        <li><a href="#"><span class="sub-item">Inhabilitar Tanques</span></a></li>
-                                    </ul>
-                                </div>
                             </li>
                         </ul>
                     </div>
@@ -215,7 +209,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="../view/partials/autores.php">
+                                <a href="<?php echo getUrl("Autores","Autores","getMostrarAutores")?>">
                                     <span class="sub-item">Autores</span>
                                 </a>
                             </li>
@@ -253,13 +247,6 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#info">
-                        <i class="fas fa-info"></i>
-                        <p>Autores</p>
-                    </a>
-                </li>
-            </ul>
         </div>
     </div>
 </div>
