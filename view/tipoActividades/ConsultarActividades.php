@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,27 +13,32 @@
         body {
             background-color: #f4f5f7;
         }
+
         .page-header {
             background: white;
             padding: 1.5rem;
             border-radius: 0.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         }
+
         .card {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             border: none;
         }
+
         .breadcrumb {
             background: none;
             padding: 0;
             margin: 0;
         }
+
         .table-responsive {
             border-radius: 0 0 0.5rem 0.5rem;
         }
     </style>
 </head>
+
 <body>
     <div class="container-fluid px-4 py-4">
         <!-- Page Header -->
@@ -43,57 +49,79 @@
         </div>
 
         <!-- Card con Tabla -->
-         <form action="<?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta") ?>" method="POST">
-        <div class="card">
-            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-list text-primary"></i> Lista de Actividades
-                </h5>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
-                    <i class="fas fa-plus"></i> Nueva Actividad
+        <form action="<?php echo getUrl("TipoActividades", "ConsultarTipoDeActividades", "getConsulta") ?>" method="POST">
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list text-primary"></i> Lista de Actividades
+                    </h5>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
+                        <i class="fas fa-plus"></i> Nueva Actividad
+                    </button>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre de la Actividad</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col" class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <?php
+                            // convertir el resultado en array 
+                            $listaActividades = [];
+
+                            if ($actividades) {
+                                while ($row = pg_fetch_assoc($actividades)) {
+                                    $listaActividades[] = $row;
+                                }
+                            }
+                            ?>
+                            <tbody>
+                                <?php
+                                foreach ($listaActividades as $actividad) { ?>
+                                    <tr>
+                                        <td><?php echo $actividad['id_actividad']; ?></td>
+                                        <td><?php echo $actividad['nombre_actividad']; ?></td>
+                                        <td>
+                                            <?php
+                                            if ($actividad['nombre_estado_actividades'] == 'Activo') {
+                                                echo '<span class="badge bg-success">Activo</span>';
+                                            } else {
+                                                echo '<span class="badge bg-danger">Inactivo</span>';
+                                            }
+                                            ?>
+                                        </td>
+                                         <td class="text-center">
+            <div class="d-flex justify-content-center gap-1">
+                <button class="btn btn-info btn-sm"
+                        onclick="verDetalle(<?php echo $actividad['id_actividad']; ?>)">
+                    <i class="fas fa-eye"></i> Ver
+                </button>
+
+                <button class="btn btn-warning btn-sm"
+                        onclick="editar(<?php echo $actividad['id_actividad']; ?>)">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+
+                <button class="btn btn-danger btn-sm"
+                        onclick="eliminar(<?php echo $actividad['id_actividad']; ?>)">
+                    <i class="fas fa-trash"></i> Inhabilitar
                 </button>
             </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre de la Actividad</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col" class="text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                foreach($actividades as $actividad){
-                                    echo "<tr>";
-                                    echo "<td>" . $actividad['id_actividad'] . "</td>";
-                                    echo "<td>" . $actividad['nombre_actividad'] . "</td>";
-                                    echo "<td>";
-                                    if($actividad['nombre_estado_actividades'] == 'Activo'){
-                                        echo '<span class="badge bg-success">Activo</span>';
-                                    } else {
-                                        echo '<span class="badge bg-danger">Inactivo</span>';
-                                    }
-                                    echo "</td>";
-                                    echo "<td class='text-center'>
-                                            <button class='btn btn-info btn-sm me-1' onclick='verDetalle(" . $actividad['id_actividad'] . ")'>
-                                                <i class='fas fa-info-circle'></i>
-                                            </button>
-                                            <button class='btn btn-warning btn-sm' onclick='editarActividad(" . $actividad['id_actividad'] . ")'>
-                                                <i class='fas fa-edit'></i>
-                                            </button>
-                                          </td>";
-                                    echo "</tr>";
-                                }
-                                ?>
-                          
-                        </tbody>
-                    </table>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+
+                               
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 
     <!-- Modal Nueva Actividad -->
@@ -163,11 +191,7 @@
                         <div class="col-8" id="detalleFecha">11/12/2024</div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                        <i class="fas fa-check"></i> Cerrar
-                    </button>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -209,3 +233,8 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/funcionesModalTipoActividades.js"></script>
+
+</body>
+<script src="assets/js/funcionesModalTipoActividades.js"></script>
