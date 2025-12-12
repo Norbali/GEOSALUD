@@ -1,0 +1,25 @@
+<?php 
+/*
+
+Acceso a acciones segun el rol del usuario
+
+if (in_array('NOMBRE_DE_LA_ACCION_BD', $_SESSION['permisos']['NOMBRE_DEL_MODULO_BD'])) {?>
+    <!-- Boton -->
+} 
+
+EJEMPLO
+if (in_array('inhabilitar', $_SESSION['permisos']['Tanques'])) { ?>
+   <button class="btn btn-danger">Eliminar Tanque</button>
+} 
+
+
+VARIABLES DE SESION DE INICIO DE SESION
+ 
+- $_SESSION['documento'] = documento del usuario
+- $_SESSION['auth'] = variable para el helprslogin
+- $_SESSION['nombre'] = nombre del usuario
+- $_SESSION['rol'] = id del rol del usuario
+
+
+*/
+?>
