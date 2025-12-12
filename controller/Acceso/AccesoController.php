@@ -164,7 +164,7 @@
 
             if (pg_num_rows($usuario) > 0) {
                 $row = pg_fetch_assoc($usuario);
-                return $row[$campo];   // Retorna el valor del campo solicitado
+                return $row[$campo];  
             } else {
                 return false;
             }
