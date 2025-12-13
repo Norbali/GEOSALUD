@@ -21,7 +21,8 @@
                     echo "</div>";
                 echo "</div>";
 
-            //echo "</div>";
+                include_once '../view/partials/footer.php';
+            echo "</div>";
         echo "</div>";
         include_once '../view/partials/scripts.php';
 
