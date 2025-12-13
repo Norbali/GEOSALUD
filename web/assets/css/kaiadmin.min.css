@@ -619,12 +619,11 @@ body {
 }
 
 .page-inner {
-   padding: 180px
+   padding: 20px
 }
 
 @media (min-width:576px) {
    .page-inner {
-      padding-top: 120px;
       padding-right: 30px;
       padding-left: 30px
    }

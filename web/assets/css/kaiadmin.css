@@ -441,11 +441,10 @@ body {
     padding-right: 2rem;
     padding-left: 2rem; } }
 .page-inner {
-  padding: 180px; }
+  padding: 20px; }
 
 @media (min-width: 576px) {
   .page-inner {
-    padding-top: 120px;
     padding-right: 30px;
     padding-left: 30px; } }
 .page-inner-fill {

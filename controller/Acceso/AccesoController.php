@@ -143,6 +143,8 @@
             $obj = new AccesoModel();
 
             $sql = "SELECT * FROM usuarios WHERE documento = '$documento'";
+            echo "<pre>$sql</pre>";
+            exit;
             $usuario = $obj->select($sql);
 
             if(pg_num_rows($usuario)>0){
