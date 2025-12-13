@@ -32,7 +32,7 @@ class TanquesController {
     $cantidad = $_POST['cantidad_peces'];
 
     // Usuario responsable (siempre debe existir)
-    $user = $_SESSION['usuario']->documento ?? 1; // valor por defecto si no hay sesión
+    $user = isset($_SESSION['usuario']->documento)? $_SESSION['usuario']->documento : 1;
 
     // ID autoincremental
     $id = $this->model->autoIncrement("tanque", "id_tanque");
@@ -59,7 +59,7 @@ class TanquesController {
     /* ============================
        LISTAR TANQUES
     ============================ */
-    public function list() {
+    public function getList() {
 
     $sql = "SELECT t.*, 
                    tt.nombre_tipo_tanque,
@@ -74,7 +74,6 @@ class TanquesController {
 
     include_once "../view/tanques/listRegistroTanques.php";
 }
-
 
 
     /* ============================
@@ -135,7 +134,7 @@ class TanquesController {
     $cantidad = $_POST['cantidad_peces'];
 
     // usuario responsable actualizado
-    $user = $_SESSION['usuario']->documento ?? 1;
+    $user = isset($_SESSION['usuario']->documento) ? $_SESSION['usuario']->documento : 1;
 
     $sql = "UPDATE tanque SET
             nombre_tanque='$nombre',

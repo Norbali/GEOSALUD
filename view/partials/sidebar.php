@@ -69,27 +69,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tanques">
+                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>">
                         <i class="fas fa-fish"></i>
                         <p>Tanques</p>
-                        <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="tanques">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="sidebar-style-2.html">
-                                    <a href="<?php echo getUrl("Tanques","Tanques","getCreate")?>">
-                                    <span class="sub-item">Registro de tanques</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="collapse" href="#subConsultarTanques">
-                                    <a href="<?php echo getUrl("Tanques","Tanques","list")?>">
-                                    <span class="sub-item">Consultar tanques</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <li class="nav-item">
