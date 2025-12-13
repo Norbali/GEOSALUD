@@ -42,14 +42,35 @@
                     </a>
                 </li>
 
-                <?php if (array_key_exists("Tanques", $permisos)){ ?>
-                    <li class="nav-item">
-                        <a  href="<?php echo getUrl("Tanques","Tanques","getList")?>">
-                            <i class="fas fa-fish"></i>
-                            <p>Tanques</p>
-                        </a>
-                    </li>
-                <?php }?>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#tanques">
+                        <i class="fas fa-fish"></i>
+                        <p>Tanques</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="tanques">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="sidebar-style-2.html">
+                                    <span class="sub-item">Registro de tanques</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="collapse" href="#subConsultarTanques">
+                                    <span class="sub-item">Consultar tanques</span>
+                                </a>
+
+                                <div class="collapse" id="subConsultarTanques">
+                                    <ul class="nav nav-collapse">
+                                        <li><a href="#"><span class="sub-item">Ver Detalle de Tanques</span></a></li>
+                                        <li><a href="#"><span class="sub-item">Editar Tanques</span></a></li>
+                                        <li><a href="#"><span class="sub-item">Inhabilitar Tanques</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
@@ -152,7 +173,7 @@
                                 </li>
                             <?php }?>
                             <li>
-                                <a href="<?php echo getUrl("Autores","Autores","getMostrarAutores")?>">
+                                <a href="../view/partials/autores.php">
                                     <span class="sub-item">Autores</span>
                                 </a>
                             </li>
@@ -198,7 +219,6 @@
                         </ul>
                     </div>
                 </li>
-                
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#info">
                         <i class="fas fa-info"></i>
