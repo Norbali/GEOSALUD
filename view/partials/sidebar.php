@@ -1,6 +1,6 @@
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
-        <!-- Logo Header -->
+        <!-- Logo  -->
         <div class="logo-header" data-background-color="dark">
 
             <a href="index.html" class="logo">
@@ -146,9 +146,15 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="forms/forms.html">
-                                    <span class="sub-item">Basic Form</span>
+                                    <span class="sub-item">Registro de actividades</span>
                                 </a>
                             </li>
+                             <li>
+                                <a href="forms/forms.html">
+                                    <span class="sub-item">Consultar tipos de actividades</span>
+                                </a>
+                            </li>
+                            
                         </ul>
                     </div>
                 </li>
@@ -224,13 +230,18 @@
                     <div class="collapse" id="reportes">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="charts/charts.html">
-                                    <span class="sub-item">Chart Js</span>
+                                <a href="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","getConsulta")?>">
+                                    <span class="sub-item">Seguimiento de actividades</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="charts/sparkline.html">
-                                    <span class="sub-item">Sparkline</span>
+                                <a href="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","getConsulta")?>">
+                                    <span class="sub-item">Nacidos o muertos </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
+                                    <span class="sub-item">Tanques por zoocriadero</span>
                                 </a>
                             </li>
                         </ul>

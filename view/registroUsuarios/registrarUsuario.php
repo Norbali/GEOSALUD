@@ -9,6 +9,7 @@
             <div class="form-group">
                 <label for="documento">Documento*</label>
                 <input type="text" class="form-control" id="documento" name="documento" placeholder="Ingrese un número de documento" required>
+                <small class="text-danger"></small>
             </div>
 
             <div class="row">
@@ -16,6 +17,7 @@
                     <div class="form-group">
                         <label for="nombre">Nombre*</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese un nombre" required>
+                        <small class="text-danger"></small>
                     </div>
                 </div>
 
@@ -23,6 +25,7 @@
                     <div class="form-group">
                         <label for="apellido">Apellido*</label>
                         <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese un apellido" required>
+                        <small class="text-danger"></small>
                     </div>
                 </div>
             </div>
@@ -30,16 +33,19 @@
             <div class="form-group">
                 <label for="telefono">Teléfono*</label>
                 <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un número de teléfono" required>
+                <small class="text-danger"></small>
             </div>
 
             <div class="form-group">
                 <label for="correo">Correo*</label>
                 <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese un correo electronico"required>
+                <small class="text-danger"></small>
             </div>
 
             <div class="form-group">
                 <label for="contraseña">Contraseña*</label>
                 <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese una ccontraseña" required>
+                <small class="text-danger"></small>
             </div>
 
             <div class="form-group">
@@ -52,6 +58,7 @@
                         </option>
                     <?php } ?>
                 </select>
+                <small class="text-danger"></small>
             </div>
 
         </div>
