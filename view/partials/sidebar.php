@@ -175,7 +175,7 @@
                                 </li>
                             <?php }?>
                             <li>
-                                <a href="../view/partials/autores.php">
+                                <a href="<?php echo getUrl("Autores","Autores","getMostrarAutores")?>">
                                     <span class="sub-item">Autores</span>
                                 </a>
                             </li>

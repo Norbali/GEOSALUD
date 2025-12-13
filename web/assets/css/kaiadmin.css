@@ -441,7 +441,7 @@ body {
     padding-right: 2rem;
     padding-left: 2rem; } }
 .page-inner {
-  padding: 24px 0; }
+  padding: 20px; }
 
 @media (min-width: 576px) {
   .page-inner {
