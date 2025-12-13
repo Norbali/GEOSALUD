@@ -3,5 +3,5 @@
     $user ="postgres";
     $password = "12345";// su contraseña, POR FAVOR ESTE CAMBIO NO LO SUBAN A LA MASTER O MAIN QUE SOLO SE QUEDE EN SU RAMA
     $database = "bd_geosalud";
-    $port = "9000"; // Puerto 
+    $port = "5432"; // Puerto 
 ?>
