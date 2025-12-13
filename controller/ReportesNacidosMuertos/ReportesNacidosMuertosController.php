@@ -8,7 +8,6 @@ class ReportesNacidosMuertosController{
         $obj = new ReportesNacidosMuertosModel();
         $sqlZoocriaderos = "SELECT * FROM zoocriadero";
         $zoocriaderos = $obj->select($sqlZoocriaderos);
-        //
         include_once '../view/reportesNacidosMuertos/reporteNacidosMuertos.php';
     } 
 

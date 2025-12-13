@@ -8,7 +8,7 @@
 
             <div class="form-group">
                 <label for="documento">Documento*</label>
-                <input type="text" class="form-control" id="documento" name="documento" placeholder="Ingrese un número de documento" required>
+                <input type="text" class="form-control" id="documento" name="documento" placeholder="Ingrese un n&uacute;mero de documento" required>
                 <small class="text-danger"></small>
             </div>
 
@@ -31,8 +31,8 @@
             </div>
 
             <div class="form-group">
-                <label for="telefono">Teléfono*</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un número de teléfono" required>
+                <label for="telefono">Tel&eacute;fono*</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un n&uacute;mero de tel&eacute;fono" required>
                 <small class="text-danger"></small>
             </div>
 
@@ -43,8 +43,8 @@
             </div>
 
             <div class="form-group">
-                <label for="contraseña">Contraseña*</label>
-                <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese una ccontraseña" required>
+                <label for="contraseña">Contrase&ntilde;a*</label>
+                <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Ingrese una ccontrase&ntilde;a" required>
                 <small class="text-danger"></small>
             </div>
 

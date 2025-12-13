@@ -1,10 +1,13 @@
+<?php
+    $permisos = $_SESSION['permisos'];
+?>
+
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo  -->
         <div class="logo-header" data-background-color="dark">
-
-            <a href="index.html" class="logo">
-                <img src="assets/img/logoGEOSALUD.png" alt="navbar brand" class="navbar-brand" height="130">
+            <a href="#" class="logo m-4">
+                <img src="assets/img/logoGEOSALUD.png" alt="navbar brand" class="navbar-brand px-5" height="70">
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -24,144 +27,119 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
-                <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="#mapa" class="collapsed" aria-expanded="false">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <p>Mapa</p>
-                    </a>
-                </li>
+               
                 <li class="nav-section">
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
                     <h4 class="text-section">Módulos</h4>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#zoocriadero">
-                        <i class="fas fa-building"></i>
-                        <p>Zoocriaderos</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="zoocriadero">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="components/avatars.html">
-                                    <span class="sub-item">Avatars</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/buttons.html">
-                                    <span class="sub-item">Buttons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/gridsystem.html">
-                                    <span class="sub-item">Grid System</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/panels.html">
-                                    <span class="sub-item">Panels</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
 
-                <li class="nav-item">
-                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>">
-                        <i class="fas fa-fish"></i>
-                        <p>Tanques</p>
+                <li class="nav-item active">
+                    <a data-bs-toggle="collapse" href="#mapa" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Mapa</p>
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#actividades">
-                        <i class="fas fa-pen-square"></i>
-                        <p>Seguimiento de tanques</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="actividades">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="tables/tables.html">
-                                    <span class="sub-item">Basic Table</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tables/datatables.html">
-                                    <span class="sub-item">Datatables</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                <?php if (array_key_exists("Tanques", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#tanques">
+                            <i class="fas fa-fish"></i>
+                            <p>Tanques</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="tanques">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="sidebar-style-2.html">
+                                        <span class="sub-item">Registro de tanques</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="collapse" href="#subConsultarTanques">
+                                        <span class="sub-item">Consultar tanques</span>
+                                    </a>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tipotanque">
-                        <i class="fas fa-th-large"></i>
-                        <p>Tipo de tanques</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="tipotanque">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                                    <div class="collapse" id="subConsultarTanques">
+                                        <ul class="nav nav-collapse">
+                                            <li><a href="#"><span class="sub-item">Ver Detalle de Tanques</span></a></li>
+                                            <li><a href="#"><span class="sub-item">Editar Tanques</span></a></li>
+                                            <li><a href="#"><span class="sub-item">Inhabilitar Tanques</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                <?php }?>
+
+                <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#actividades">
+                            <i class="fas fa-pen-square"></i>
+                            <p>Seguimiento de tanques</p>
+                        </a>
+                    </li>
+                <?php }?>
+
+                <?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#tipotanque">
+                            <i class="fas fa-th-large"></i>
+                            <p>Tipo de tanques</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="tipotanque">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="sidebar-style-2.html">
+                                        <span class="sub-item">Registro de tipos de tanques</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="icon-menu.html">
+                                        <span class="sub-item">Consultar Tipos de tanques</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                <?php }?>
+
+                <?php if (array_key_exists("TiposDeActividades", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#tipoactividades">
+                            <i class="fas fa-list-alt"></i>
+                            <p>Tipos de actividades</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="tipoactividades">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a href="forms/forms.html">
+                                        <span class="sub-item">Registro de actividades</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="forms/forms.html">
+                                        <span class="sub-item">Consultar tipos de actividades</span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                <?php }?>
                 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tipoactividades">
-                        <i class="fas fa-list-alt"></i>
-                        <p>Tipos de actividades</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="tipoactividades">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="forms/forms.html">
-                                    <span class="sub-item">Registro de actividades</span>
-                                </a>
-                            </li>
-                             <li>
-                                <a href="forms/forms.html">
-                                    <span class="sub-item">Consultar tipos de actividades</span>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
-                        <i class="fas fa-user"></i>
-                        <p>Registro de usuarios</p>
-                    </a>
-                    <div class="collapse" id="usuarios">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="maps/googlemaps.html">
-                                    <span class="sub-item">Google Maps</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/jsvectormap.html">
-                                    <span class="sub-item">Jsvectormap</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                <?php if (array_key_exists("RegistroDeUsuarios", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
+                            <i class="fas fa-user"></i>
+                            <p>Registro de usuarios</p>
+                        </a>
+                    </li>
+                <?php }?>
                 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#configuracion">
@@ -181,16 +159,21 @@
                                     <span class="sub-item">Manual de Usuario</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="../view/partials/manualDeInstalacion.php">
-                                    <span class="sub-item">Manual de Instalación</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../view/partials/manualDeSistema.php">
-                                    <span class="sub-item">Manual de Sistema</span>
-                                </a>
-                            </li>
+                            <?php if (array_key_exists("ManualInstalacion", $permisos)){ ?>
+                                <li>
+                                    <a href="../view/partials/manualDeInstalacion.php">
+                                        <span class="sub-item">Manual de Instalación</span>
+                                    </a>
+                                </li>
+                            <?php }?>
+
+                            <?php if (array_key_exists("ManualSistema", $permisos)){ ?>
+                                <li>
+                                    <a href="../view/partials/manualDeSistema.php">
+                                        <span class="sub-item">Manual de Sistema</span>
+                                    </a>
+                                </li>
+                            <?php }?>
                             <li>
                                 <a href="<?php echo getUrl("Autores","Autores","getMostrarAutores")?>">
                                     <span class="sub-item">Autores</span>
@@ -204,6 +187,7 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#reportes">
                         <i class="fas fa-newspaper"></i>
@@ -212,24 +196,39 @@
                     </a>
                     <div class="collapse" id="reportes">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","getConsulta")?>">
-                                    <span class="sub-item">Seguimiento de actividades</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","getConsulta")?>">
-                                    <span class="sub-item">Nacidos o muertos </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
-                                    <span class="sub-item">Tanques por zoocriadero</span>
-                                </a>
-                            </li>
+                            <?php if (array_key_exists("ReporteSeguimientoAc", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","getConsulta")?>">
+                                        <span class="sub-item">Seguimiento de actividades</span>
+                                    </a>
+                                </li>
+                            <?php }?>
+
+                            <?php if (array_key_exists("ReporteNacidosOMuert", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","getConsulta")?>">
+                                        <span class="sub-item">Peces Nacidos y muertos </span>
+                                    </a>
+                                </li>
+                            <?php }?>
+                            <?php if (array_key_exists("ReporteTanquePorZoo", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
+                                        <span class="sub-item">Tanques por zoocriadero</span>
+                                    </a>
+                                </li>
+                            <?php }?>
                         </ul>
                     </div>
                 </li>
+                
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#info">
+                        <i class="fas fa-info"></i>
+                        <p>Autores</p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
