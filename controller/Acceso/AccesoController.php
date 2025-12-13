@@ -71,7 +71,8 @@
             $obj = new AccesoModel();
 
             $sql = "
-                SELECT m.nombre_modulo, a.nombre_accion FROM permisos p
+                SELECT m.nombre_modulo, a.nombre_accion
+                FROM permisos p
                 INNER JOIN modulo m ON p.id_modulo = m.id_modulo
                 INNER JOIN acciones a ON p.id_accion = a.id_accion
                 WHERE p.id_rol = $idRol
@@ -79,17 +80,19 @@
 
             $result = $obj->select($sql);
 
-            $permisos = [];
+            $permisos = array();
 
             while ($row = pg_fetch_assoc($result)) {
-                $modulo = $row['nombre_modulo'];
-                $accion = $row['nombre_accion'];
-                $permisos[$row['nombre_modulo']][] = $row['nombre_accion'];
+                if (!isset($permisos[$row['nombre_modulo']])) {
+                    $permisos[$row['nombre_modulo']] = array();
+                }
+
+                array_push($permisos[$row['nombre_modulo']], $row['nombre_accion']);
             }
 
             return $permisos;
-            
         }
+
 
         //VALIDAR CAMPOS
         function validarContrasena($contrasena) {
