@@ -141,6 +141,8 @@
                         </ul>
                     </div>
                 </li>
+                 <li>
+                              
                 
                 <li class="nav-item">
                                 <a href=" <?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta")?>">
@@ -148,6 +150,7 @@
                         <p>Tipos de actividades</p>
                     </a>
                 </li>
+
                 
                 <li class="nav-item">
                     <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
