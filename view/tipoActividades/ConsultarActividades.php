@@ -1,3 +1,13 @@
+ <?php
+    session_start();
+    if (isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        // importante para que no se repita la alerta
+        unset($_SESSION['alert']);
+    }
+    ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -64,16 +74,7 @@
 </head>
 
 <body>
-    <!-- Alertas de éxito o error -->
-    <?php
-    session_start();
-    if (isset($_SESSION['alert'])) {
-        $alert = $_SESSION['alert'];
-        // importante para que no se repita la alerta
-        unset($_SESSION['alert']);
-    }
-    ?>
-
+   
     <?php if (!empty($alert)) { ?>
         <div class="container-fluid px-4 pt-3">
             <div class="alert alert-<?= $alert['type'] ?> alert-dismissible fade show" role="alert">
