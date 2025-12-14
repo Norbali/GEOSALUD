@@ -99,18 +99,18 @@
             $mensaje = "";
 
             if (strlen($contrasena) < 8) {
-                $mensaje = "Debe tener m&iacute;nimo 8 caracteres.";
-            } elseif (!preg_match('/[A-Z]/', $contrasena)) {
-                $mensaje = "Debe contener al menos una may&uacute;scula.";
-            } elseif (!preg_match('/[a-z]/', $contrasena)) {
-                $mensaje = "Debe contener al menos una min&uacute;scula.";
-            } elseif (!preg_match('/\d/', $contrasena)) {
-                $mensaje = "Debe contener al menos un n&uacute;mero.";
-            } elseif (!preg_match('/[\W_]/', $contrasena)) {
-                $mensaje = "Debe contener al menos un car&aacute;cter especial.";
+                $mensaje = "La contrase&ntilde;a debe tener m&iacute;nimo 8 caracteres.";
+            } elseif (
+                !preg_match('/[A-Z]/', $contrasena) ||
+                !preg_match('/[a-z]/', $contrasena) ||
+                !preg_match('/\d/', $contrasena) ||
+                !preg_match('/[\W_]/', $contrasena)
+            ) {
+                $mensaje = "La contrase&ntilde;a debe contener may&uacute;scula, min&uacute;scula, n&uacute;mero y car&aacute;cter especial.";
             } else {
                 $mensaje = "true";
             }
+
             return $mensaje;
         }
 
@@ -118,20 +118,11 @@
             $mensaje = "";
             if (empty($documento)) {
                 $mensaje = "El documento no puede estar vacío.";
-            }
-            
-            elseif (!preg_match('/^[0-9]+$/', $documento)) {
-                $mensaje = "El documento solo debe contener n&uacute;meros.";
-            }
-
-            elseif (strlen($documento) < 9) {
-                $mensaje = "El documento debe tener m&iacute;nimo 9 d&iacute;gitos.";
-            }
-
-            elseif (strlen($documento) > 10) {
-                $mensaje = "El documento debe tener m&aacute;ximo 10 d&iacute;gitos.";
-            }
-            else {
+            } elseif (
+                !preg_match('/^[0-9]+$/', $documento) || strlen($documento) < 9 || strlen($documento) > 10
+            ) {
+                $mensaje = "El documento debe contener solo n&uacute;meros enteros y tener entre 9 y 10 d&iacute;gitos.";
+            } else {
                 $mensaje = "true";
             }
 
@@ -152,10 +143,11 @@
             }
         }
 
-        public function validarCredencialContraseña($documento, $contraseña){
+        public function validarCredencialContraseña($documento, $contrasena){
             $obj = new AccesoModel();
+            $hash = sha1($contrasena);
 
-            $sql = "SELECT * FROM usuarios WHERE documento = '$documento' AND contrasena = '$contraseña'";
+            $sql = "SELECT * FROM usuarios WHERE documento = '$documento' AND contrasena = '$hash'";
             $usuario = $obj->select($sql);
 
             if(pg_num_rows($usuario)>0){
@@ -193,8 +185,5 @@
             }
         }
 
-
-
     }
-
 ?>
