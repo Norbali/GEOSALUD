@@ -631,12 +631,11 @@ body {
 }
 
 .page-inner {
-  padding: 24px 0;
-  margin-top: 0 !important;
-}
+  padding: 180px; }
 
 @media (min-width: 576px) {
   .page-inner {
+    padding-top: 120px;
     padding-right: 30px;
     padding-left: 30px;
   }
