@@ -80,31 +80,16 @@
                         </a>
                     </li>
                 <?php }?>
+<?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
+    <li class="nav-item">
+        <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">
+            <i class="fas fa-th-large"></i>
+            <p>Tipo de tanques</p>
+        </a>
+    </li>
+<?php }?>
 
-                <?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
-                    <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#tipotanque">
-                            <i class="fas fa-th-large"></i>
-                            <p>Tipo de tanques</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="tipotanque">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <a href="sidebar-style-2.html">
-                                        <span class="sub-item">Registro de tipos de tanques</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="icon-menu.html">
-                                        <span class="sub-item">Consultar Tipos de tanques</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                <?php }?>
-
+                
                 <?php if (array_key_exists("TiposDeActividades", $permisos)){ ?>
                     <li class="nav-item">
                         <a data-bs-toggle="collapse" href="#tipoactividades">
