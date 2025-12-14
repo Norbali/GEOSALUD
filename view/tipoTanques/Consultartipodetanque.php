@@ -98,7 +98,7 @@
                                             <div class="d-flex justify-content-center gap-1">
                                                 <button class="btn btn-info btn-sm"
                                                     onclick="verDetalle(<?php echo $tipoTanque['id_tipo_tanque']; ?>)">
-                                                    <i class="fas fa-eye"></i> Ver
+                                                    <i class="fas fa-eye"></i> Ver Detalles
                                                 </button>
 
                                                 <button class="btn btn-warning btn-sm"
