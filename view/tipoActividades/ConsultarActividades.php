@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body {
             background-color: #f4f5f7;
@@ -37,8 +39,22 @@
         .container-fluid {
             overflow: visible !important;
         }
+        .page-content-fix {
+    position: relative;
+    top: 0 !important;
+    transform: none !important;
+    margin-top: 0 !important;
+    padding-top: 1rem;
+}
+
+        .main-panel,
+        .content,
+        .container-fluid {
+            overflow: visible !important;
+        }
 
         .page-header {
+            display: block !important;
             display: block !important;
             background: white;
             padding: 1.5rem;
@@ -46,6 +62,7 @@
             margin-bottom: 1.5rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         }
+
 
 
         .card {
@@ -70,11 +87,22 @@
         }
 
         
+
+        
     </style>
 </head>
 
 <body>
-   
+    <!-- Alertas de éxito o error -->
+    <?php
+    session_start();
+    if (isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        // importante para que no se repita la alerta
+        unset($_SESSION['alert']);
+    }
+    ?>
+
     <?php if (!empty($alert)) { ?>
         <div class="container-fluid px-4 pt-3">
             <div class="alert alert-<?= $alert['type'] ?> alert-dismissible fade show" role="alert">
@@ -126,7 +154,12 @@
                         <i class="fas fa-plus"></i> Nueva Actividad
                     </button>
 
+
                 </div>
+            </div>
+  
+            <form method="POST" action="<?php echo getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'postConsulta'); ?>">
+
             </div>
   
             <form method="POST" action="<?php echo getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'postConsulta'); ?>">
@@ -211,6 +244,7 @@
                                 <?php } ?>
                             </tbody>
 
+
                         </table>
                     </div>
                 </div>
@@ -250,6 +284,17 @@
                         }
                         ?>
 
+
+
+                        <?php
+                        $listaEstados = array();
+                        if ($estados) {
+                            while ($row = pg_fetch_assoc($estados)) {
+                                $listaEstados[] = $row;
+                            }
+                        }
+                        ?>
+
                         <div class="mb-3">
                             <label class="form-label">Estado *</label>
                             <select class="form-select"
@@ -273,6 +318,7 @@
 
                     </div>
 
+                </form>
                 </form>
             </div>
         </div>
@@ -306,6 +352,8 @@
                         </div>
 
                         <!-- ESTADO  -->
+
+                        <!-- ESTADO  -->
                         <div class="mb-3">
                             <label class="form-label">Estado</label>
 
@@ -319,6 +367,15 @@
                                     </option>
                                 <?php } ?>
                             </select>
+
+                            <!-- EL ESTADO QUE SE ENVÍA -->
+                            <input type="hidden"
+                                name="id_estado_actividad"
+                                id="editEstadoHidden">
+
+                            <small class="text-muted">
+                                El estado no se puede editar.
+                            </small>
 
                             <!-- EL ESTADO QUE SE ENVÍA -->
                             <input type="hidden"
@@ -358,6 +415,12 @@
 
 
 
+</div>
+
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         //OBLIGAR DROPDOWN BOOTSTRAP A FUNCIONAR CON BOTON
@@ -380,7 +443,29 @@
         }
     </script>
 
+    <script>
+        //OBLIGAR DROPDOWN BOOTSTRAP A FUNCIONAR CON BOTON
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('btnOrdenar');
+            const dropdown = new bootstrap.Dropdown(btn);
+
+            btn.addEventListener('click', function() {
+                dropdown.toggle();
+            });
+        });
+    </script>
+
+    <script>
+        // FUNCION PARA ORDENAR
+        function ordenar(tipo) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('orden', tipo);
+            window.location.href = url.toString();
+        }
+    </script>
+
     <script src="assets/js/funcionesModalTipoActividades.js"></script>
+
 
 
 </body>
