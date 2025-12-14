@@ -143,10 +143,11 @@
             }
         }
 
-        public function validarCredencialContraseña($documento, $contraseña){
+        public function validarCredencialContraseña($documento, $contrasena){
             $obj = new AccesoModel();
+            $hash = sha1($contrasena);
 
-            $sql = "SELECT * FROM usuarios WHERE documento = '$documento' AND contrasena = '$contraseña'";
+            $sql = "SELECT * FROM usuarios WHERE documento = '$documento' AND contrasena = '$hash'";
             $usuario = $obj->select($sql);
 
             if(pg_num_rows($usuario)>0){
@@ -185,5 +186,4 @@
         }
 
     }
-
 ?>
