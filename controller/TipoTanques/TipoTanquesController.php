@@ -33,47 +33,9 @@ class TipoTanquesController {
         $ejecutar = $obj->insert($sql);
         
         if ($ejecutar) {
-            echo json_encode(array(
-                'success' => true,
-                'message' => 'Tipo de tanque registrado exitosamente'
-            ));
+            redirect(getUrl("TipoTanques", "TipoTanques", "getConsultar"));
         } else {
-            echo json_encode(array(
-                'success' => false,
-                'message' => 'Error al registrar el tipo de tanque'
-            ));
-        }
-    }
-    
-    // Obtener un tipo de tanque por ID (para ver detalle)
-    public function getDetalle() {
-        $obj = new TipoTanquesModel();
-        
-        $id_tipo_tanque = $_GET['id'];
-        
-        $sql = "SELECT 
-                    tt.id_tipo_tanque,
-                    tt.nombre_tipo_tanque,
-                    ett.nombre_estado_tipo_tanques,
-                    tt.id_estado_tipo_tanque
-                FROM tipo_tanque tt
-                JOIN estado_tipo_tanques ett
-                    ON tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanques
-                WHERE tt.id_tipo_tanque = $id_tipo_tanque";
-        
-        $resultado = $obj->select($sql);
-        
-        if ($resultado) {
-            $tipoTanque = pg_fetch_assoc($resultado);
-            echo json_encode(array(
-                'success' => true,
-                'data' => $tipoTanque
-            ));
-        } else {
-            echo json_encode(array(
-                'success' => false,
-                'message' => 'Tipo de tanque no encontrado'
-            ));
+            echo "Error al registrar el tipo de tanque";
         }
     }
     
@@ -93,15 +55,9 @@ class TipoTanquesController {
         $ejecutar = $obj->update($sql);
         
         if ($ejecutar) {
-            echo json_encode(array(
-                'success' => true,
-                'message' => 'Tipo de tanque actualizado exitosamente'
-            ));
+            redirect(getUrl("TipoTanques", "TipoTanques", "getConsultar"));
         } else {
-            echo json_encode(array(
-                'success' => false,
-                'message' => 'Error al actualizar el tipo de tanque'
-            ));
+            echo "Error al actualizar el tipo de tanque";
         }
     }
     
@@ -118,20 +74,12 @@ class TipoTanquesController {
         $ejecutar = $obj->update($sql);
         
         if ($ejecutar) {
-            echo json_encode(array(
-                'success' => true,
-                'message' => 'Tipo de tanque inhabilitado exitosamente'
-            ));
+            redirect(getUrl("TipoTanques", "TipoTanques", "getConsultar"));
         } else {
-            echo json_encode(array(
-                'success' => false,
-                'message' => 'Error al inhabilitar el tipo de tanque'
-            ));
+            echo "Error al inhabilitar el tipo de tanque";
         }
     }
-    
-    // Habilitar tipo de tanque (cambiar estado a Activo)
-    public function postHabilitar() {
+       public function postHabilitar() {
         $obj = new TipoTanquesModel();
         
         $id_tipo_tanque = $_POST['id_tipo_tanque'];
@@ -143,17 +91,14 @@ class TipoTanquesController {
         $ejecutar = $obj->update($sql);
         
         if ($ejecutar) {
-            echo json_encode(array(
-                'success' => true,
-                'message' => 'Tipo de tanque habilitado exitosamente'
-            ));
+            redirect(getUrl("TipoTanques", "TipoTanques", "getConsultar"));
         } else {
-            echo json_encode(array(
-                'success' => false,
-                'message' => 'Error al habilitar el tipo de tanque'
-            ));
+            echo "Error al habilitar el tipo de tanque";
         }
     }
+}
+
+?>
 }
 
 ?>
