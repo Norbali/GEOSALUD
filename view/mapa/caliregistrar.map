@@ -15,6 +15,7 @@ MAP
      IMAGEURL "/ms_tmp/"
    END
 
+  
    LEGEND
      STATUS ON
      IMAGECOLOR 255 255 255
@@ -47,22 +48,7 @@ MAP
     END
    END
 
-   LAYER
-     CONNECTIONTYPE postgis
-     NAME "Puntos"
-     STATUS ON
-     CONNECTION "user=postgres password=Norbali dbname=prueba host=localhost port=5432"
-     DATA "geom from puntos using unique id using SRID=4326"
-     TYPE POINT
-     CLASS
-      STYLE
-        SYMBOL star
-        SIZE 30
-        COLOR 255 0 255
-        OUTLINECOLOR 0 0 0
-      END
-     END
-    END
+
 
    LAYER
     NAME "Malla_Vial"
@@ -90,12 +76,35 @@ MAP
     END
   END
 
-   LAYER
+  LAYER
+    CONNECTIONTYPE postgis
+    NAME "Puntos"
+    STATUS ON
+    CONNECTION "user=postgres password=Norbali dbname=bd_geosalud host=localhost port=5432"
+    DATA "coordenadas from zoocriadero using unique id_zoocriadero using SRID=4326"
+    TYPE POINT
+
+     PROJECTION
+        "init=epsg:4326"
+      END
+
+    CLASS
+      STYLE
+        SYMBOL star
+        SIZE 30
+        COLOR 255 0 255
+        OUTLINECOLOR 0 0 0
+      END
+    END
+  END
+
+
+  LAYER
     NAME "Barrios"
-    TRANSPARENCY 80
+    TRANSPARENCY 30
     STATUS ON
     DATA "BarriosC.shp"
-    TYPE LINE
+    TYPE POLYGON
     CLASS
       NAME "BARRIOS"
       STYLE
@@ -105,8 +114,9 @@ MAP
     END
   END
 
-   LAYER
+  LAYER
     NAME "Comunas"
+    TRANSPARENCY 30
     STATUS ON
     DATA "ComunasC.shp"
     TYPE POLYGON
