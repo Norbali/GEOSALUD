@@ -95,7 +95,7 @@
     </div>
 <script>
     document.getElementById('registroForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // SIEMPRE detenemos primero
+        event.preventDefault(); // SIEMPRE detener primero
 
         // Limpiar errores
         document.querySelectorAll('.text-danger').forEach(el => el.textContent = '');
@@ -110,65 +110,60 @@
         const contrasena = document.getElementById('contrasena').value;
         const rol        = document.getElementById('id_rol').value;
 
-        /* ===== DOCUMENTO ===== */
+        //documento
         if (!/^\d{9,10}$/.test(documento)) {
             document.getElementById('error-documento').textContent =
-                'El documento debe tener 9 o 10 dígitos numéricos.';
+                'El documento debe tener 9 o 10 d&iacute;gitos num&eacute;ricos.';
             valido = false;
         }
 
-        /* ===== NOMBRE ===== */
+        //nombre
         if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]{2,20}$/.test(nombre)) {
             document.getElementById('error-nombre').textContent =
                 'El nombre debe tener entre 2 y 20 letras.';
             valido = false;
         }
 
-        /* ===== APELLIDO ===== */
+        //apellido
         if (!/^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]{2,20}$/.test(apellido)) {
             document.getElementById('error-apellido').textContent =
                 'El apellido debe tener entre 2 y 20 letras.';
             valido = false;
         }
 
-        /* ===== TELÉFONO ===== */
+        //telefono
         if (!/^\d{9,10}$/.test(telefono)) {
             document.getElementById('error-telefono').textContent =
-                'El teléfono debe tener entre 9 y 10 dígitos.';
+                'N&uacute;mero de documento invalido, el n&uacute;mero de documento debe tener 9 o 10 d&iacute;gitos num&eacute;ricos.';
             valido = false;
         }
 
-        /* ===== CORREO ===== */
+        //correo
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
             document.getElementById('error-correo').textContent =
-                'El correo no tiene un formato válido.';
+                '“Correo inv&aacute;lido. Debe incluir una extensi&oacute;n y dominio, por ejemplo: usuario@dominio.extension.';
             valido = false;
         }
 
-        /* ===== CONTRASEÑA ===== */
+        //contrasena
         if (
-            contrasena.length < 8 ||
-            contrasena.length > 16 ||
-            !/[A-Z]/.test(contrasena) ||
-            !/[a-z]/.test(contrasena) ||
-            !/[0-9]/.test(contrasena) ||
-            !/[!@#$%^&*(),.?":{}|<>_\-+=`[\]\\;/]/.test(contrasena)
+            contrasena.length < 8 ||contrasena.length > 16 || !/[A-Z]/.test(contrasena) || !/[a-z]/.test(contrasena) ||
+            !/[0-9]/.test(contrasena) || !/[!@#$%^&*(),.?":{}|<>_\-+=`[\]\\;/]/.test(contrasena)
         ) {
             document.getElementById('error-contrasena').textContent =
-                'La contraseña debe tener 8 a 16 caracteres, una mayúscula, un número y un símbolo.';
+                'Su contrase&ntilde;a no es segura (m&iacute;nimo 8 caracteres, al menos un n&uacute;mero, una letra may&uacute;scula y un s&iacute;mbolo)';
             valido = false;
         }
 
-        /* ===== ROL ===== */
+        //rol
         if (rol === '') {
             document.getElementById('error-id_rol').textContent =
                 'Debe seleccionar un rol.';
             valido = false;
         }
 
-        /* ===== RESULTADO FINAL ===== */
         if (valido) {
-            // SOLO aquí se envía el formulario
+            // SOLO aqui se envia el formulario
             this.submit();
         }
     });

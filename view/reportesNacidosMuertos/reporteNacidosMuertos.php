@@ -23,15 +23,12 @@
             <!-- Zoocriadero -->
             <div class="col-md-4">
                 <label class="form-label">Zoocriadero</label>
-                <select name="zoocriadero" class="form-select">
-                    <option value="">Todos</option>
                     <select name="zoocriadero" class="form-select">
-                    <option value="">Todos</option>
-                    <?php foreach ($zoocriaderos as $zoocriadero) { ?>
-                        <option value="<?= $zoocriadero['id_zoocriadero'] ?>"><?= $act['nombre_zoocriadero'] ?></option>
-                    <?php } ?>
-                </select>
-                </select>
+                        <option value="">Todos</option>
+                        <?php foreach ($zoocriaderos as $zoocriadero) { ?>
+                            <option value="<?= $zoocriadero['id_zoocriadero'] ?>"><?= $act['nombre_zoocriadero'] ?></option>
+                        <?php } ?>
+                    </select>
             </div>
 
             <!-- Botón -->
