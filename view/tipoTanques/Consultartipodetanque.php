@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion de Tipo de Tanques - KaiAdmin</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -41,14 +40,13 @@
 
 <body>
     <div class="container-fluid px-4 py-4">
-        <!-- Page Header -->
         <div class="page-header">
             <h1 class="h3 mb-2">
                 <i class="fas fa-water text-primary"></i> Gestion de Tipo de Tanques
             </h1>
         </div>
 
-        <!-- Card con Tabla -->
+        <!-- Card y su tabla -->
         <div class="card">
             <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                 <h5 class="card-title mb-0">
