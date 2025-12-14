@@ -43,33 +43,10 @@
                 </li>
 
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tanques">
+                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>" class="collapsed" aria-expanded="false">
                         <i class="fas fa-fish"></i>
                         <p>Tanques</p>
-                        <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="tanques">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Registro de tanques</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="collapse" href="#subConsultarTanques">
-                                    <span class="sub-item">Consultar tanques</span>
-                                </a>
-
-                                <div class="collapse" id="subConsultarTanques">
-                                    <ul class="nav nav-collapse">
-                                        <li><a href="#"><span class="sub-item">Ver Detalle de Tanques</span></a></li>
-                                        <li><a href="#"><span class="sub-item">Editar Tanques</span></a></li>
-                                        <li><a href="#"><span class="sub-item">Inhabilitar Tanques</span></a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
@@ -149,7 +126,7 @@
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="../view/partials/actualizarInformacion.php">
-                                    <span class="sub-item">Actualizar Información</span>
+                                    <span class="sub-item">Actualizar Informaci&oacute;n</span>
                                 </a>
                             </li>
                             <li>
@@ -172,16 +149,12 @@
                                     </a>
                                 </li>
                             <?php }?>
-                            <li>
-                                <a href="../view/partials/autores.php">
-                                    <span class="sub-item">Autores</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../view/partials/videoManual.php">
-                                    <span class="sub-item">Video Manual</span>
-                                </a>
-                            </li>
+                            <li class="nav-item">
+                                    <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
+                                         <i class="fas fa-video"></i>
+                                        <p>Video Manual</p>
+                                    </a>
+                             </li>
                         </ul>
                     </div>
                 </li>
@@ -220,10 +193,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#info">
-                        <i class="fas fa-info"></i>
-                        <p>Autores</p>
-                    </a>
+                 <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
+                    <i class="fas fa-info"></i>
+                    <p>Autores</p>
+                 </a>
                 </li>
             </ul>
         </div>
