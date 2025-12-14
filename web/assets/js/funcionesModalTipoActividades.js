@@ -1,36 +1,75 @@
 function verDetalle(id) {
-    // Aquí luego puedes traer datos por AJAX si quieres
     document.getElementById('detalleId').innerText = id;
     document.getElementById('detalleNombre').innerText = 'Actividad ' + id;
     document.getElementById('detalleEstado').innerHTML =
         '<span class="badge bg-success">Activo</span>';
 
-    const modal = new bootstrap.Modal(document.getElementById('modalDetalle'));
+    const modal = new bootstrap.Modal(
+        document.getElementById('modalDetalle')
+    );
     modal.show();
 }
 
-function editar(id) {
+function editarActividad(id, nombre, estado) {
+
     document.getElementById('editId').value = id;
-    document.getElementById('editNombre').value = 'Actividad ' + id;
+    document.getElementById('editNombre').value = nombre;
 
-    const modal = new bootstrap.Modal(document.getElementById('modalEditar'));
-    modal.show();
+    // MOSTRAR ESTADO EN EL SELECT
+    document.getElementById('editEstado').value = estado;
+
+    // ENVIA EL ESTADO ACTUAL 
+    document.getElementById('editEstadoHidden').value = estado;
+
+    const modalElement = document.getElementById('modalEditar');
+    modalEditar = bootstrap.Modal.getOrCreateInstance(modalElement);
+    modalEditar.show();
 }
 
-function eliminar(id) {
-    if (confirm('¿Está seguro de eliminar la actividad #' + id + '?')) {
-        alert('Aquí puedes hacer el DELETE por AJAX');
-    }
+// LIMPIAR CAMPOS AL CERRAR MODAL
+document.getElementById('modalEditar')
+    .addEventListener('hidden.bs.modal', function () {
+        document.getElementById('editId').value = '';
+        document.getElementById('editNombre').value = '';
+        document.getElementById('editEstado').value = '';
+        document.getElementById('editEstadoHidden').value = '';
+    });
+
+function actividadInhabilitada() {
+    Swal.fire({
+        icon: 'info',
+        title: 'Actividad inhabilitada',
+        text: 'Este registro está inhabilitado y no se puede editar.',
+        confirmButtonColor: '#6f63ff'
+    });
 }
 
-function guardarNuevo() {
-    alert('Aquí puedes guardar la nueva actividad');
-    const modal = bootstrap.Modal.getInstance(document.getElementById('modalNuevo'));
-    modal.hide();
+function eliminarActividad(id) {
+    Swal.fire({
+        title: '¿Inhabilitar actividad?',
+        text: 'Esta acción cambiará el estado a INACTIVO',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, inhabilitar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href =
+                'index.php?modulo=TipoActividades' +
+                '&controlador=ConsultarTipoDeActividades' +
+                '&funcion=postInhabilitar' +
+                '&id=' + id;
+        }
+    });
 }
+
 
 function guardarEdicion() {
     alert('Cambios guardados correctamente');
-    const modal = bootstrap.Modal.getInstance(document.getElementById('modalEditar'));
+    const modal = bootstrap.Modal.getInstance(
+        document.getElementById('modalEditar')
+    );
     modal.hide();
 }
