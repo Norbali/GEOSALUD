@@ -167,7 +167,7 @@
                                     </a>
                                 </li>
                             <?php }?>
-                            <?php if (array_key_exists("ReporteTanquePorZoo", $permisos)){ ?>
+                            <?php if (array_key_exists("ReporteTanquesPorZoo", $permisos)){ ?>
                                 <li>
                                     <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
                                         <span class="sub-item">Tanques por zoocriadero</span>

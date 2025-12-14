@@ -5,6 +5,7 @@
         <title>Mapa</title>
 
         <link rel="stylesheet" href="/GEOSALUD/view/mapa/misc/img/dc.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="/GEOSALUD/view/mapa/misc/lib/mscross-1.1.9.js"></script>
 
@@ -64,7 +65,7 @@
                     </p>
                     <p align="left">
                         <input checked onclick="chgLayers()" type="checkbox" name="layer[2]" value="Barrios">
-                        <Strong>barrios</Strong>
+                        <Strong>Barrios</Strong>
                     </p>
                     <p align="left">
                         <input checked onclick="chgLayers()" type="checkbox" name="layer[3]" value="Malla_Vial">
@@ -84,29 +85,50 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="modalNombre" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Ingresar nombre</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" id="nombrePunto" class="form-control" placeholder="Nombre del punto">
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" id="btnGuardarNombre">Guardar</button>
-                        </div>
+            <!-- MODALES --> 
+
+        
+        <div class="modal fade" id="modalNombre" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ingresar nombre</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="nombrePunto" class="form-control" placeholder="Nombre del punto">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="btnGuardarNombre">Guardar</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-         <script type="text/javascript">
+        <!-- MODAL PRUEBA--> 
+         <div class="modal fade" id="modalPrueba" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ingresar nombre</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="nombrePunto" class="form-control" placeholder="Nombre del punto">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="btnGuardarNombre">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
         myMap1 = new msMap(document.getElementById("dc_main"), "standardRight");
-        myMap1.setCgi("/ms4w/cgi-bin/mapserv.exe");
+        myMap1.setCgi("/cgi-bin/mapserv.exe");
         myMap1.setMapFile("/ms4w/Apache/htdocs/GEOSALUD/view/mapa/caliregistrar.map");
         myMap1.setFullExtent(1053867, 1068491,  860190, 879411);
-        myMap1.setLayers("Cali Comunas Barrios Malla_Vial");
+        myMap1.setLayers("Cali Comunas Barrios Malla_Vial Puntos");
 
         myMap2 = new msMap(document.getElementById("dc_main2"));
         myMap2.setActionNone();
@@ -171,7 +193,7 @@
         function queryI(event, map, x, y, xx, yy) {
             if (seleccionado) {
 
-                alert("Coordenadas mapa: x: " + x + " y: " + y + " reales: x " + xx + " y: " + yy);
+                //alert("Coordenadas mapa: x: " + x + " y: " + y + " reales: x " + xx + " y: " + yy);
 
                 // Mostrar modal
                 var modal = new bootstrap.Modal(document.getElementById('modalNombre'));

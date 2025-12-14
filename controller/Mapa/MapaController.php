@@ -13,6 +13,10 @@
             include_once '../view/Mapa/visorCaliMapa.php';
         }
 
+        public function registrarZoocriadero(){
+            
+        }
+
     }
 
 ?>
