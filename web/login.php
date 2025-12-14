@@ -20,7 +20,7 @@
         <div class="container container-login animated fadeIn">
             <h3 class="text-center">Iniciar Sesi&oacute;n</h3>
             <div class="text-center">
-                    <img src="assets/img/logoGEOSALUD2.png" alt="navbar brand" class="navbar-brand m-5" height="120">
+                    <img src="assets/img/logoGEOSALUD.png" alt="navbar brand" class="navbar-brand m-2" height="120">
             </div>
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
