@@ -136,18 +136,39 @@
                 <div class="d-flex gap-2">
                     
                 <!-- ORDENAR -->
-                    <button class="btn btn-morado dropdown-toggle"
-                        type="button"
-                        id="btnOrdenar">
-                        <i class="fas fa-sort me-1"></i> Ordenar
-                    </button>
+                   <div class="dropdown">
+    <button class="btn btn-morado dropdown-toggle"
+        type="button"
+        id="btnOrdenar"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <i class="fas fa-sort me-1"></i> Ordenar
+    </button>
 
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#" onclick="ordenar('id_asc')">ID Ascendiente</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="ordenar('id_desc')">ID Descendiente</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="ordenar('nom_asc')">Nombre Ascendiente</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="ordenar('nom_desc')">Nombre Descendiente</a></li>
-                    </ul>
+    <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+            <a class="dropdown-item" href="#" onclick="ordenar('id_asc')">
+                ID Ascendente
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#" onclick="ordenar('id_desc')">
+                ID Descendente
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#" onclick="ordenar('nom_asc')">
+                Nombre Ascendente
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#" onclick="ordenar('nom_desc')">
+                Nombre Descendente
+            </a>
+        </li>
+    </ul>
+</div>
+
 
                     <!-- NUEVA ACTIVIDAD -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
@@ -443,7 +464,7 @@
         }
     </script>
 
-    <script>
+    <!-- <script>
         //OBLIGAR DROPDOWN BOOTSTRAP A FUNCIONAR CON BOTON
         document.addEventListener('DOMContentLoaded', function() {
             const btn = document.getElementById('btnOrdenar');
@@ -453,7 +474,7 @@
                 dropdown.toggle();
             });
         });
-    </script>
+    </script> -->
 
     <script>
         // FUNCION PARA ORDENAR
