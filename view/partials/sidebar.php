@@ -86,44 +86,6 @@
                         </a>
                     </li>
                 <?php }?>
-
-
-
-                
-                <?php if (array_key_exists("TiposDeActividades", $permisos)){ ?>
-                    <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#tipoactividades">
-                            <i class="fas fa-list-alt"></i>
-                            <p>Tipos de actividades</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="tipoactividades">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <a href="forms/forms.html">
-                                        <span class="sub-item">Registro de actividades</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="forms/forms.html">
-                                        <span class="sub-item">Consultar tipos de actividades</span>
-                                    </a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </li>
-                <?php }?>
-                
-                <?php if (array_key_exists("RegistroDeUsuarios", $permisos)){ ?>
-                    <li class="nav-item">
-                        <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
-                            <i class="fas fa-user"></i>
-                            <p>Registro de usuarios</p>
-                        </a>
-                    </li>
-                <?php }?>
-
                 
                 <li class="nav-item">
                     <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">

@@ -199,6 +199,13 @@ body {
 .btn-close {
     font-size: 0.875rem;
 }
+.main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1f2937;
+        }
 </style>
 <div class="container mt-4">
 
@@ -215,9 +222,7 @@ body {
 <?php } ?>
 
 <!-- HEADER -->
-<div class="header-card">
-    <h4><i class="fas fa-water text-primary"></i> Gesti&oacute;n de Tanques</h4>
-</div>
+        <h1 class="main-title">Gestión de Tanques</h1>
 
 <!-- LISTA -->
     <div class="list-card">

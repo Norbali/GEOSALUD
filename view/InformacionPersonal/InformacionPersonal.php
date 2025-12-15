@@ -171,6 +171,13 @@ body {
     border-radius: 10px;
     margin-top: 10px;
 }
+.main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1f2937;
+        }
 </style>
 
 <div class="container mt-4">
@@ -184,9 +191,7 @@ body {
 <?php } ?>
 
 <!-- HEADER -->
-<div class="header-card">
-    <h4><i class="fas fa-user text-primary"></i> Informaci&oacute;n Personal</h4>
-</div>
+    <h1 class="main-title"><i class="fas fa-user text-primary"></i> Informaci&oacute;n Personal</h1>
 
 <!-- INFORMACI&oacute;N DEL USUARIO -->
 <div class="row justify-content-center">
