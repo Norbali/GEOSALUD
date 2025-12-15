@@ -1,3 +1,7 @@
+<?php
+    include_once '../lib/helpers.php';
+?>
+
 <div style="position: relative; top: -100px;">
     <div class="card">
         <div class="card-header">
@@ -55,6 +59,15 @@
                     </tbody>
                 </table>
             </div>
+            <?php
+                if (isset($_SESSION['sinResultados'])) {
+                    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            ' . $_SESSION['sinResultados'] . '
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                    unset($_SESSION['sinResultados']);
+                }
+            ?>
     </div>
 </div>
 

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once '../model/ReportesTanquesZoocriadero/ReportesTanquesZoocriaderoModel.php';
 
     class ReportesTanquesZoocriaderoController{
@@ -61,6 +62,9 @@
                 ";
 
             $cosultaTanquesZoocriadero = $obj->select($sql);
+            if(pg_affected_rows($cosultaTanquesZoocriadero) == 0){
+                $_SESSION['sinResultados'] = "No se encontraron registros.";
+            }
 
             include_once "../view/reportesTanquesZoocriadero/filtro.php";
         }
