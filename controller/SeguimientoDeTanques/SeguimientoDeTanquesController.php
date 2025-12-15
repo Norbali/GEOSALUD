@@ -1,26 +1,15 @@
 <?php
-
+session_start();
 include_once '../model/SeguimientoDeTanques/SeguimientoDeTanquesModel.php';
 
 class SeguimientoDeTanquesController
 {
-    /* ================================
-       MOSTRAR FORMULARIO
-    ================================ */
+    
+      // MOSTRAR FORMULARIO
+   
     public function getConsulta()
     {
-        session_start();
-
-        if (!isset($_SESSION['auth'])) {
-            redirect(getUrl("Login", "Login", "getLogin"));
-            exit;
-        }
-
-        if (!isset($_SESSION['permisos']['SeguimientoTanques'])) {
-           // redirect(getUrl("Errores", "Errores", "get403"));
-            exit;
-        }
-
+        
         $obj = new SeguimientoDeTanquesModel();
 
         $sqlActividades = "
@@ -35,37 +24,15 @@ class SeguimientoDeTanquesController
         include_once '../view/seguimientoTanques/seguimientoDeTanques.php';
     }
 
-    /* ================================
-       ALIAS POST
-    ================================ */
-    public function postConsulta()
-    {
-        $this->postCreate();
-    }
-
-    /* ================================
-       GUARDAR SEGUIMIENTO
-    ================================ */
+   
+   
+        // REGISTRAR SEGUIMIENTO
     public function postCreate()
     {
-        session_start();
-
-        // if (!isset($_SESSION['auth'])) {
-        //     redirect(getUrl("Login", "Login", "getLogin"));
-        //     exit;
-        // }
-
-        // if (
-        //     !isset($_SESSION['permisos']['SeguimientoTanques']) ||
-        //     !in_array('crear', $_SESSION['permisos']['SeguimientoTanques'])
-        // ) {
-        //   //  redirect(getUrl("Errores", "Errores", "get403"));
-        //     exit;
-        // }
 
         $obj = new SeguimientoDeTanquesModel();
 
-        // 🔴 PHP ANTIGUO → isset()
+        // DATOS DEL FORMULARIO
         $id_seguimiento = isset($_POST['id_seguimiento']) ? $_POST['id_seguimiento'] : '';
         $id_actividad   = isset($_POST['id_actividad']) ? $_POST['id_actividad'] : '';
         $ph             = isset($_POST['ph']) ? $_POST['ph'] : '';
@@ -117,17 +84,16 @@ class SeguimientoDeTanquesController
         }
     }
 
-    /* ================================
-       VALIDACIONES
-    ================================ */
+    // VALIDAR CAMPOS OBLIGATORIOS
     private function camposObligatorios($tanque, $actividad, $ph, $temperatura)
     {
         return $tanque != '' && $actividad != '' && $ph != '' && $temperatura != '';
     }
 
-    /* ================================
-       ALERTAS
-    ================================ */
+
+
+       // ALERTAS
+
     private function alerta($tipo, $mensaje)
     {
         $_SESSION['alert'] = array(
