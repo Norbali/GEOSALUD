@@ -210,6 +210,7 @@
                     consulta1.open(
                         "GET",
                         "insertar_punto.php?x=" + xx + "&y=" + yy + "&nombre=" + nombre,
+                        //AQUI COLOCAR LOS VALORES QUE SE VA HACER EL REGISTRO
                         true
                     );
 
