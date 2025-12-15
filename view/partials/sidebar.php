@@ -147,6 +147,23 @@
                     </a>
                 </li>
 
+                <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#actividades">
+                            <i class="fas fa-pen-square"></i>
+                            <p>Seguimiento de tanques</p><!-- Span caret si tiene submenus -->
+                        </a>
+                    </li>
+                <?php }?>
+                <?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">
+                            <i class="fas fa-th-large"></i>
+                            <p>Tipo de tanques</p>
+                        </a>
+                    </li>
+                <?php }?>
+
                 
                 <li class="nav-item">
                     <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
