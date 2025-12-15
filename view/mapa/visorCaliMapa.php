@@ -17,7 +17,6 @@
                         <input checked onclick="chgLayers()" type="checkbox" name="layer[0]" value="Cali">
                         <Strong>Poligono</Strong>
                     </p>
-
                     <p align="left">
                         <input checked onclick="chgLayers()" type="checkbox" name="layer[1]" value="Comunas">
                         <Strong>Comuna</Strong>
@@ -34,8 +33,6 @@
                         <input checked onclick="chgLayers()" type="checkbox" name="layer[4]" value="Puntos">
                         <Strong>Puntos Guardados</Strong>
                     </p>
-
-
                 </form>
             </div>
             <div id="Layer1">

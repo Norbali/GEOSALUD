@@ -165,7 +165,7 @@ body {
 
 /* Botones mejorados */
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #3a0249 0%, #764ba2 100%);
     border: none;
     border-radius: 10px;
     padding: 10px 24px;
@@ -201,12 +201,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #41075e 0%, #764ba2 100%);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    background: linear-gradient(135deg, #2d1247 0%, #667eea 100%);
 }
 
 /* Animaciones sutiles */
