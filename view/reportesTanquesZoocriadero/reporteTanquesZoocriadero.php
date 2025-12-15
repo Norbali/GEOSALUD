@@ -11,8 +11,8 @@
                 <div class="col-md-4">
                     <label class="form-label">Zoocriadero</label>
                      <div class="col-3 mb-3 ">
-                    <input type="text" class="form-control" placeholder="Buscar..." id="filtro" 
-                        data-url="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "filtro");?>">
+                    <input type="text" class="form-control" placeholder="Ingrese el nombre de un zoocriadero..." style="width: 300px;" id="filtro" 
+                        data-url="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "filtro", false, "ajax");?>">
                     </div>
                 </div>
             </form>
