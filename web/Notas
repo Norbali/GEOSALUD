@@ -26,23 +26,6 @@ usuarios = 1060676543 1060676544 1060676545
 // los dos ultimos no exiten en su bd
 contraseña = Colom1234_
 
-//tildes html
-&aacute;  → á
-&eacute;  → é
-&iacute;  → í
-&oacute;  → ó
-&uacute;  → ú
-
-&Aacute; → Á
-&Eacute; → É
-&Iacute; → Í
-&Oacute; → Ó
-&Uacute; → Ú
-
-ñ
-&ntilde;  → ñ
-&Ntilde;  → Ñ
-
-
+/
 */
 ?>
