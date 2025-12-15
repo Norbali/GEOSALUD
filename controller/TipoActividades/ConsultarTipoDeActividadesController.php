@@ -10,21 +10,6 @@ class ConsultarTipoDeActividadesController
     {
         $obj = new ConsultarTipoDeActividadesModel();
 
-        // ORDEN PERMITIDOS
-        $ordenPermitido = array(
-            'id_asc'   => 'a.id_actividad ASC',
-            'id_desc'  => 'a.id_actividad DESC',
-            'nom_asc'  => 'a.nombre_actividad ASC',
-            'nom_desc' => 'a.nombre_actividad DESC'
-        );
-
-        // ORDEN POR DEFECTO
-        $orden = 'a.id_actividad ASC';
-
-        // VALIDAR ORDEN RECIBIDO
-        if (isset($_GET['orden']) && array_key_exists($_GET['orden'], $ordenPermitido)) {
-            $orden = $ordenPermitido[$_GET['orden']];
-        }
 
         $sql = "
         SELECT 
@@ -35,7 +20,7 @@ class ConsultarTipoDeActividadesController
         FROM actividad a
         JOIN estado_actividad ea
             ON a.id_estado_actividad = ea.id_estado_actividades
-        ORDER BY $orden
+        ORDER BY a.id_actividad ASC
     ";
 
         $actividades = $obj->select($sql);
