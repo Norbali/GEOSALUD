@@ -101,13 +101,7 @@ class SeguimientoDeTanquesController
             'message' => $mensaje
         );
 
-        redirect(getUrl(
-    "SeguimientoDeTanques",
-    "SeguimientoDeTanques",
-    "getConsulta"
-
-
-        ));
+        redirect(getUrl( "SeguimientoDeTanques", "SeguimientoDeTanques", "getConsulta"));
         exit;
     }
 }

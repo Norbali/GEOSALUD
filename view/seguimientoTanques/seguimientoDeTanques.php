@@ -1,42 +1,26 @@
-<?php
-session_start();
-require_once '../config/conexion.php';
+<?php if (isset($_SESSION['alert'])): ?>
+<div class="alert alert-<?= $_SESSION['alert']['type'] ?>">
+    <?= $_SESSION['alert']['message'] ?>
+</div>
+<?php unset($_SESSION['alert']); endif; ?>
 
-if (!isset($_SESSION['auth'])) {
-    header("Location: ../login.php");
-    exit;
-}
-?>
+<h4>Seguimiento de Tanques</h4>
 
-<div class="container">
-<h4 class="fw-bold mb-3">Seguimiento de Tanques</h4>
+<form method="POST" action="<?= getUrl('SeguimientoDeTanques','SeguimientoDeTanques','postCreate') ?>">
 
-<?php if (isset($_GET['msg'])) { ?>
-<div class="alert alert-info"><?= $_GET['msg']; ?></div>
-<?php } ?>
-
-
-<form method="POST" action="<?php echo getUrl('SeguimientoDeTanques', 'SeguimientoDeTanques', 'postCreate'); ?>">
-
-
-
-<!-- No Tanque -->
 <label>No. Tanque *</label>
-<input type="number" name="id_seguimiento" class="form-control" required>
+<input type="number" name="id_tanque" class="form-control" required>
 
-<!-- Tipo Actividad -->
 <label class="mt-2">Tipo de Actividad *</label>
 <select name="id_actividad" class="form-control" required>
 <option value="">Seleccione</option>
-<?php
-$sql = "SELECT id_actividad, nombre FROM actividad";
-foreach ($pdo->query($sql) as $row) {
-    echo "<option value='{$row['id_actividad']}'>{$row['nombre']}</option>";
-}
-?>
+<?php foreach ($actividades as $act): ?>
+<option value="<?= $act['id_actividad'] ?>">
+    <?= $act['nombre_actividad'] ?>
+</option>
+<?php endforeach; ?>
 </select>
 
-<!-- Parámetros -->
 <div class="row mt-3">
 <div class="col-md-4">
 <label>pH *</label>
@@ -54,7 +38,6 @@ foreach ($pdo->query($sql) as $row) {
 </div>
 </div>
 
-<!-- Conteos -->
 <div class="row mt-3">
 <div class="col-md-4">
 <label>Alevines</label>
@@ -72,18 +55,13 @@ foreach ($pdo->query($sql) as $row) {
 </div>
 </div>
 
-<!-- Observaciones -->
 <label class="mt-3">Observaciones</label>
 <textarea name="observaciones" class="form-control"></textarea>
 
-<!-- Responsable -->
 <label class="mt-3">Responsable</label>
-<input type="text" class="form-control" value="<?= $_SESSION['nombreCompleto']; ?>" readonly>
+<input type="text" class="form-control"
+value="<?= $_SESSION['nombre'].' '.$_SESSION['apellido']; ?>" readonly>
 
-<!-- Botón con permiso -->
-<?php if (in_array('crear', $_SESSION['permisos']['SeguimientoTanques'])) { ?>
 <button class="btn btn-success mt-3">Guardar</button>
-<?php } ?>
 
 </form>
-</div>
