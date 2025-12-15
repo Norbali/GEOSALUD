@@ -85,81 +85,10 @@
             </button>
         </div>
 
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-head-bg-primary mt-3">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Actividad</th>
-                            <th>Zoocriadero</th>
-                            <th>Tanque</th>
-                            <th>Accciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            while ($row = pg_fetch_assoc($consultaSeguimiento)) {
-                                echo "<tr>";
-                                echo "<td>".$row['fecha']."</td>";
-                                echo "<td>".$row['nombre_actividad']."</td>";
-                                echo "<td>".$row['nombre_zoocriadero']."</td>";
-                                echo "<td>".$row['id_tanque']."</td>";
-                                echo "<td>";
-                            ?>
-
-                                <!-- BOTÓN MODAL -->
-                                <button 
-                                    type="button" 
-                                    class="btn btn-primary btn-sm" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalDetalle<?= $row['id_seguimiento'] ?>">
-                                    Ver detalle
-                                </button>
-
-                                <!-- MODAL -->
-                                <div class="modal fade" id="modalDetalle<?= $row['id_seguimiento'] ?>" tabindex="-1">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Detalle del seguimiento</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-
-                                            <div class="modal-body">
-                                                <p><strong>Fecha:</strong> <?= $row['fecha'] ?></p>
-                                                <p><strong>Actividad:</strong> <?= $row['nombre_actividad'] ?></p>
-                                                <p><strong>Zoocriadero:</strong> <?= $row['nombre_zoocriadero'] ?></p>
-                                                <p><strong>Tanque:</strong> <?= $row['id_tanque'] ?></p>
-
-                                                <hr>
-
-                                                <p><strong>PH:</strong> <?= $row['ph'] ?></p>
-                                                <p><strong>Temperatura:</strong> <?= $row['temperatura'] ?></p>
-                                                <p><strong>Cloro:</strong> <?= $row['cloro'] ?></p>
-                                                <p><strong>Nacidos:</strong> <?= $row['num_alevines'] ?></p>
-                                                <p><strong>Muertes:</strong> <?= $row['num_muertes'] ?></p>
-                                                <p><strong>Machos:</strong> <?= $row['num_machos'] ?></p>
-                                                <p><strong>Hembras:</strong> <?= $row['num_hembras'] ?></p>
-                                                <p><strong>Observaciones:</strong> <?= $row['observaciones'] ?></p>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <?php
-                                echo "</td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                    </tbody>
-                </table>
+            <!-- Fecha inicio -->
+            <div class="col-md-4">
+                <label class="form-label">Fecha inicio</label>
+                <input type="date" name="fecha_inicio" class="form-control">
             </div>
 
             <!-- Fecha fin -->
