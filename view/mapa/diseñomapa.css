@@ -21,12 +21,8 @@ body {
     height: 100vh;
     /* Altura completa de la ventana */
     margin: 0;
-    border-radius: 0;
-    /* Sin bordes redondeados para ocupar todo */
-    box-shadow: none;
     overflow: hidden;
     background: white;
-    border: none;
 }
 
 /* Mini mapa - diseño mejorado */

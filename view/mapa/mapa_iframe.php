@@ -21,7 +21,6 @@
             
            /* Contenedor del mapa grande */
             #dc_main {
-                position: relative;
                 width: 90%;
                 height: 700px;
                 margin: 0 auto; /* centra el mapa */
@@ -51,7 +50,7 @@
     <body>
 
         <div class="mscross"
-                style="overflow:hidden; width: 1000px; height:1000px; -moz-user-select:none; position:relative; border-radius: 2%; margin:0 auto; display:block;" id="dc_main">
+                style="width: 1000px; height:1000px; margin:0 auto;" id="dc_main">
         </div>
 
             <div id="Layer2" >
