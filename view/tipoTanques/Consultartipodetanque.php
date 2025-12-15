@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion de Tipo de Tanques - KaiAdmin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         body {
             background-color: #f4f5f7;
@@ -99,19 +99,26 @@
                                                 <i class="fas fa-eye"></i> Ver Detalles
                                             </button>
 
-                                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" 
-                                                data-bs-target="#modalEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>">
-                                                <i class="fas fa-edit"></i> Editar
-                                            </button>
+                                            <?php if ($tipoTanque['nombre_estado_tipo_tanques'] == 'activo') { ?>
+                                                <button class="btn btn-warning btn-sm" 
+                                                    onclick="confirmarEdicion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo $tipoTanque['nombre_tipo_tanque']; ?>')">
+                                                    <i class="fas fa-edit"></i> Editar
+                                                </button>
+                                            <?php } else { ?>
+                                                <button class="btn btn-warning btn-sm" 
+                                                    onclick="mostrarAlertaInactivo('<?php echo $tipoTanque['nombre_tipo_tanque']; ?>')">
+                                                    <i class="fas fa-edit"></i> Editar
+                                                </button>
+                                            <?php } ?>
 
                                             <?php if ($tipoTanque['nombre_estado_tipo_tanques'] == 'activo') { ?>
-                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" 
-                                                    data-bs-target="#modalInhabilitar<?php echo $tipoTanque['id_tipo_tanque']; ?>">
+                                                <button class="btn btn-danger btn-sm" 
+                                                    onclick="confirmarInhabilitacion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo $tipoTanque['nombre_tipo_tanque']; ?>')">
                                                     <i class="fas fa-ban"></i> Inhabilitar
                                                 </button>
                                             <?php } else { ?>
-                                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" 
-                                                    data-bs-target="#modalActivar<?php echo $tipoTanque['id_tipo_tanque']; ?>">
+                                                <button class="btn btn-success btn-sm" 
+                                                    onclick="confirmarActivacion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo $tipoTanque['nombre_tipo_tanque']; ?>')">
                                                     <i class="fas fa-check-circle"></i> Activar
                                                 </button>
                                             <?php } ?>
@@ -162,7 +169,8 @@
                                 <div class="modal fade" id="modalEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>" tabindex="-1">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <form action="<?php echo getUrl("TipoTanques", "TipoTanques", "postActualizar"); ?>" method="POST">
+                                            <form id="formEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>" 
+                                                action="<?php echo getUrl("TipoTanques", "TipoTanques", "postActualizar"); ?>" method="POST">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">
                                                         <i class="fas fa-edit text-warning"></i> Editar Tipo de Tanque
@@ -174,6 +182,7 @@
                                                     <div class="mb-3">
                                                         <label class="form-label">Nombre del Tipo de Tanque</label>
                                                         <input type="text" class="form-control" name="nombre_tipo_tanque" 
+                                                            id="nombreEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>"
                                                             value="<?php echo $tipoTanque['nombre_tipo_tanque']; ?>" required>
                                                     </div>
                                                     <div class="mb-3">
@@ -197,62 +206,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Modal Eliminar individual -->
-                                <div class="modal fade" id="modalInhabilitar<?php echo $tipoTanque['id_tipo_tanque']; ?>" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form action="<?php echo getUrl("TipoTanques", "TipoTanques", "postInhabilitar"); ?>" method="POST">
-                                                <div class="modal-header bg-danger text-white">
-                                                    <h5 class="modal-title">
-                                                        <i class="fas fa-exclamation-triangle"></i> Confirmar Inhabilitación
-                                                    </h5>
-                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="id_tipo_tanque" value="<?php echo $tipoTanque['id_tipo_tanque']; ?>">
-                                                    <p>¿Está seguro que desea inhabilitar el tipo de tanque <strong><?php echo $tipoTanque['nombre_tipo_tanque']; ?></strong>?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        <i class="fas fa-times"></i> Cancelar
-                                                    </button>
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="fas fa-ban"></i> Inhabilitar
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Modal Activar individual -->
-                                <div class="modal fade" id="modalActivar<?php echo $tipoTanque['id_tipo_tanque']; ?>" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form action="<?php echo getUrl("TipoTanques", "TipoTanques", "postHabilitar"); ?>" method="POST">
-                                                <div class="modal-header bg-success text-white">
-                                                    <h5 class="modal-title">
-                                                        <i class="fas fa-check-circle"></i> Confirmar Activación
-                                                    </h5>
-                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="id_tipo_tanque" value="<?php echo $tipoTanque['id_tipo_tanque']; ?>">
-                                                    <p>¿Está seguro que desea activar el tipo de tanque <strong><?php echo $tipoTanque['nombre_tipo_tanque']; ?></strong>?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                        <i class="fas fa-times"></i> Cancelar
-                                                    </button>
-                                                    <button type="submit" class="btn btn-success">
-                                                        <i class="fas fa-check-circle"></i> Activar
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
                             <?php } ?>
                         </tbody>
                     </table>
@@ -265,7 +218,7 @@
     <div class="modal fade" id="modalNuevo" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="<?php echo getUrl("TipoTanques", "TipoTanques", "postCrear"); ?>" method="POST">
+                <form id="formNuevo" action="<?php echo getUrl("TipoTanques", "TipoTanques", "postCrear"); ?>" method="POST">
                     <div class="modal-header">
                         <h5 class="modal-title">
                             <i class="fas fa-plus-circle text-primary"></i> Nuevo Tipo de Tanque
@@ -275,7 +228,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Nombre del Tipo de Tanque</label>
-                            <input type="text" class="form-control" name="nombre_tipo_tanque" required>
+                            <input type="text" class="form-control" name="nombre_tipo_tanque" id="nombreTanqueNuevo" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Estado</label>
@@ -299,6 +252,112 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Mostrar mensajes desde PHP
+        <?php if (isset($mensaje) && isset($tipo_mensaje)) { ?>
+            Swal.fire({
+                icon: '<?php echo $tipo_mensaje == "success" ? "success" : ($tipo_mensaje == "warning" ? "warning" : "error"); ?>',
+                title: '<?php echo $tipo_mensaje == "success" ? "¡Éxito!" : ($tipo_mensaje == "warning" ? "Advertencia" : "Error"); ?>',
+                text: '<?php echo $mensaje; ?>',
+                confirmButtonColor: '#3085d6',
+                timer: 3000,
+                timerProgressBar: true
+            });
+        <?php } ?>
+
+        // Alerta para tanque inactivo
+        function mostrarAlertaInactivo(nombreTanque) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Tanque Inactivo',
+                text: 'Este tanque "' + nombreTanque + '" no se puede editar porque no está activo.',
+                confirmButtonColor: '#ffc107',
+                confirmButtonText: 'Entendido'
+            });
+        }
+
+        // Confirmar edición con SweetAlert2
+        function confirmarEdicion(idTanque, nombreTanque) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "¿Deseas editar el tipo de tanque '" + nombreTanque + "'?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#ffc107',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, editar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Abrir modal de edición
+                    const modalEditar = new bootstrap.Modal(document.getElementById('modalEditar' + idTanque));
+                    modalEditar.show();
+                }
+            });
+        }
+
+        // Confirmar inhabilitación
+        function confirmarInhabilitacion(idTanque, nombreTanque) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "¿Deseas inhabilitar el tipo de tanque '" + nombreTanque + "'?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, inhabilitar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Crear formulario y enviarlo
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '<?php echo getUrl("TipoTanques", "TipoTanques", "postInhabilitar"); ?>';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'id_tipo_tanque';
+                    input.value = idTanque;
+                    
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
+
+        // Confirmar activación
+        function confirmarActivacion(idTanque, nombreTanque) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "¿Deseas activar el tipo de tanque '" + nombreTanque + "'?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, activar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Crear formulario y enviarlo
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '<?php echo getUrl("TipoTanques", "TipoTanques", "postHabilitar"); ?>';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'id_tipo_tanque';
+                    input.value = idTanque;
+                    
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
