@@ -1,3 +1,0 @@
-@echo off
-echo Proceso por lotes ejecutado con exito .......
-del *.png *.gif *.db

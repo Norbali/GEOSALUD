@@ -15,7 +15,7 @@ const expresionesRegulares = {
 const errores = {
     nombre: "El nombre debe tener entre 2 y 20 letras",
     apellido: "El apellido debe tener entre 2 y 20 letras",
-    correo: "Correo inválido. Debe incluir una extensión y dominio, por ejemplo: usuario@dominio.extension",
+    correo: "Correo inválido. Debe incluir una extensión de dominio, por ejemplo: usuario@dominio.extension",
     contraseña: "La contraseña debe tener entre 8 y 16 caracteres, incluir 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial",
     telefono: "Número inválido. Debe ser un número telefónico válido, por ejemplo: 3123456789.",
     documento: "Número de documento invalido, el número de documento debe tener 9 o 10 dígitos"

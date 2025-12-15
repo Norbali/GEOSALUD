@@ -10,6 +10,7 @@ class ReportesNacidosMuertosController{
         $zoocriaderos = $obj->select($sqlZoocriaderos);
 
         $listadoNacidosMuertos = $this->listarNacidosMuertos();
+        //
         include_once '../view/reportesNacidosMuertos/reporteNacidosMuertos.php';
     } 
 
