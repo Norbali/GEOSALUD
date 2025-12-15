@@ -42,7 +42,7 @@
     <div class="container-fluid px-4 py-4">
         <div class="page-header">
             <h1 class="h3 mb-2">
-                <i class="fas fa-water text-primary"></i> Gestion de Tipo de Tanques
+                <i class="fas fa-water text-primary"></i> Gestión de Tipo de Tanques
             </h1>
         </div>
 
@@ -255,7 +255,7 @@
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Mostrar mensajes desde PHP
+        // Mostrar mensajes
         <?php if (isset($mensaje) && isset($tipo_mensaje)) { ?>
             Swal.fire({
                 icon: '<?php echo $tipo_mensaje == "success" ? "success" : ($tipo_mensaje == "warning" ? "warning" : "error"); ?>',
