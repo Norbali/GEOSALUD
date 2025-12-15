@@ -32,7 +32,7 @@
 
                     <div class="form-group">
                         <label for="documento">Documento*</label>
-                        <input type="text" class="form-control" id="documento" name="documento" placeholder="Ingrese un n&uacute;mero de documento" minlength="9" maxlength="10" required>
+                        <input type="text" class="form-control" id="documento" name="documento" placeholder="Ingrese un número de documento" minlength="9" maxlength="10" required>
                         <small id="error-documento" class="text-danger"></small>
                     </div>
 
@@ -55,8 +55,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="telefono">Tel&eacute;fono*</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un n&uacute;mero de tel&eacute;fono" minlength="9" maxlength="10" required>
+                        <label for="telefono">Teléfono*</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un número de teléfono" minlength="9" maxlength="10" required>
                         <small id="error-telefono" class="text-danger"></small>
                     </div>
 
@@ -67,8 +67,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="contrasena">Contrase&ntilde;a*</label>
-                        <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese una contrase&ntilde;a" minlength="8" maxlength="16" required>
+                        <label for="contrasena">Contrasena*</label>
+                        <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese una contraseña" minlength="8" maxlength="16" required>
                         <small id="error-contrasena" class="text-danger"></small>
                     </div>
 
@@ -113,7 +113,7 @@
         //documento
         if (!/^\d{9,10}$/.test(documento)) {
             document.getElementById('error-documento').textContent =
-                'El documento debe tener 9 o 10 d&iacute;gitos num&eacute;ricos.';
+                'El documento debe tener 9 o 10 dígitos numéricos.';
             valido = false;
         }
 
@@ -134,14 +134,14 @@
         //telefono
         if (!/^\d{9,10}$/.test(telefono)) {
             document.getElementById('error-telefono').textContent =
-                'N&uacute;mero de documento invalido, el n&uacute;mero de documento debe tener 9 o 10 d&iacute;gitos num&eacute;ricos.';
+                'Número de documento invalido, el número de documento debe tener 9 o 10 dígitos numíricos.';
             valido = false;
         }
 
         //correo
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
             document.getElementById('error-correo').textContent =
-                '“Correo inv&aacute;lido. Debe incluir una extensi&oacute;n y dominio, por ejemplo: usuario@dominio.extension.';
+                '“Correo inválido. Debe incluir una extensión y dominio, por ejemplo: usuario@dominio.extension.';
             valido = false;
         }
 
@@ -151,7 +151,7 @@
             !/[0-9]/.test(contrasena) || !/[!@#$%^&*(),.?":{}|<>_\-+=`[\]\\;/]/.test(contrasena)
         ) {
             document.getElementById('error-contrasena').textContent =
-                'Su contrase&ntilde;a no es segura (m&iacute;nimo 8 caracteres, al menos un n&uacute;mero, una letra may&uacute;scula y un s&iacute;mbolo)';
+                'Su contraseña no es segura (mínimo 8 caracteres, al menos un número, una letra mayúscula y un símbolo)';
             valido = false;
         }
 
