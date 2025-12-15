@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>GEOSALUD</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="assets/img/logoGEOSALUD.png">

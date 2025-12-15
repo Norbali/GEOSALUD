@@ -292,7 +292,7 @@ body {
 </div>
 
 <div class="form-group">
-    <label for="telefono">Teléfono *</label>
+    <label for="telefono">Tel&eacute;fono *</label>
     <input type="text" id="telefono" name="telefono" value="<?php echo isset($datosUsuario['telefono']) ? $datosUsuario['telefono'] : ''; ?>" maxlength="10" required>
 </div>
 

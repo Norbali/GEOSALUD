@@ -624,7 +624,7 @@ document.querySelectorAll('.btn-enable').forEach(btn => {
         const url = this.getAttribute('href');
         
         Swal.fire({
-            title: 'habilitar tanque?',
+            title: '¿Habilitar tanque?',
             text: 'Esta accion cambiara el estado a ACTIVO',
             icon: 'question',
             showCancelButton: true,
