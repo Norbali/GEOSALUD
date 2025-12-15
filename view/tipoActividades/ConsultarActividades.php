@@ -1,3 +1,4 @@
+<div style="position: relative; top: -70px;">
 <?php
     include_once '../lib/helpers.php';
     $permisos = $_SESSION['permisos'];
@@ -364,3 +365,4 @@ function sortTable(column, direction) {
 </script>
 
 <script src="assets/js/funcionesModalTipoActividades.js"></script>
+</div>

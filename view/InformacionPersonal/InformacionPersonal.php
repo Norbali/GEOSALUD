@@ -1,3 +1,4 @@
+<div style="position: relative; top: -70px;">
 <?php
 session_start();
 
@@ -370,3 +371,4 @@ document.getElementById('foto_input').addEventListener('change', function() {
     }
 });
 </script>
+</div>

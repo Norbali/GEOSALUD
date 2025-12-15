@@ -1,4 +1,4 @@
-
+<div style="position: relative; top: -70px;">
 <?php
 session_start();
 
@@ -641,3 +641,4 @@ document.querySelectorAll('.btn-enable').forEach(btn => {
 });
 </script>
 <script src="assets/js/funcionesModalTipoActividades.js"></script>
+</div>
