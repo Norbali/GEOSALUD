@@ -77,26 +77,13 @@ MAP
   END
 
   LAYER
-    CONNECTIONTYPE postgis
-    NAME "Puntos"
-    STATUS ON
-    CONNECTION "user=postgres password=Norbali dbname=bd_geosalud host=localhost port=5432"
-    DATA "coordenadas from zoocriadero using unique id_zoocriadero using SRID=4326"
-    TYPE POINT
-
-     PROJECTION
-        "init=epsg:4326"
-      END
-
-    CLASS
-      STYLE
-        SYMBOL star
-        SIZE 30
-        COLOR 255 0 255
-        OUTLINECOLOR 0 0 0
-      END
-    END
-  END
+  NAME "zoocriadero"
+  TYPE POINT
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=bd_geosalud user=postgres password=***"
+  DATA "coordenadas FROM public.zoocriadero USING UNIQUE id_zoocriadero USING SRID=4326"
+  STATUS ON
+END
 
 
   LAYER
