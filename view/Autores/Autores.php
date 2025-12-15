@@ -1,4 +1,4 @@
-
+<div style="position: relative; top: -70px;">
     <style>
         .titulo-autores {
             font-size: 3rem;
@@ -104,6 +104,6 @@
             </div>
         </div>
     </div>
-
+    </div>
 </div>
 

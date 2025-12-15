@@ -1,3 +1,13 @@
+<style>
+.main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1f2937;
+        }
+</style>
+
 <?php 
     include_once '../lib/helpers.php';
 ?>
@@ -22,10 +32,8 @@
     <?php } ?>
     <div style="position: relative; top: -70px;">
 
-        <div class="card mx-auto mt-1" style="max-width: 800px; margin-top:-30px;">
-            <div class="card-header mt-1">
-                <div class="card-title">Registro de Usuario</div>
-            </div>
+           <h1 class="main-title">Registro de Usuarios</h1>
+ 
 
             <form id="registroForm" class="" action="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","postCreate") ?>" method="POST">
                 <div class="card-body">
