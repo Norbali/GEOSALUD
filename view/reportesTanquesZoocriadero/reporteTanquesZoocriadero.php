@@ -11,7 +11,7 @@
                 <div class="col-md-4">
                     <label class="form-label">Zoocriadero</label>
                     <select name="zoocriadero" id="zoocriadero" class="form-select">
-                        <option value="Todos">Todos</option>
+                        <option value="">Todos</option>
                         <?php while ($zoocriadero = pg_fetch_assoc($zoocriaderos)) { ?>
                             <option value="<?php echo $zoocriadero['id_zoocriadero']; ?>">
                                 <?php echo $zoocriadero['nombre_zoocriadero']; ?>
@@ -46,11 +46,20 @@
                     <thead>
                         <tr>
                             <th>Id zoocriadero</th>
+                            <th>Estado</th>
                             <th>Tanque</th>
                             <th>Tipo de tanque</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php while ($row = pg_fetch_assoc($cosultaTanquesZoocriadero)) { ?>
+                            <tr>
+                                <td><?php echo $row['nombre_zoocriadero']; ?></td>
+                                <td><?php echo $row['estado_zoocriadero']; ?></td>
+                                <td><?php echo $row['id_tanque']; ?></td>
+                                <td><?php echo $row['nombre_tipo_tanque']; ?></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

@@ -5,7 +5,7 @@
         </div>
 
         <div class="card-body">
-            <form id="filtrosReporte" class="row g-3">
+            <form id="filtrosReporte" class="row g-3" method="POST" action="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","filtro")?>">
 
                 <!-- Fecha inicio -->
                 <div class="col-md-4">
@@ -25,7 +25,7 @@
                 <div class="col-md-4">
                     <label class="form-label">Zoocriadero</label>
                     <select name="zoocriadero" id="zoocriadero" class="form-select">
-                        <option value="Todos">Todos</option>
+                        <option value="">Todos</option>
                         <?php while ($zoocriadero = pg_fetch_assoc($zoocriaderos)) { ?>
                             <option value="<?php echo $zoocriadero['id_zoocriadero']; ?>">
                                 <?php echo $zoocriadero['nombre_zoocriadero']; ?>
@@ -36,7 +36,7 @@
                 </div>
 
                 <!-- Botón -->
-            <div class="d-flex justify-content-end gap-1">
+                <div class="d-flex justify-content-end gap-1">
                     <button type="submit" class="btn btn-primary btn-sm">
                         Generar Reporte
                     </button>
@@ -45,7 +45,6 @@
                         Generar Excel
                     </button>
                 </div>   
-
             </form>
         </div>
     </div>
@@ -60,16 +59,29 @@
                 <table class="table table-bordered table-head-bg-primary mt-3">
                     <thead>
                         <tr>
+                            <th>Fecha</th>
                             <th>Zoocriadero</th>
                             <th>Id tanque</th>
                             <th>Nacidos</th>
                             <th>Muertes hembras</th>
                             <th>Muertes machos</th>
-                            <th>Muertes</th>
+                            <th>Total Muertes</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php while ($row = pg_fetch_assoc($listadoNacidosMuertos)) { ?>
+                            <tr>
+                                <td><?php echo $row['fecha']; ?></td>
+                                <td><?php echo $row['nombre_zoocriadero']; ?></td>
+                                <td><?php echo $row['id_tanque']; ?></td>
+                                <td><?php echo $row['nacidos']; ?></td>
+                                <td><?php echo $row['muertes_hembras']; ?></td>
+                                <td><?php echo $row['muertes_machos']; ?></td>
+                                <td><?php echo $row['total_muertes']; ?></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -88,13 +100,6 @@
 
         const fechaInicio = document.getElementById('fecha_inicio').value;
         const fechaFin = document.getElementById('fecha_fin').value;
-
-        
-        if (!fechaInicio && !fechaFin && !actividad && !zoocriadero) {
-            document.getElementById('error-fechaInicio').textContent =
-                'Debe seleccionar al menos un filtro';
-            isValid = false;
-        }
 
         if (fechaInicio && fechaFin && fechaInicio > fechaFin) {
             document.getElementById('error-fechaFin').textContent =
@@ -126,15 +131,6 @@
             }
             isValid = false;
         }
-
-        const zoocriadero = document.getElementById('zoocriadero').value;
-        if (zoocriadero === '') {
-            document.getElementById('error-zoocriadero').textContent =
-                'Debe seleccionar un zoocriadero';
-            isValid = false;
-        }
-
-
 
         if (!isValid) return;
         const accion = formData.get('accion');

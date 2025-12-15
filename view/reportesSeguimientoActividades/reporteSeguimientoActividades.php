@@ -1,23 +1,3 @@
-<?php
-$fecha_inicio = '';
-$fecha_fin = '';
-$actividad_sel = '';
-$zoocriadero_sel = '';
-
-if (isset($_POST['fecha_inicio'])) {
-    $fecha_inicio = $_POST['fecha_inicio'];
-}
-if (isset($_POST['fecha_fin'])) {
-    $fecha_fin = $_POST['fecha_fin'];
-}
-if (isset($_POST['actividad'])) {
-    $actividad_sel = $_POST['actividad'];
-}
-if (isset($_POST['zoocriadero'])) {
-    $zoocriadero_sel = $_POST['zoocriadero'];
-}
-?>
-
 <div style="position: relative; top: -70px;">
     <div class="card mx-auto mt-0">
         <div class="card-header">
