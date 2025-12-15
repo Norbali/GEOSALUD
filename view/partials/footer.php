@@ -23,6 +23,4 @@
             2024, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">ThemeKita</a>
         </div>				
     </div>
-</footer> 
-<script src="../web/js/jquery.js"></script>
-<script src="../web/js/global.js"></script>
+</footer>

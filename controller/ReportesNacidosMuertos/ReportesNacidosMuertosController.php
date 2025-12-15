@@ -123,9 +123,6 @@ class ReportesNacidosMuertosController{
         include_once '../view/reportesNacidosMuertos/reporteNacidosMuertos.php';
     }
 
-
-
-
 }
 
 ?>

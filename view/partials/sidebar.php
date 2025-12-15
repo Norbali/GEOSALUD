@@ -35,45 +35,47 @@
                     <h4 class="text-section">Módulos</h4>
                 </li>
 
-                <li class="nav-item active">
-                    <a href="<?php echo getUrl("Mapa","Mapa","vistaIndex")?>" class="collapsed" aria-expanded="false">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <p>Mapa</p>
-                    </a>
-                </li>
-
                 <li class="nav-item">
-                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>" class="collapsed" aria-expanded="false">
+                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>">
                         <i class="fas fa-fish"></i>
                         <p>Tanques</p>
                     </a>
                 </li>
+      
+               <!-- <!- <?php if (array_key_exists("TipoActividades", $permisos)){?> -->
+                <li class="nav-item">
+                                <a href=" <?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta")?>">
+                        <i class="fas fa-list-alt"></i>
+                        <p>Tipos de actividades</p>
+                    </a>
+                </li>
+                <!-- <?php }?> -->
 
                 <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#actividades">
-                            <i class="fas fa-pen-square"></i>
+                        <i class="fas fa-pen-square"></i>        
+                        <a href="<?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta");?>">
                             <p>Seguimiento de tanques</p>
                         </a>
                     </li>
                 <?php }?>
-<?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
-    <li class="nav-item">
-        <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">
-            <i class="fas fa-th-large"></i>
-            <p>Tipo de tanques</p>
-        </a>
-    </li>
-<?php }?> 
+                <?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">
+                            <i class="fas fa-th-large"></i>
+                            <p>Tipo de tanques</p>
+                        </a>
+                    </li>
+                <?php }?> 
 
-<?php if (array_key_exists("PermisoDeRoles", $permisos)){ ?>
-    <li class="nav-item">
-        <a href="<?php echo getUrl("PermisoRoles", "PermisoRoles", "getConsultar") ?>">
-            <i class="fas fa-th-large"></i>
-            <p>Permiso de roles</p>
-        </a>
-    </li>
-<?php }?>
+                <?php if (array_key_exists("PermisoDeRoles", $permisos)){ ?>
+                    <li class="nav-item">
+                        <a href="<?php echo getUrl("PermisoRoles", "PermisoRoles", "getConsultar") ?>">
+                            <i class="fas fa-th-large"></i>
+                            <p>Permiso de roles</p>
+                        </a>
+                    </li>
+                <?php }?>
 
 
 
@@ -111,6 +113,14 @@
                         </a>
                     </li>
                 <?php }?>
+
+                
+                <li class="nav-item">
+                    <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
+                        <i class="fas fa-user"></i>
+                        <p>Registro de usuarios</p>
+                    </a>
+                </li>
                 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#configuracion">
@@ -121,34 +131,13 @@
                     <div class="collapse" id="configuracion">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="../view/partials/actualizarInformacion.php">
-                                    <span class="sub-item">Actualizar Informaci&oacute;n</span>
+                                <a href="<?php echo getUrl('InformacionPersonal','InformacionPersonal','getInformacion') ?>">
+                                    <span class="sub-item">Informaci&oacute;n Personal</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="../view/partials/manualDeUsuario.php">
-                                    <span class="sub-item">Manual de Usuario</span>
-                                </a>
-                            </li>
-                            <?php if (array_key_exists("ManualInstalacion", $permisos)){ ?>
-                                <li>
-                                    <a href="../view/partials/manualDeInstalacion.php">
-                                        <span class="sub-item">Manual de Instalación</span>
-                                    </a>
-                                </li>
-                            <?php }?>
-
-                            <?php if (array_key_exists("ManualSistema", $permisos)){ ?>
-                                <li>
-                                    <a href="../view/partials/manualDeSistema.php">
-                                        <span class="sub-item">Manual de Sistema</span>
-                                    </a>
-                                </li>
-                            <?php }?>
                             <li class="nav-item">
                                     <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
-                                         <i class="fas fa-video"></i>
-                                        <p>Video Manual</p>
+                                        <span class="sub-item">Manuales</span>
                                     </a>
                              </li>
                         </ul>

@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// Capturar alertas
+if (isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+    unset($_SESSION['alert']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,23 +17,12 @@ session_start();
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
 body {
     background-color: #f5f5f5;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.alert-custom {
-    background-color: #f8d7da;
-    border: none;
-    border-radius: 8px;
-    color: #721c24;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .header-card {
@@ -85,6 +80,25 @@ body {
     padding: 12px;
     cursor: pointer;
     user-select: none;
+}
+
+.table thead th:hover {
+    background-color: #e9ecef;
+}
+
+.table thead th.sortable::after {
+    content: ' ⇅';
+    opacity: 0.3;
+}
+
+.table thead th.sort-asc::after {
+    content: ' ↑';
+    opacity: 1;
+}
+
+.table thead th.sort-desc::after {
+    content: ' ↓';
+    opacity: 1;
 }
 
 .table tbody td {
@@ -214,9 +228,21 @@ body {
 
 <div class="container mt-4">
 
+<!-- ALERTAS -->
+<?php if (!empty($alert)) { ?>
+    <div class="alert alert-<?= $alert['type'] ?> alert-dismissible fade show" role="alert">
+        <strong><?= $alert['message'] ?></strong>
+        <?php if (!empty($alert['error'])) { ?>
+            <br>
+            <small><?= htmlspecialchars($alert['error']) ?></small>
+        <?php } ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<?php } ?>
+
 <!-- HEADER -->
 <div class="header-card">
-    <h2><i class="fas fa-water text-primary "></i> Gesti&oacute;n de Tanques</h2>
+    <h4><i class="fas fa-water text-primary"></i> Gesti&oacute;n de Tanques</h4>
 </div>
 
 <!-- LISTA -->
@@ -278,7 +304,7 @@ body {
         data-documento="<?php echo $_SESSION['documento']; ?>"
         data-responsable="<?php echo $_SESSION['nombreCompleto']; ?>"
         data-rol="<?php echo $_SESSION['nombreRol']; ?>">
-        <i class="fas fa-eye"></i> Ver
+        <i class="fas fa-eye"></i> Ver Detalle
         </button>
 
         <!-- EDITAR -->
@@ -320,7 +346,7 @@ body {
                 'estado' => 1
             )
         ); ?>">
-        <i class="fas fa-check"></i> Activar
+        <i class="fas fa-check"></i> Habilitar
         </a>
         <?php } ?>
         </td>
@@ -602,8 +628,54 @@ function sortTable(column, direction) {
         th.classList.remove('sort-asc', 'sort-desc');
     });
     
-
+    
 }
+
+// Confirmación SweetAlert para inhabilitar
+document.querySelectorAll('.btn-disable').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = this.getAttribute('href');
+        
+        Swal.fire({
+            title: '¿Inhabilitar tanque?',
+            text: 'Esta accion cambiara el estado a INACTIVO',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'S&iacute;, inhabilitar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    });
+});
+
+// Confirmación para activar
+document.querySelectorAll('.btn-enable').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = this.getAttribute('href');
+        
+        Swal.fire({
+            title: 'dictivar tanque?',
+            text: 'Esta accion cambiara el estado a ACTIVO',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#28a745',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'S&iacute;o, activar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    });
+});
 </script>
 
 </body>
