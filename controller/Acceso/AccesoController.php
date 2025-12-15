@@ -4,6 +4,7 @@
 
     class AccesoController{
 
+        //funcion para valdiar el login
         public function login(){
           
             $obj = new AccesoModel();
@@ -95,6 +96,7 @@
 
 
         //VALIDAR CAMPOS
+        //validar cntraseña
         function validarContrasena($contrasena) {
             $mensaje = "";
 
@@ -114,6 +116,7 @@
             return $mensaje;
         }
 
+        //validar documento
         function validarDocumento($documento) {
             $mensaje = "";
             if (empty($documento)) {
@@ -130,6 +133,7 @@
         }
 
         //validar credenciales
+        //validar bd codumento
         public function validarCredencialDocumento($documento){
             $obj = new AccesoModel();
 
@@ -143,6 +147,7 @@
             }
         }
 
+        //validar bd contraseña
         public function validarCredencialContraseña($documento, $contrasena){
             $obj = new AccesoModel();
             $hash = sha1($contrasena);
