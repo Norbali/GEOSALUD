@@ -81,9 +81,8 @@
         </div>
         <div class="text-end mt-2 me-4">
            <button type="button" onclick="exportarExcelXLSX()" class="btn btn-success btn-sm">
-            Generar Excel
-        </button>
-
+                Generar Excel
+            </button>
         </div>
 
         <div class="card-body">

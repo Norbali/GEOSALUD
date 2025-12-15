@@ -50,7 +50,7 @@
             <h4 class="card-title">Resultados del Reporte</h4>
         </div>
         <div class="text-end mt-2 me-4">
-            <button type="submit" class="btn btn-success btn-sm">
+            <button type="button" onclick="exportarExcelXLSX()" class="btn btn-success btn-sm">
                 Generar Excel
             </button>
         </div>
@@ -88,7 +88,93 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <script>
+    function exportarExcelXLSX() {
+        //OBTENER FILTROS
+        const fechaInicio = document.getElementById('fecha_inicio')?.value || 'Sin filtro';
+        const fechaFin = document.getElementById('fecha_fin')?.value || 'Sin filtro';
+        const zoocriaderoSelect = document.getElementById('zoocriadero');
+        const zoocriadero = zoocriaderoSelect?.selectedOptions[0]?.text || 'Todos';
+
+        //OBTENER TABLA
+        const tabla = document.querySelector('.table-responsive table tbody');
+        if (!tabla) {
+            alert('No hay datos para exportar');
+            return;
+        }
+
+        const filas = tabla.querySelectorAll('tr');
+        if (filas.length === 0) {
+            alert('No hay registros para exportar');
+            return;
+        }
+
+        let datos = [];
+
+        //ENCABEZADO DEL EXCEL
+        datos.push(['REPORTE PECES NACIDOS Y MUERTOS']);
+        datos.push([]);
+        datos.push(['Filtros aplicados']);
+        datos.push(['Fecha inicio', fechaInicio]);
+        datos.push(['Fecha fin', fechaFin]);
+        datos.push(['Zoocriadero', zoocriadero]);
+        datos.push([]);
+
+        // ENCABEZADOS DE LA TABLA
+        datos.push([
+            'Fecha',
+            'Zoocriadero',
+            'Id Tanque',
+            'Nacidos',
+            'Muertes Hembras',
+            'Muertes Machos',
+            'Total Muertes'
+        ]);
+
+        // DATOS DE LA TABLA
+        filas.forEach(fila => {
+            const celdas = fila.querySelectorAll('td');
+            if (celdas.length === 7) {
+                datos.push([
+                    celdas[0].textContent.trim(),
+                    celdas[1].textContent.trim(),
+                    celdas[2].textContent.trim(),
+                    celdas[3].textContent.trim(),
+                    celdas[4].textContent.trim(),
+                    celdas[5].textContent.trim(),
+                    celdas[6].textContent.trim()
+                ]);
+            }
+        });
+
+
+        //CREAR EXCEL
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(datos);
+
+        //ANCHO DE COLUMNAS
+        ws['!cols'] = [
+            { wch: 12 }, // Fecha
+            { wch: 25 }, // Zoocriadero
+            { wch: 10 }, // Id Tanque
+            { wch: 10 }, // Nacidos
+            { wch: 18 }, // Muertes Hembras
+            { wch: 18 }, // Muertes Machos
+            { wch: 15 }  // Total Muertes
+        ];
+
+        XLSX.utils.book_append_sheet(wb, ws, 'Nacidos y Muertos');
+
+        const fechaActual = new Date().toISOString().split('T')[0];
+        XLSX.writeFile(
+            wb,
+            `Reporte_Nacidos_Muertos_${fechaActual}.xlsx`
+        );
+    }
+
+
     document.getElementById('filtrosReporte').addEventListener('submit', function (e) {
         e.preventDefault();
 
