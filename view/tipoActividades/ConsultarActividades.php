@@ -100,15 +100,15 @@
                         <button class="btn btn-secondary dropdown-toggle sortable" type="button" data-bs-toggle="dropdown" aria-expanded="false"onclick="sortTable('id')" data-column="id" data-direction="<?php echo $order; ?>">
                 <i class="bi bi-sort-down"></i> Ordenar por ID
             </button>
-                </button>
+                
                     </div>
 
                     <!-- NUEVA ACTIVIDAD -->
-                        <!-- <?php if (in_array('actualizar', $permisos['TiposDeActividades'])) { ?> --> 
+                        <?php if (in_array('actualizar', $permisos['TiposDeActividades'])) { ?> 
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
                         <i class="fas fa-plus"></i> Nueva Actividad
                     </button>
-                    <!-- <?php } ?> -->
+                    <?php } ?>
                 </div>
             </div>
 
@@ -162,17 +162,17 @@
                                                 </button>
                                                  <?php } ?> 
                                             <?php } else { ?>
-                                                <!-- <?php
-                                                 if (in_array('actualizar', $permisos['TiposDeActividades'])) { ?> -->
+                                                 <?php
+                                                 if (in_array('actualizar', $permisos['TiposDeActividades'])) { ?> 
                                                 <button type="button"
                                                     class="btn btn-warning btn-sm"
                                                     onclick="actividadInhabilitada()">
                                                     <i class="fas fa-edit"></i> Editar
                                                 </button>
-                                            <!-- <?php } ?> -->
-                                             <!-- <?php } ?>
+                                             <?php } ?> 
+                                              <?php } ?>
 
-                                                <?php if (in_array('inhabilitar', $permisos['TiposDeActividades'])) { ?> --> 
+                                                <?php if (in_array('inhabilitar', $permisos['TiposDeActividades'])) { ?> 
                                             <?php if ($actividad['nombre_estado_actividades'] === 'Activo') { ?>
                                                 <button type="button"
                                                     class="btn btn-danger btn-sm"
