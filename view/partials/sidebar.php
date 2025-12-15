@@ -98,22 +98,6 @@
                     </div>
                 </li>
 
-           <li class="nav-item">
-    <a href="<?= getUrl(
-    "SeguimientoDeTanques",
-    "SeguimientoDeTanques",
-    "getConsulta"
-
-
-    ) ?>">
-        <i class="fas fa-pen-square"></i>
-        <p>Seguimiento de tanques</p>
-    </a>
-</li>
-
-
-
-                   
                 </li>
 
                 <li class="nav-item">
@@ -139,22 +123,23 @@
                 </li>
                  <li>
                               
-                
+               <!-- <!- <?php if (array_key_exists("TipoActividades", $permisos)){?> -->
                 <li class="nav-item">
                                 <a href=" <?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta")?>">
                         <i class="fas fa-list-alt"></i>
                         <p>Tipos de actividades</p>
                     </a>
                 </li>
+                <!-- <?php }?> -->
 
-                <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
+             
                     <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#actividades">
+                                <a href=" <?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta")?>">
                             <i class="fas fa-pen-square"></i>
                             <p>Seguimiento de tanques</p><!-- Span caret si tiene submenus -->
                         </a>
                     </li>
-                <?php }?>
+              
                 <?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">
