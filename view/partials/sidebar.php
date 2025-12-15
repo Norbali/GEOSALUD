@@ -120,10 +120,18 @@
                                     <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
                                         <span class="sub-item">Manuales</span>
                                     </a>
-                             </li>
+                            </li>
+                            <li class="nav-item">
+                                    <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
+                                        <span class="sub-item">Autores</span>
+                                    </a>
+                            </li>
+                             
+                             
                         </ul>
                     </div>
                 </li>
+                
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#reportes">
@@ -157,13 +165,6 @@
                             <?php }?>
                         </ul>
                     </div>
-                </li>
-                <li class="nav-item">
-                 <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
-                    <i class="fas fa-info"></i>
-                    <p>Autores</p>
-                 </a>
-                </li>
             </ul>
         </div>
     </div>

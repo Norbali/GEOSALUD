@@ -1,3 +1,4 @@
+<div style="position: relative; top: -70px;">
 <?php
     include_once '../lib/helpers.php';
     $permisos = $_SESSION['permisos'];
@@ -59,6 +60,13 @@
     .sortable {
         cursor: pointer;
     }
+    .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1f2937;
+        }
 
    
 </style>
@@ -80,11 +88,7 @@
 <div class="container-fluid px-4 py-4">
     <div class="page-content-fix">
 
-        <div class="page-header">
-            <h1 class="h3 mb-2">
-                <i class="fas fa-tasks text-primary"></i> Gestión de Actividades
-            </h1>
-        </div>
+        <h1 class="main-title">Gestión de Actividades</h1>
 
         <!-- Card con Tabla -->
          <form action="<?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta") ?>" method="POST">
@@ -373,3 +377,4 @@ function sortTable(column, direction) {
 </script>
 
 <script src="assets/js/funcionesModalTipoActividades.js"></script>
+</div>
