@@ -100,6 +100,7 @@ class ReporteSeguimientoActividadesController{
         include_once '../view/reportesSeguimientoActividades/reporteSeguimientoActividades.php';
     }
       
+    
 }
 
 ?>
