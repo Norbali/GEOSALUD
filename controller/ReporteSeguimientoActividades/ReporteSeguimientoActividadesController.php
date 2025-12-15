@@ -6,11 +6,15 @@ class ReporteSeguimientoActividadesController{
 
     public function getConsulta(){
         $obj = new ReporteSeguimientoActividadesModel();
-        $sqlActividades = "SELECT *FROM actividad";
-        //$sql = "SELECT *FROM actividad WHERE id_estado_actividad=1";
+
+        $sqlActividades = "SELECT * FROM actividad WHERE id_estado_actividad=1";
         $actividades = $obj->select($sqlActividades);
-        $sqlZoocriaderos = "SELECT *FROM zoocriaderos";
-        //
+
+        $sqlZoocriaderos = "SELECT * FROM zoocriadero";
+        $zoocriaderos = $obj->select($sqlZoocriaderos);
+
+        $consultaSeguimiento = $this->listarSeguimiento();
+        
         include_once '../view/reportesSeguimientoActividades/reporteSeguimientoActividades.php';
     } 
 
