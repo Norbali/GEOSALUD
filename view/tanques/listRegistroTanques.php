@@ -248,9 +248,9 @@ body {
 
         <td>
         <?php if ($t['id_estado_tanque'] == 1) { ?>
-        <span class="badge bg-success">Activo</span>
+        <span class="badge bg-success">Habilitado</span>
         <?php } else { ?>
-        <span class="badge bg-secondary">Inactivo</span>
+        <span class="badge bg-danger">Inhabilitado</span>
         <?php } ?>
         </td>
 
@@ -616,13 +616,13 @@ document.querySelectorAll('.btn-enable').forEach(btn => {
         const url = this.getAttribute('href');
         
         Swal.fire({
-            title: 'dictivar tanque?',
+            title: 'habilitar tanque?',
             text: 'Esta accion cambiara el estado a ACTIVO',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#28a745',
             cancelButtonColor: '#6c757d',
-            confirmButtonText: 'S&iacute;o, activar',
+            confirmButtonText: 'S&iacute;, activar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
