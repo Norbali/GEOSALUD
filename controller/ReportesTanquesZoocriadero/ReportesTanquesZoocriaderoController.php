@@ -37,6 +37,19 @@
 
             return $obj->select($sql);
         }
+
+        public function filtro(){
+            $obj = new ReportesTanquesZoocriaderoModel();
+
+            $id_zoocriadero = $_POST['zoocriadero'];
+
+            $cosultaTanquesZoocriadero = $this->cosultaTanquesZoocriadero($id_zoocriadero);
+
+            $sqlZoocriaderos = "SELECT * FROM zoocriadero";
+            $zoocriaderos = $obj->select($sqlZoocriaderos);
+
+            include_once '../view/reportesTanquesZoocriadero/reporteTanquesZoocriadero.php';
+        }
     }
 
 ?>

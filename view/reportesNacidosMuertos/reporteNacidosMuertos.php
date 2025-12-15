@@ -37,12 +37,8 @@
 
                 <!-- Botón -->
                 <div class="d-flex justify-content-end gap-1">
-                    <button type="submit" class="btn btn-primary btn-sm">
+                    <button type="submit" name="accion" value="reporte" class="btn btn-primary btn-sm">
                         Generar Reporte
-                    </button>
-
-                    <button type="submit" class="btn btn-success btn-sm">
-                        Generar Excel
                     </button>
                 </div>   
             </form>
@@ -53,7 +49,11 @@
         <div class="card-header">
             <h4 class="card-title">Resultados del Reporte</h4>
         </div>
-
+        <div class="text-end mt-2 me-4">
+            <button type="submit" class="btn btn-success btn-sm">
+                Generar Excel
+            </button>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-head-bg-primary mt-3">

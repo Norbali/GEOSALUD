@@ -68,11 +68,6 @@
                                 class="btn btn-primary btn-sm">
                             Generar Reporte
                         </button>
-
-                        <button type="submit" name="excel" value="excel"
-                                class="btn btn-success btn-sm">
-                            Exportar Excel
-                        </button>
                     </div>
 
                 </div>
@@ -83,6 +78,12 @@
     <div class="card mt-4">
         <div class="card-header">
             <h4 class="card-title">Resultados del Reporte</h4>
+        </div>
+        <div class="text-end mt-2 me-4">
+           <button type="button" onclick="exportarExcelXLSX()" class="btn btn-success btn-sm">
+            Generar Excel
+        </button>
+
         </div>
 
         <div class="card-body">
@@ -165,8 +166,101 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <script>
     
+    function exportarExcelXLSX() {
+        // Obtener los datos de los filtros
+        const fechaInicio = document.getElementById('fecha_inicio').value;
+        const fechaFin = document.getElementById('fecha_fin').value;
+        const actividad = document.getElementById('actividad').selectedOptions[0]?.text || 'Todas';
+        const zoocriadero = document.getElementById('zoocriadero').selectedOptions[0]?.text || 'Todos';
+
+        // Obtener la tabla
+        const tabla = document.querySelector('.table-responsive table tbody');
+        const filas = tabla.querySelectorAll('tr');
+
+        // Crear array para los datos
+        let datos = [];
+
+        // Información de filtros
+        datos.push(['REPORTE DE SEGUIMIENTO DE TANQUES']);
+        datos.push([]);
+        datos.push(['Filtros Aplicados:']);
+        datos.push(['Fecha Inicio:', fechaInicio || 'Sin filtro']);
+        datos.push(['Fecha Fin:', fechaFin || 'Sin filtro']);
+        datos.push(['Actividad:', actividad]);
+        datos.push(['Zoocriadero:', zoocriadero]);
+        datos.push([]);
+
+        // Encabezados
+        datos.push(['Fecha', 'Actividad', 'Zoocriadero', 'Tanque', 'PH', 'Temperatura', 'Cloro', 'Nacidos', 'Muertes', 'Machos', 'Hembras', 'Observaciones']);
+
+        // Datos de la tabla
+        filas.forEach(fila => {
+            const celdas = fila.querySelectorAll('td');
+            if (celdas.length > 0) {
+                const botonModal = fila.querySelector('button[data-bs-target]');
+                const modalId = botonModal?.getAttribute('data-bs-target');
+                
+                if (modalId) {
+                    const modal = document.querySelector(modalId);
+                    const fecha = celdas[0].textContent.trim();
+                    const actividadNombre = celdas[1].textContent.trim();
+                    const zoocriaderoNombre = celdas[2].textContent.trim();
+                    const tanque = celdas[3].textContent.trim();
+
+                    const modalBody = modal.querySelector('.modal-body');
+                    const parrafos = modalBody.querySelectorAll('p');
+                    
+                    let ph = '', temperatura = '', cloro = '', nacidos = '', muertes = '', machos = '', hembras = '', observaciones = '';
+                    
+                    parrafos.forEach(p => {
+                        const texto = p.textContent;
+                        if (texto.includes('PH:')) ph = texto.split(':')[1]?.trim() || '';
+                        if (texto.includes('Temperatura:')) temperatura = texto.split(':')[1]?.trim() || '';
+                        if (texto.includes('Cloro:')) cloro = texto.split(':')[1]?.trim() || '';
+                        if (texto.includes('Nacidos:')) nacidos = texto.split(':')[1]?.trim() || '';
+                        if (texto.includes('Muertes:')) muertes = texto.split(':')[1]?.trim() || '';
+                        if (texto.includes('Machos:')) machos = texto.split(':')[1]?.trim() || '';
+                        if (texto.includes('Hembras:')) hembras = texto.split(':')[1]?.trim() || '';
+                        if (texto.includes('Observaciones:')) observaciones = texto.split(':')[1]?.trim() || '';
+                    });
+
+                    datos.push([fecha, actividadNombre, zoocriaderoNombre, tanque, ph, temperatura, cloro, nacidos, muertes, machos, hembras, observaciones]);
+                }
+            }
+        });
+
+        // Crear el libro y la hoja
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(datos);
+
+        // Ajustar ancho de columnas
+        ws['!cols'] = [
+            { wch: 12 }, // Fecha
+            { wch: 20 }, // Actividad
+            { wch: 20 }, // Zoocriadero
+            { wch: 10 }, // Tanque
+            { wch: 8 },  // PH
+            { wch: 12 }, // Temperatura
+            { wch: 8 },  // Cloro
+            { wch: 10 }, // Nacidos
+            { wch: 10 }, // Muertes
+            { wch: 10 }, // Machos
+            { wch: 10 }, // Hembras
+            { wch: 30 }  // Observaciones
+        ];
+
+        // Agregar la hoja al libro
+        XLSX.utils.book_append_sheet(wb, ws, 'Seguimiento Tanques');
+
+        // Generar y descargar el archivo
+        const fechaActual = new Date().toISOString().split('T')[0];
+        XLSX.writeFile(wb, `Reporte_Seguimiento_Tanques_${fechaActual}.xlsx`);
+    }
+
     document.getElementById('filtrosReporte').addEventListener('submit', function (e) {
         e.preventDefault();
 
