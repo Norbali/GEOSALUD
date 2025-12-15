@@ -1,9 +1,9 @@
 <?php
-    /*
+    
     if(!isset($_SESSION['auth']) || $_SESSION['auth']!="ok"){
         redirect("login.php");
     }
-    */
+    
 
     // LO DESCOMENTA NORBALI, CUANDO AVANCE MAS EN LOGIN, SI LO DESCOMENTAN NO LO SUBAN A LA MASTER O MAIN 
     //RECUEREN QUE SI LO DESCOMENTAN LO MAS SEGURO ES QUE LES DE ERROR PORQUE NO CUENTAN EL ARCHIVO login.php NI LA LOGICA QUE NESECITA
