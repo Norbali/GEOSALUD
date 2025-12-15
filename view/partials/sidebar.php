@@ -58,7 +58,7 @@
                         <p>Tipos de actividades</p>
                     </a>
                 </li>
-                <!-- <?php }?> -->
+               
 
                 <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
