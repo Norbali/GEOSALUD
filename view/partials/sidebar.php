@@ -1,3 +1,9 @@
+<?php 
+    include_once '../lib/helpers.php';
+    $permisos = $_SESSION['permisos'];
+
+?>
+
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo  -->
@@ -24,17 +30,19 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
-                <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="#mapa" class="collapsed" aria-expanded="false">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <p>Mapa</p>
-                    </a>
-                </li>
+
                 <li class="nav-section">
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
                     <h4 class="text-section">Módulos</h4>
+                </li>
+
+                <li class="nav-item active">
+                    <a href="<?php echo getUrl("Mapa","Mapa","vistaIndex")?>" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Mapa</p>
+                    </a>
                 </li>
 
                 <li class="nav-item">
@@ -46,7 +54,7 @@
       
                <!-- <!- <?php if (array_key_exists("TipoActividades", $permisos)){?> -->
                 <li class="nav-item">
-                                <a href=" <?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta")?>">
+                        <a href=" <?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta")?>">
                         <i class="fas fa-list-alt"></i>
                         <p>Tipos de actividades</p>
                     </a>
@@ -55,8 +63,9 @@
 
              
                     <li class="nav-item">
-                        <i class="fas fa-pen-square"></i>        
+                           
                         <a href="<?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta");?>">
+                             <i class="fas fa-pen-square"></i>    
                             <p>Seguimiento de tanques</p>
                         </a>
                     </li>

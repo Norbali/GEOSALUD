@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     include_once '../model/Acceso/AccesoModel.php';
 
     class AccesoController{
@@ -47,7 +47,7 @@
                 $nombre = $this->obtenerValorCampo($documento, "nombre");
                 $apellido = $this->obtenerValorCampo($documento, "apellido");
                 $_SESSION['nombreCompleto'] =$nombre." ".$apellido;
-                 $_SESSION['nombre'] =$nombre;
+                $_SESSION['nombre'] =$nombre;
 
                 $_SESSION['rol'] = $idRol;
                 $_SESSION['nombreRol'] = $this->obtenerNombreRol($idRol);
