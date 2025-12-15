@@ -36,93 +36,14 @@
                     </span>
                     <h4 class="text-section">Módulos</h4>
                 </li>
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#zoocriadero">
-                        <i class="fas fa-building"></i>
-                        <p>Zoocriaderos</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="zoocriadero">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="components/avatars.html">
-                                    <span class="sub-item">Avatars</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/buttons.html">
-                                    <span class="sub-item">Buttons</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/gridsystem.html">
-                                    <span class="sub-item">Grid System</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="components/panels.html">
-                                    <span class="sub-item">Panels</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
 
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tanques">
+                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>" class="collapsed" aria-expanded="false">
                         <i class="fas fa-fish"></i>
                         <p>Tanques</p>
-                        <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="tanques">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Registro de tanques</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a data-bs-toggle="collapse" href="#subConsultarTanques">
-                                    <span class="sub-item">Consultar tanques</span>
-                                </a>
-
-                                <div class="collapse" id="subConsultarTanques">
-                                    <ul class="nav nav-collapse">
-                                        <li><a href="#"><span class="sub-item">Ver Detalle de Tanques</span></a></li>
-                                        <li><a href="#"><span class="sub-item">Editar Tanques</span></a></li>
-                                        <li><a href="#"><span class="sub-item">Inhabilitar Tanques</span></a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
-
-                </li>
-
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tipotanque">
-                        <i class="fas fa-th-large"></i>
-                        <p>Tipo de tanques</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="tipotanque">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="sidebar-style-2.html">
-                                    <span class="sub-item">Sidebar Style 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="icon-menu.html">
-                                    <span class="sub-item">Icon Menu</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                 <li>
-                              
+      
                <!-- <!- <?php if (array_key_exists("TipoActividades", $permisos)){?> -->
                 <li class="nav-item">
                                 <a href=" <?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta")?>">
@@ -135,10 +56,9 @@
              
                     <li class="nav-item">
                         <i class="fas fa-pen-square"></i>        
-                    <a href=" <?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta")?>">
-                           
-                            <p>Seguimiento de tanques</p><!-- Span caret si tiene submenus -->
-                    </a>
+                        <a href="<?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta");?>">
+                            <p>Seguimiento de tanques</p>
+                        </a>
                     </li>
               
                 <?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
@@ -156,20 +76,6 @@
                         <i class="fas fa-user"></i>
                         <p>Registro de usuarios</p>
                     </a>
-                    <div class="collapse" id="usuarios">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="maps/googlemaps.html">
-                                    <span class="sub-item">Google Maps</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="maps/jsvectormap.html">
-                                    <span class="sub-item">Jsvectormap</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
                 
                 <li class="nav-item">
@@ -181,28 +87,13 @@
                     <div class="collapse" id="configuracion">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="../view/partials/actualizarInformacion.php">
-                                    <span class="sub-item">Actualizar Información</span>
+                                <a href="<?php echo getUrl('InformacionPersonal','InformacionPersonal','getInformacion') ?>">
+                                    <span class="sub-item">Informaci&oacute;n Personal</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="../view/partials/manualDeUsuario.php">
-                                    <span class="sub-item">Manual de Usuario</span>
-                                </a>
-                            </li>
-                                <li>
-                                    <a href="../view/partials/manualDeInstalacion.php">
-                                        <span class="sub-item">Manual de Instalaci&oacute;n</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../view/partials/manualDeSistema.php">
-                                        <span class="sub-item">Manual de Sistema</span>
-                                    </a>
-                                </li>
                             <li class="nav-item">
                                     <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
-                                        <span class="sub-item">Video Manual</span>
+                                        <span class="sub-item">Manuales</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -212,6 +103,7 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#reportes">
                         <i class="fas fa-newspaper"></i>
