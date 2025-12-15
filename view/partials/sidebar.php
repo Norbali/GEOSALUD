@@ -32,7 +32,7 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
-                    <h4 class="text-section">Módulos</h4>
+                    <h4 class="text-section">M&oacute;dulos</h4>
                 </li>
 
                 <li class="nav-item active">
@@ -110,28 +110,13 @@
                     <div class="collapse" id="configuracion">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="../view/partials/actualizarInformacion.php">
-                                    <span class="sub-item">Actualizar Informaci&oacute;n</span>
+                                <a href="<?php echo getUrl('InformacionPersonal','InformacionPersonal','getInformacion') ?>">
+                                    <span class="sub-item">Informaci&oacute;n Personal</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="../view/partials/manualDeUsuario.php">
-                                    <span class="sub-item">Manual de Usuario</span>
-                                </a>
-                            </li>
-                                <li>
-                                    <a href="../view/partials/manualDeInstalacion.php">
-                                        <span class="sub-item">Manual de Instalaci&oacute;n</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../view/partials/manualDeSistema.php">
-                                        <span class="sub-item">Manual de Sistema</span>
-                                    </a>
-                                </li>
                             <li class="nav-item">
                                     <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
-                                        <span class="sub-item">Video Manual</span>
+                                        <span class="sub-item">Manuales</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">

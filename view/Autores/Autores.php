@@ -40,8 +40,9 @@
         }
 
         .autor-row {
+            text-align: center;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             flex-wrap: wrap;
             gap: 20px;
         }
@@ -106,7 +107,7 @@
                 <span>Nombre completo</span><br>  Valentina Zambrano Garc&iacute;a
             </div>
             <div class="autor-dato">
-                <span>Correo:</span><br> valentinazambranogarcia30@gmail.com
+                <span>Correo</span><br> valentinazambranogarcia30@gmail.com
             </div>
             <div class="autor-dato">
                 <span>Tel&eacute;fono</span><br> 3245185055
