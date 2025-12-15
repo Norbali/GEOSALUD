@@ -1,4 +1,12 @@
 
+<?php
+session_start();
+
+if (isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+    unset($_SESSION['alert']);
+}
+?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
@@ -632,3 +640,4 @@ document.querySelectorAll('.btn-enable').forEach(btn => {
     });
 });
 </script>
+<script src="assets/js/funcionesModalTipoActividades.js"></script>
