@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['auth'])) {
-    header("Location: login.php");
-    exit;
-}
-
 include_once '../model/Tanques/TanquesModel.php';
 
 class TanquesController {
@@ -90,21 +85,6 @@ class TanquesController {
             return;
         }
 
-        // OBTENER ID_ZOOCRIADERO
-        if (isset($_SESSION['id_zoocriadero']) && !empty($_SESSION['id_zoocriadero'])) {
-            $id_zoocriadero = (int)$_SESSION['id_zoocriadero'];
-        } else {
-            $sqlZoo = "SELECT id_zoocriadero FROM zoocriadero WHERE documento_responsable = '".$_SESSION['documento']."'";
-            $resultZoo = $this->model->select($sqlZoo);
-            
-            if ($resultZoo && pg_num_rows($resultZoo) > 0) {
-                $rowZoo = pg_fetch_assoc($resultZoo);
-                $id_zoocriadero = (int)$rowZoo['id_zoocriadero'];
-            } else {
-                $id_zoocriadero = 1;
-            }
-        }
-
         $id = $this->model->autoIncrement("tanque", "id_tanque");
 
         $sql = "INSERT INTO tanque (
@@ -115,7 +95,6 @@ class TanquesController {
                     medida_profundidad, 
                     id_tipo_tanque, 
                     cantidad_peces,
-                    id_zoocriadero,
                     id_estado_tanque
                 ) VALUES (
                     $id,
@@ -125,7 +104,6 @@ class TanquesController {
                     ".(float)$profundidad.",
                     ".(int)$tipo.",
                     ".(int)$cantidad.",
-                    $id_zoocriadero,
                     1
                 )";
 
@@ -169,7 +147,7 @@ class TanquesController {
             !$this->validarNumeroPositivo($profundidad) || !$this->validarNumeroPositivo($cantidad)) {
             $this->alerta(
                 'danger',
-                'Las medidas y cantidad de peces deben ser numeros positivos'
+                'Las medidas y cantidad de peces deben ser números positivos'
             );
             return;
         }
@@ -230,7 +208,7 @@ class TanquesController {
 
         // VALIDAR ID
         if ($id <= 0) {
-            $this->alerta('danger', 'ID invalido');
+            $this->alerta('danger', 'ID inválido');
             return;
         }
 

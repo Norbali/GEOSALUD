@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Autores</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .titulo-autores {
@@ -40,15 +33,13 @@
         }
 
         .autor-row {
+            text-align: center;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             flex-wrap: wrap;
             gap: 20px;
         }
     </style>
-</head>
-
-<body>
 
 <div class="container-fluid px-5 mt-4">
 
@@ -106,7 +97,7 @@
                 <span>Nombre completo</span><br>  Valentina Zambrano Garc&iacute;a
             </div>
             <div class="autor-dato">
-                <span>Correo:</span><br> valentinazambranogarcia30@gmail.com
+                <span>Correo</span><br> valentinazambranogarcia30@gmail.com
             </div>
             <div class="autor-dato">
                 <span>Tel&eacute;fono</span><br> 3245185055
@@ -116,5 +107,3 @@
 
 </div>
 
-</body>
-</html>
