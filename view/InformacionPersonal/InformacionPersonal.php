@@ -96,22 +96,6 @@ body {
     border-bottom: 2px solid #0d6efd;
 }
 
-.profile-photo-container {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 30px;
-}
-
-.profile-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
 .profile-icon {
     width: 150px;
     height: 150px;
@@ -120,6 +104,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto 30px;
     border: 4px solid #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
@@ -129,55 +114,13 @@ body {
     color: white;
 }
 
-.change-photo-btn {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #0d6efd;
-    color: white;
-    border: 3px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.change-photo-btn:hover {
-    background: #0b5ed7;
-    transform: scale(1.1);
-}
-
-.change-photo-btn i {
-    font-size: 1rem;
-}
-
-#foto_input {
-    display: none;
-}
-
-.preview-container {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.preview-image {
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
 .main-title {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #1f2937;
-        }
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1f2937;
+}
 </style>
 
 <div class="container mt-4">
@@ -191,9 +134,9 @@ body {
 <?php } ?>
 
 <!-- HEADER -->
-    <h1 class="main-title"><i class="fas fa-user text-primary"></i> Informaci&oacute;n Personal</h1>
+<h1 class="main-title"><i class="fas fa-user text-primary"></i> Información Personal</h1>
 
-<!-- INFORMACI&oacute;N DEL USUARIO -->
+<!-- INFORMACIÓN DEL USUARIO -->
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="info-card">
@@ -206,26 +149,9 @@ body {
 
             <?php if ($datosUsuario) { ?>
             
-            <!-- FOTO DE PERFIL -->
-            <div class="profile-photo-container">
-                <?php if (!empty($datosUsuario['foto_perfil']) && file_exists("C:/ms4w/Apache/htdocs/GEOSALUD/uploads/fotos_perfil/".$datosUsuario['foto_perfil'])) { ?>
-                    <img src="/GEOSALUD/uploads/fotos_perfil/<?php echo $datosUsuario['foto_perfil']; ?>" 
-                         alt="Foto de perfil" 
-                         class="profile-photo" 
-                         id="profile_photo">
-                <?php } else { ?>
-                    <div class="profile-icon" id="profile_icon">
-                        <i class="fas fa-user"></i>
-                    </div>
-                <?php } ?>
-                
-                <label for="foto_input" class="change-photo-btn" title="Cambiar foto">
-                    <i class="fas fa-camera"></i>
-                </label>
-                
-                <form id="form_foto" action="<?php echo getUrl('InformacionPersonal','InformacionPersonal','postActualizarFoto'); ?>" method="post" enctype="multipart/form-data" style="display: none;">
-                    <input type="file" id="foto_input" name="foto_perfil" accept="image/*">
-                </form>
+            <!-- ÍCONO DE PERFIL -->
+            <div class="profile-icon">
+                <i class="fas fa-user"></i>
             </div>
 
             <div class="info-item">
@@ -239,12 +165,12 @@ body {
             </div>
 
             <div class="info-item">
-                <div class="info-label">TEL&Eacute;FONO</div>
+                <div class="info-label">TELÉFONO</div>
                 <div class="info-value"><?php echo $datosUsuario['telefono']; ?></div>
             </div>
 
             <div class="info-item">
-                <div class="info-label">CORREO ELECTR&Oacute;NICO</div>
+                <div class="info-label">CORREO ELECTRÓNICO</div>
                 <div class="info-value"><?php echo $datosUsuario['correo']; ?></div>
             </div>
 
@@ -259,13 +185,13 @@ body {
 
             <div class="mt-4">
                 <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalContrasena">
-                    <i class="fas fa-key"></i> Cambiar Contrase&ntilde;a
+                    <i class="fas fa-key"></i> Cambiar Contraseña
                 </button>
             </div>
 
             <?php } else { ?>
             <div class="alert alert-warning">
-                No se encontr&oacute; informaci&oacute;n del usuario.
+                No se encontró información del usuario.
             </div>
             <?php } ?>
         </div>
@@ -280,7 +206,7 @@ body {
 <div class="modal-content">
 
 <div class="modal-header">
-<h5 class="modal-title">Editar Informaci&oacute;n Personal</h5>
+<h5 class="modal-title">Editar Información Personal</h5>
 <button class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 
@@ -298,12 +224,12 @@ body {
 </div>
 
 <div class="form-group">
-    <label for="telefono">Tel&eacute;fono *</label>
+    <label for="telefono">Teléfono *</label>
     <input type="text" id="telefono" name="telefono" value="<?php echo isset($datosUsuario['telefono']) ? $datosUsuario['telefono'] : ''; ?>" maxlength="10" required>
 </div>
 
 <div class="form-group">
-    <label for="correo">Correo Electr&oacute;nico *</label>
+    <label for="correo">Correo Electrónico *</label>
     <input type="email" id="correo" name="correo" value="<?php echo isset($datosUsuario['correo']) ? $datosUsuario['correo'] : ''; ?>" required>
 </div>
 
@@ -315,13 +241,13 @@ body {
 </div>
 </div>
 
-<!-- MODAL CAMBIAR CONTRASE&ntilde;A -->
+<!-- MODAL CAMBIAR CONTRASEÑA -->
 <div class="modal fade" id="modalContrasena" tabindex="-1">
 <div class="modal-dialog modal-dialog-centered">
 <div class="modal-content">
 
 <div class="modal-header">
-<h5 class="modal-title">Cambiar Contrase&ntilde;a</h5>
+<h5 class="modal-title">Cambiar Contraseña</h5>
 <button class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 
@@ -329,51 +255,26 @@ body {
 <form action="<?php echo getUrl('InformacionPersonal','InformacionPersonal','postCambiarContrasena'); ?>" method="post">
 
 <div class="form-group">
-    <label for="contrasena_actual">Contrase&ntilde;a Actual *</label>
+    <label for="contrasena_actual">Contraseña Actual *</label>
     <input type="password" id="contrasena_actual" name="contrasena_actual" required>
 </div>
 
 <div class="form-group">
-    <label for="contrasena_nueva">Contrase&ntilde;a Nueva *</label>
+    <label for="contrasena_nueva">Contraseña Nueva *</label>
     <input type="password" id="contrasena_nueva" name="contrasena_nueva" minlength="6" required>
 </div>
 
 <div class="form-group">
-    <label for="contrasena_confirmar">Confirmar Contrase&ntilde;a Nueva *</label>
+    <label for="contrasena_confirmar">Confirmar Contraseña Nueva *</label>
     <input type="password" id="contrasena_confirmar" name="contrasena_confirmar" minlength="6" required>
 </div>
 
-<button type="submit" class="btn btn-primary w-100 mt-3">Cambiar Contrase&ntilde;a</button>
+<button type="submit" class="btn btn-primary w-100 mt-3">Cambiar Contraseña</button>
 </form>
 </div>
 
 </div>
 </div>
 </div>
-<script>
-// Auto-submit del formulario cuando se selecciona una foto
-document.getElementById('foto_input').addEventListener('change', function() {
-    if (this.files && this.files[0]) {
-        // Validar tamaño
-        if (this.files[0].size > 5242880) {
-            alert('La imagen no debe superar 5MB');
-            this.value = '';
-            return;
-        }
-        
-        // Validar tipo
-        var validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-        if (!validTypes.includes(this.files[0].type)) {
-            alert('Solo se permiten imágenes JPG, PNG o GIF');
-            this.value = '';
-            return;
-        }
-        
-        // Enviar formulario
-        if (confirm('¿Desea cambiar su foto de perfil?')) {
-            document.getElementById('form_foto').submit();
-        }
-    }
-});
-</script>
+
 </div>
