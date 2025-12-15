@@ -38,7 +38,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>" class="collapsed" aria-expanded="false">
+                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>">
                         <i class="fas fa-fish"></i>
                         <p>Tanques</p>
                     </a>
