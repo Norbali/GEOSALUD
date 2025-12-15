@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Video Manual</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         body {
             min-height: 100vh;
-            padding: 40px 0;
         }
 
         .main-title {
@@ -131,10 +121,6 @@
             max-width: 800px;
         }
     </style>
-</head>
-
-<body>
-
 <div class="container-fluid px-4">
 
     <h1 class="main-title">Documentaci&oacute;n del Sistema</h1>
@@ -207,8 +193,3 @@
     </div>
 
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>

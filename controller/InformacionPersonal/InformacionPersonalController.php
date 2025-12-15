@@ -223,8 +223,8 @@ class InformacionPersonalController {
         $correo = strtolower(trim($correo));
 
         // 3. VALIDAR LONGITUD TOTAL
-        if (strlen($correo) < 8) {
-            return 'El correo electronico debe tener al menos 8 caracteres';
+        if (strlen($correo) < 16) {
+            return 'El correo electronico debe tener al menos 16 caracteres';
         }
         
         if (strlen($correo) > 100) {
