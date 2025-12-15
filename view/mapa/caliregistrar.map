@@ -77,14 +77,13 @@ MAP
   END
 
   LAYER
-  NAME "zoocriadero"
-  TYPE POINT
-  CONNECTIONTYPE POSTGIS
-  CONNECTION "host=localhost dbname=bd_geosalud user=postgres password=***"
-  DATA "coordenadas FROM public.zoocriadero USING UNIQUE id_zoocriadero USING SRID=4326"
-  STATUS ON
-END
-
+    NAME "zoocriadero"
+    TYPE POINT
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "host=localhost dbname=bd_geosalud user=postgres password=***"
+    DATA "coordenadas FROM public.zoocriadero USING UNIQUE id_zoocriadero USING SRID=4326"
+    STATUS ON
+  END
 
   LAYER
     NAME "Barrios"

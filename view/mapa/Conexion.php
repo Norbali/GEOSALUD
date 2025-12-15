@@ -4,7 +4,7 @@ $server = "localhost";
 $port = "5432";
 $database = "prueba";
 $user = "postgres";
-$password = "Norbali";
+$password = "12345";
 
 $link = pg_connect("host={$server} port={$port} dbname={$database} user={$user} password={$password}");
 
