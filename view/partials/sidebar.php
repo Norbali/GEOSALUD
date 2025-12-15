@@ -34,7 +34,7 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
-                    <h4 class="text-section">Módulos</h4>
+                    <h4 class="text-section">M&oacute;dulos</h4>
                 </li>
 
                 <li class="nav-item active">
