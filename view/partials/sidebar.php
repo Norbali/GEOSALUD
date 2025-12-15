@@ -98,26 +98,22 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#actividades">
-                        <i class="fas fa-pen-square"></i>
-                        <p>Seguimiento de tanques</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="actividades">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="tables/tables.html">
-                                    <span class="sub-item">Basic Table</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tables/datatables.html">
-                                    <span class="sub-item">Datatables</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+           <li class="nav-item">
+    <a href="<?= getUrl(
+    "SeguimientoDeTanques",
+    "SeguimientoDeTanques",
+    "getConsulta"
+
+
+    ) ?>">
+        <i class="fas fa-pen-square"></i>
+        <p>Seguimiento de tanques</p>
+    </a>
+</li>
+
+
+
+                   
                 </li>
 
                 <li class="nav-item">
