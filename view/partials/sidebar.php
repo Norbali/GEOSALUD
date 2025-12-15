@@ -119,25 +119,27 @@
                                     <span class="sub-item">Manual de Usuario</span>
                                 </a>
                             </li>
+                            <?php if (array_key_exists("ManualInstalacion", $permisos)){ ?>
                                 <li>
                                     <a href="../view/partials/manualDeInstalacion.php">
-                                        <span class="sub-item">Manual de Instalaci&oacute;n</span>
+                                        <span class="sub-item">Manual de Instalación</span>
                                     </a>
                                 </li>
+                            <?php }?>
+
+                            <?php if (array_key_exists("ManualSistema", $permisos)){ ?>
                                 <li>
                                     <a href="../view/partials/manualDeSistema.php">
                                         <span class="sub-item">Manual de Sistema</span>
                                     </a>
                                 </li>
+                            <?php }?>
                             <li class="nav-item">
                                     <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
-                                        <span class="sub-item">Video Manual</span>
+                                         <i class="fas fa-video"></i>
+                                        <p>Video Manual</p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
-                                        <span class="sub-item">Autores</span>                                 </a>
-                                </li>
+                             </li>
                         </ul>
                     </div>
                 </li>
@@ -174,6 +176,12 @@
                             <?php }?>
                         </ul>
                     </div>
+                </li>
+                <li class="nav-item">
+                 <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
+                    <i class="fas fa-info"></i>
+                    <p>Autores</p>
+                 </a>
                 </li>
             </ul>
         </div>

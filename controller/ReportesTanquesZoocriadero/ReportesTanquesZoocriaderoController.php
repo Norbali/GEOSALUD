@@ -10,7 +10,6 @@
 
             $cosultaTanquesZoocriadero = $this->cosultaTanquesZoocriadero();
 
-            //
             include_once '../view/reportesTanquesZoocriadero/reporteTanquesZoocriadero.php';
         } 
 
