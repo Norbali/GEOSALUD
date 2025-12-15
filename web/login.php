@@ -22,6 +22,7 @@
             <div class="text-center">
                     <img src="assets/img/logoGEOSALUD2.png" alt="navbar brand" class="navbar-brand m-5" height="120">
             </div>
+            <!--MENSAJE DE ERROR CON VARIABLE DE SESION-->
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <?php
