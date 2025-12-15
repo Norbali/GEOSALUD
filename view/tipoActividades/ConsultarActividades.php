@@ -3,7 +3,8 @@
     include_once '../lib/helpers.php';
     $permisos = $_SESSION['permisos'];
 
-    echo '<pre>';
+
+    session_start();
 
     if (isset($_SESSION['alert'])) {
         $alert = $_SESSION['alert'];
@@ -108,11 +109,9 @@
                     </div>
 
                     <!-- NUEVA ACTIVIDAD -->
-                     <?php if (in_array('actualizar', $permisos['TiposDeActividades'])) { ?> 
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
                         <i class="fas fa-plus"></i> Nueva Actividad
                     </button>
-                    <?php } ?> 
                 </div>
             </div>
 
@@ -155,41 +154,36 @@
                                                <?php 
                                                 //Acceso a acciones segun permisos de rol 
                                                 if (in_array('actualizar', $permisos['TiposDeActividades'])) { ?>
-                                                    <button type="button"
-                                                        class="btn btn-warning btn-sm"
-                                                        onclick="editarActividad(
-                                                        <?= $actividad['id_actividad'] ?>,
-                                                        '<?= addslashes($actividad['nombre_actividad']) ?>',
-                                                        '<?= $actividad['id_estado_actividad'] ?>'
-                                                            )">
-                                                        <i class="fas fa-edit"></i> Editar
-                                                    </button>
-                                                <?php } else if (in_array('actualizar', $permisos['TiposDeActividades'])) { ?>
-                                                    <button type="button"
-                                                        class="btn btn-warning btn-sm"
-                                                        onclick="actividadInhabilitada()">
-                                                        <i class="fas fa-edit"></i> Editar
-                                                    </button>
-                                                <?php } ?> 
-                                              <?php } ?>
+                                                <button type="button"
+                                                    class="btn btn-warning btn-sm"
+                                                    onclick="editarActividad(
+                                                       <?= $actividad['id_actividad'] ?>,
+                                                       '<?= addslashes($actividad['nombre_actividad']) ?>',
+                                                      '<?= $actividad['id_estado_actividad'] ?>'
+                                                        )">
+                                                    <i class="fas fa-edit"></i> Editar
+                                                </button>
+                                                 <?php } ?> 
+                                            <?php } else { ?>
+                                                <button type="button"
+                                                    class="btn btn-warning btn-sm"
+                                                    onclick="actividadInhabilitada()">
+                                                    <i class="fas fa-edit"></i> Editar
+                                                </button>
+                                            <?php } ?>
 
-                                                <?php if (in_array('inhabilitar', $permisos['TiposDeActividades'])) { ?>
                                             <?php if ($actividad['nombre_estado_actividades'] === 'Activo') { ?>
                                                 <button type="button"
                                                     class="btn btn-danger btn-sm"
                                                     onclick="eliminarActividad(<?= $actividad['id_actividad']; ?>)">
                                                     <i class="fas fa-trash"></i> Inhabilitar
                                                 </button>
-                                                <?php } ?> 
                                             <?php } else { ?>
-
-                                                <?php if (in_array('inhabilitar', $permisos['TiposDeActividades'])) { ?>
                                                 <button type="button"
                                                     class="btn btn-secondary btn-sm"
                                                     disabled>
                                                     <i class="fas fa-ban"></i> Inhabilitada
                                                 </button>
-                                                <?php } ?>
                                             <?php } ?>
                                         </div>
                                     </td>
