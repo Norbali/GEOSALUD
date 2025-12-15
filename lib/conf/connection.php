@@ -34,10 +34,10 @@
             if (!$this->link){
                 die(pg_last_error($this->link)); //Mostrara cual es el error o se puede tambien escribir un mensaje diciendo que en la conexion hubo un error.
 
+            }else{
+
+             //echo "Conexion Exitosa";
             }
-            // Establece la codificación de caracteres a UTF-8 para la conexión a la base de datos Y así manejar correctamente caracteres especiales.
-            pg_set_client_encoding($this->link, "UTF8");
-           
         }
         public function getConnect(){ // o getConnect
             return $this->link;
