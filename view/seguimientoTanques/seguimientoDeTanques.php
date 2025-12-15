@@ -15,11 +15,8 @@ if (!isset($_SESSION['auth'])) {
 <div class="alert alert-info"><?= $_GET['msg']; ?></div>
 <?php } ?>
 
-<form method="POST" action="<?= getUrl(
-    "SeguimientoDeTanques",
-    "SeguimientoDeTanques",
-    "postConsulta"
-) ?>">
+
+<form method="POST" action="<?php echo getUrl('SeguimientoDeTanques', 'SeguimientoDeTanques', 'postCreate'); ?>">
 
 
 
