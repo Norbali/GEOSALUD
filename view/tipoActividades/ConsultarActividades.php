@@ -87,7 +87,8 @@
             </h1>
         </div>
 
-        <!-- CARD y TABLA -->
+        <!-- Card con Tabla -->
+         <form action="<?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta") ?>" method="POST">
         <div class="card">
             <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                 <h5 class="card-title mb-0">
@@ -248,8 +249,8 @@
         </div>
     </div>
 
-    <!-- MODAL EDITAR -->
-    <div class="modal fade" id="modalEditar" tabindex="-1">
+    <!-- Modal Editar -->
+    <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form method="POST"
@@ -265,26 +266,16 @@
 
                         <!-- NOMBRE  -->
                         <div class="mb-3">
-                            <label class="form-label">Nombre *</label>
-                            <input type="text"
-                                class="form-control"
-                                id="editNombre"
-                                name="nombre_actividad">
+                            <label for="editNombre" class="form-label">Nombre de la Actividad</label>
+                            <input type="text" class="form-control" id="editNombre" required>
                         </div>
 
                         <!-- ESTADO  -->
                         <div class="mb-3">
-                            <label class="form-label">Estado</label>
-
-                            <select class="form-select"
-                                id="editEstado"
-                                readonly
-                                style="pointer-events:none; background:#e9ecef;">
-                                <?php foreach ($listaEstados as $estado) { ?>
-                                    <option value="<?= $estado['id_estado_actividades'] ?>">
-                                        <?= $estado['nombre_estado_actividades'] ?>
-                                    </option>
-                                <?php } ?>
+                            <label for="editEstado" class="form-label">Estado</label>
+                            <select class="form-select" id="editEstado">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
                             </select>
 
                             <!-- EL ESTADO QUE SE ENVÍA -->
