@@ -1,4 +1,3 @@
-<!-- VISTA: Consultartipodetanque.php -->
 <div style="position: relative; top: -70px;">
     <style>
         body {
@@ -46,12 +45,9 @@
                 <h5 class="card-title mb-0">
                     <i class="fas fa-list text-primary"></i> Lista de Tipos de Tanques
                 </h5>
-                    
-
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
                     <i class="fas fa-plus"></i> Nuevo Tipo de Tanque
                 </button>
-                
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -185,6 +181,32 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        // Función para limpiar espacios múltiples mientras el usuario escribe
+        function limpiarEspacios(input) {
+            // Eliminar espacios al inicio
+            input.value = input.value.replace(/^\s+/, '');
+            // Reemplazar múltiples espacios por uno solo
+            input.value = input.value.replace(/\s{2,}/g, ' ');
+        }
+
+        // Aplicar limpieza de espacios a los inputs al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Input del modal nuevo
+            const inputNuevo = document.getElementById('nombreTanqueNuevo');
+            if (inputNuevo) {
+                inputNuevo.addEventListener('input', function() {
+                    limpiarEspacios(this);
+                });
+            }
+
+            // Inputs de los modales de edición
+            document.querySelectorAll('[id^="nombreEditar"]').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    limpiarEspacios(this);
+                });
+            });
+        });
+
         // Mostrar mensajes
         <?php if (isset($mensaje) && isset($tipo_mensaje)) { ?>
             Swal.fire({
