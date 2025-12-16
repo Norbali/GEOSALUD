@@ -75,7 +75,7 @@
                     </li>
                 <?php }?> 
 
-                <?php if (array_key_exists("PermisoDeRoles", $permisos)){ ?>
+                <?php if (array_key_exists("PermisoRoles", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("PermisoRoles", "PermisoRoles", "getConsultar") ?>">
                             <i class="fas fa-th-large"></i>
