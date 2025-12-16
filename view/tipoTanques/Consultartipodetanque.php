@@ -1,3 +1,4 @@
+<!-- VISTA: Consultartipodetanque.php -->
 <div style="position: relative; top: -70px;">
     <style>
         body {
@@ -124,13 +125,7 @@
                                                             id="nombreEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>"
                                                             value="<?php echo $tipoTanque['nombre_tipo_tanque']; ?>" required>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Estado</label>
-                                                        <select class="form-select" name="id_estado_tipo_tanque">
-                                                            <option value="1" <?php echo ($tipoTanque['nombre_estado_tipo_tanques'] == 'activo') ? 'selected' : ''; ?>>Activo</option>
-                                                            <option value="2" <?php echo ($tipoTanque['nombre_estado_tipo_tanques'] == 'Inactivo') ? 'selected' : ''; ?>>Inactivo</option>
-                                                        </select>
-                                                    </div>
+                                                    <!-- SE ELIMINÓ EL SELECTOR DE ESTADO EN EDICIÓN -->
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -169,13 +164,8 @@
                             <label class="form-label">Nombre del Tipo de Tanque *</label>
                             <input type="text" class="form-control" name="nombre_tipo_tanque" id="nombreTanqueNuevo" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Estado</label>
-                            <select class="form-select" name="id_estado_tipo_tanque">
-                                <option value="1" selected>Activo</option>
-                                <option value="2">Inactivo</option>
-                            </select>
-                        </div>
+                        <!-- SE ELIMINÓ EL SELECTOR DE ESTADO -->
+                        <!-- El estado será ACTIVO por defecto en el backend -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -227,7 +217,7 @@
         function confirmarInhabilitacion(idTanque, nombreTanque) {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¿Deseas inhabilitar el tipo de tanque '" + nombreTanque + "'?",
+                text: "¿Deseas inhabilitar el tipo de tanque '" + nombreTanque + "'? Esta acción no se puede deshacer.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#dc3545',
