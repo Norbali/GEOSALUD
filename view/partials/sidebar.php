@@ -60,7 +60,7 @@
                     </li>
                 <?php //}?>
 
-                <?php // if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
+                <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                            
                         <a href="<?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta");?>">
@@ -68,7 +68,7 @@
                             <p>Seguimiento de tanques</p>
                         </a>
                     </li>
-                <?php // }?>
+                <?php  }?>
                 <?php //if (array_key_exists("TipoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">

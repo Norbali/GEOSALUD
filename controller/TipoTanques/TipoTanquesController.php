@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include_once '../model/TipoTanques/TipoTanquesModel.php';
 
@@ -173,6 +174,24 @@ class TipoTanquesController {
             $_SESSION['tipo_mensaje'] = "error";
             redirect(getUrl("TipoTanques", "TipoTanques", "getConsultar"));
         }
+    }
+
+    public function filtro($nombre) {
+        $obj = new TipoTanquesModel();
+        $sql = "SELECT 
+                    tt.id_tipo_tanque,
+                    tt.nombre_tipo_tanque,
+                    ett.nombre_estado_tipo_tanques
+                FROM tipo_tanque tt
+                JOIN estado_tipo_tanques ett
+                    ON tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanques
+                WHERE tt.nombre_tipo_tanque ILIKE '%$nombre%'
+                ORDER BY tt.id_tipo_tanque";
+        $tiposTanques = $obj->select($sql);
+        if (pg_num_rows($tiposTanques) == 0) {
+            $_SESSION['sinResultadosTipoTanque'] = "No se encontraron resultados para la búsqueda \"$nombre\".";
+        }   
+        include_once '../view/tipoTanques/filtroTipoTanques.php';
     }
 }
 

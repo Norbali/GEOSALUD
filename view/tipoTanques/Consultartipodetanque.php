@@ -40,10 +40,23 @@
 
 <body>
     <div class="container-fluid px-4 py-4">
-        <div class="page-header">
+        <div class="page-header d-flex flex-column align-items-start">
             <h1 class="h3 mb-2">
                 <i class="fas fa-water text-primary"></i> Gestión de Tipo de Tanques
             </h1>
+
+            <div class="col-md-4 mt-2 p-0">
+                <label class="form-label mb-1">Zoocriadero</label>
+
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Ingrese el nombre de un zoocriadero..."
+                    id="filtro"
+                    style="max-width: 300px;"
+                    data-url="<?php echo getUrl('TipoTanques', 'TipoTanques', 'filtro', false, 'ajax'); ?>"
+                >
+            </div>
         </div>
 
         <!-- Card y su tabla -->
