@@ -108,7 +108,7 @@
                 !preg_match('/\d/', $contrasena) ||
                 !preg_match('/[\W_]/', $contrasena)
             ) {
-                $mensaje = "La contraseña debe contener mayúscula, miníscula, número y carácter especial.";
+                $mensaje = "La contraseña debe contener mayúscula, minúscula, número y carácter especial.";
             } else {
                 $mensaje = "true";
             }
