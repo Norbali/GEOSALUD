@@ -94,6 +94,9 @@ class ReporteSeguimientoActividadesController{
 
 
         $consultaSeguimiento = $obj->select($sql);
+        if (pg_num_rows($consultaSeguimiento) == 0) {
+            $_SESSION['sinResultadoSeguimientoTanques'] = 'No se encontraron registros con los filtros seleccionados.';
+        }
 
         $sqlActividades = "SELECT * FROM actividad WHERE id_estado_actividad=1";
         $actividades = $obj->select($sqlActividades);

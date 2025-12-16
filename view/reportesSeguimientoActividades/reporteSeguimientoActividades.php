@@ -1,3 +1,6 @@
+<?php 
+    include_once '../lib/helpers.php';
+?>
 <div style="position: relative; top: -70px;">
     <div class="card mx-auto mt-0">
         <div class="card-header">
@@ -160,6 +163,15 @@
                             ?>
                     </tbody>
                 </table>
+                <?php
+                    if (isset($_SESSION['sinResultadoSeguimientoTanques'])) {
+                        echo '<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                                ' . $_SESSION['sinResultadoSeguimientoTanques'] . '
+                            </div>';
+                        unset($_SESSION['sinResultadoSeguimientoTanques']);
+                    }
+                ?>
+
             </div>
         </div>
     </div>
