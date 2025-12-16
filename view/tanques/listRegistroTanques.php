@@ -1,22 +1,12 @@
+<div style="position: relative; top: -70px;">
 <?php
 session_start();
 
-// Capturar alertas
 if (isset($_SESSION['alert'])) {
     $alert = $_SESSION['alert'];
     unset($_SESSION['alert']);
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gestión de Tanques</title>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
@@ -80,31 +70,19 @@ body {
     padding: 12px;
     cursor: pointer;
     user-select: none;
+    text-align: center;
 }
 
 .table thead th:hover {
     background-color: #e9ecef;
-}
-
-.table thead th.sortable::after {
-    content: ' ⇅';
-    opacity: 0.3;
-}
-
-.table thead th.sort-asc::after {
-    content: ' ↑';
-    opacity: 1;
-}
-
-.table thead th.sort-desc::after {
-    content: ' ↓';
-    opacity: 1;
+    text-align: center;
 }
 
 .table tbody td {
     padding: 15px 12px;
     vertical-align: middle;
     border-bottom: 1px solid #f0f0f0;
+    text-align: center;
 }
 
 .badge {
@@ -221,11 +199,14 @@ body {
 .btn-close {
     font-size: 0.875rem;
 }
+.main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1f2937;
+        }
 </style>
-</head>
-
-<body>
-
 <div class="container mt-4">
 
 <!-- ALERTAS -->
@@ -241,19 +222,17 @@ body {
 <?php } ?>
 
 <!-- HEADER -->
-<div class="header-card">
-    <h4><i class="fas fa-water text-primary"></i> Gesti&oacute;n de Tanques</h4>
-</div>
+        <h1 class="main-title">Gestión de Tanques</h1>
 
 <!-- LISTA -->
-<div class="list-card">
+    <div class="list-card">
     <div class="list-header">
         <h5><i class="fas fa-list text-primary"></i> Lista de Tanques</h5>
         <div class="header-actions">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i  class="sortable" onclick="sortTable('id')" data-column="id" data-direction="<?php echo $order; ?>">Ordenar por ID</i>
-                </button>
+            <button class="btn btn-secondary dropdown-toggle sortable" type="button" data-bs-toggle="dropdown" aria-expanded="false"onclick="sortTable('id')" data-column="id" data-direction="<?php echo $order; ?>">
+                <i class="bi bi-sort-down"></i> Ordenar por ID
+            </button>
             </div>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
                 <i class="fas fa-plus"></i> Nuevo Tanque
@@ -268,7 +247,6 @@ body {
             <th>ID</th>
             <th>NOMBRE</th>
             <th>TIPO</th>
-            <th>RESPONSABLE</th>
             <th>ESTADO</th>
             <th style="min-width: 280px;">ACCIONES</th>
         </tr>
@@ -280,13 +258,12 @@ body {
         <td><?php echo $t['id_tanque']; ?></td>
         <td><?php echo $t['nombre_tanque']; ?></td>
         <td><?php echo $t['nombre_tipo_tanque']; ?></td>
-        <td><?php echo $_SESSION['nombreCompleto']; ?></td>
 
         <td>
         <?php if ($t['id_estado_tanque'] == 1) { ?>
-        <span class="badge bg-success">Activo</span>
+        <span class="badge bg-success">Habilitado</span>
         <?php } else { ?>
-        <span class="badge bg-secondary">Inactivo</span>
+        <span class="badge bg-danger">Inhabilitado</span>
         <?php } ?>
         </td>
 
@@ -300,10 +277,7 @@ body {
         data-alto="<?php echo $t['medida_alto']; ?>"
         data-ancho="<?php echo $t['medida_ancho']; ?>"
         data-profundidad="<?php echo $t['medida_profundidad']; ?>"
-        data-cantidad="<?php echo $t['cantidad_peces']; ?>"
-        data-documento="<?php echo $_SESSION['documento']; ?>"
-        data-responsable="<?php echo $_SESSION['nombreCompleto']; ?>"
-        data-rol="<?php echo $_SESSION['nombreRol']; ?>">
+        data-cantidad="<?php echo $t['cantidad_peces']; ?>">
         <i class="fas fa-eye"></i> Ver Detalle
         </button>
 
@@ -359,6 +333,8 @@ body {
 
 </div>
 
+</div>
+
 <!-- ================= MODAL VER ================= -->
 <div class="modal fade" id="modalVer" tabindex="-1">
 <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -370,13 +346,6 @@ body {
 </div>
 
 <div class="modal-body">
-<h6 class="text-muted mb-3">Responsable</h6>
-<p><strong>Documento:</strong> <span id="v_documento"></span></p>
-<p><strong>Nombre:</strong> <span id="v_responsable"></span></p>
-<p><strong>Rol:</strong> <span id="v_rol"></span></p>
-
-<hr>
-
 <h6 class="text-muted mb-3">Datos del Tanque</h6>
 <p><strong>Nombre:</strong> <span id="v_nombre"></span></p>
 <p><strong>Tipo:</strong> <span id="v_tipo"></span></p>
@@ -406,7 +375,7 @@ body {
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <label for="nombre">Nombre *</label>
+            <label for="nombre">Nombre Tanque *</label>
             <input type="text" id="nombre" name="nombre_tanque" required>
         </div>
     </div>
@@ -436,7 +405,7 @@ body {
 
     <div class="col-md-4">
         <div class="form-group">
-            <label for="tipo">Tipo *</label>
+            <label for="tipo">Tipo Tanque *</label>
             <select id="tipo" name="id_tipo_tanque" required>
                 <option value="">Seleccione...</option>
                 <?php 
@@ -485,7 +454,7 @@ body {
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <label for="e_nombre">Nombre *</label>
+            <label for="e_nombre">Nombre Tanque *</label>
             <input type="text" id="e_nombre" name="nombre_tanque" required>
         </div>
     </div>
@@ -515,7 +484,7 @@ body {
 
     <div class="col-md-4">
         <div class="form-group">
-            <label for="e_tipo">Tipo *</label>
+            <label for="e_tipo">Tipo Tanque *</label>
             <select id="e_tipo" name="id_tipo_tanque" required>
                 <option value="">Seleccione...</option>
                 <?php 
@@ -546,7 +515,6 @@ body {
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 // Modal Ver
@@ -661,13 +629,13 @@ document.querySelectorAll('.btn-enable').forEach(btn => {
         const url = this.getAttribute('href');
         
         Swal.fire({
-            title: 'dictivar tanque?',
+            title: '¿Habilitar tanque?',
             text: 'Esta accion cambiara el estado a ACTIVO',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#28a745',
             cancelButtonColor: '#6c757d',
-            confirmButtonText: 'S&iacute;o, activar',
+            confirmButtonText: 'S&iacute;, activar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -677,6 +645,5 @@ document.querySelectorAll('.btn-enable').forEach(btn => {
     });
 });
 </script>
-
-</body>
-</html>
+<script src="assets/js/funcionesModalTipoActividades.js"></script>
+</div>

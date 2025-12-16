@@ -24,3 +24,6 @@
         </div>				
     </div>
 </footer>
+
+<script src="../web/js/jquery.js"></script>
+<script src="../web/js/global.js"></script>

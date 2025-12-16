@@ -1,6 +1,6 @@
 <?php
-
- include_once '../model/ReportesNacidosMuertos/ReportesNacidosMuertosModel.php';
+    session_start();
+    include_once '../model/ReportesNacidosMuertos/ReportesNacidosMuertosModel.php';
 
 class ReportesNacidosMuertosController{
 
@@ -114,10 +114,15 @@ class ReportesNacidosMuertosController{
 
         // Consulta principal
         $listadoNacidosMuertos = $obj->select($sql);
+        if (pg_num_rows($listadoNacidosMuertos) == 0) {
+            $_SESSION['sinResultadoNacidosMuertos'] = 'No se encontraron registros con los filtros seleccionados.';
+        }
 
         // Para volver a cargar selects
         $sqlZoocriaderos = "SELECT * FROM zoocriadero";
         $zoocriaderos = $obj->select($sqlZoocriaderos);
+
+
 
         // Mostrar vista
         include_once '../view/reportesNacidosMuertos/reporteNacidosMuertos.php';
