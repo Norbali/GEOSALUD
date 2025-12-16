@@ -77,16 +77,6 @@
                         </a>
                     </li>
                 <?php }?> 
-
-                <?php if (array_key_exists("PermisoDeRoles", $permisos)){ ?>
-                    <li class="nav-item">
-                        <a href="<?php echo getUrl("PermisoRoles", "PermisoRoles", "getConsultar") ?>">
-                            <i class="fas fa-th-large"></i>
-                            <p>Permiso de roles</p>
-                        </a>
-                    </li>
-                <?php }?>
-
                 <?php if (array_key_exists("RegistroDeUsuarios", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
