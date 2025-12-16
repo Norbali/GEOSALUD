@@ -204,16 +204,9 @@ class TipoTanquesController {
     }
     
     /* ============================
-       MÉTODOS DE VALIDACIÓN
+       FILTRAR TIPOS DE TANQUES
     ============================ */
-    
-    // VALIDAR TEXTO (LETRAS, NÚMEROS Y ESPACIOS)
-    private function validarTexto($texto) {
-        return preg_match('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/u', $texto);
-    }
-
     public function filtro($nombre) {
-        $obj = new TipoTanquesModel();
         $sql = "SELECT 
                     tt.id_tipo_tanque,
                     tt.nombre_tipo_tanque,
@@ -221,14 +214,45 @@ class TipoTanquesController {
                 FROM tipo_tanque tt
                 JOIN estado_tipo_tanques ett
                     ON tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanques
-                WHERE tt.nombre_tipo_tanque ILIKE '%$nombre%'
+                WHERE tt.nombre_tipo_tanque ILIKE '%".pg_escape_string($nombre)."%'
                 ORDER BY tt.id_tipo_tanque";
-        $tiposTanques = $obj->select($sql);
+        
+        $tiposTanques = $this->model->select($sql);
+        
         if (pg_num_rows($tiposTanques) == 0) {
             $_SESSION['sinResultadosTipoTanque'] = "No se encontraron resultados para la búsqueda \"$nombre\".";
-        }   
+        }
+        
         include_once '../view/tipoTanques/filtroTipoTanques.php';
     }
+    
+    /* ============================
+       MÉTODOS DE VALIDACIÓN
+    ============================ */
+    
+    // VALIDAR TEXTO (LETRAS, NÚMEROS Y ESPACIOS)
+    private function validarTexto($texto) {
+        return preg_match('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/u', $texto);
+    }
+    
+    // VALIDAR DUPLICADOS - MÉTODO QUE FALTABA
+    private function existeTipoTanque($nombre) {
+        $sql = "
+            SELECT 1
+            FROM tipo_tanque
+            WHERE LOWER(nombre_tipo_tanque) = LOWER('".pg_escape_string($nombre)."')
+        ";
+        $result = $this->model->select($sql);
+        return pg_num_rows($result) > 0;
+    }
+    
+    // ALERTA Y REDIRECCIÓN
+    private function alerta($tipo, $mensaje) {
+        $_SESSION['tipo_mensaje'] = $tipo;
+        $_SESSION['mensaje'] = $mensaje;
+        
+        echo "<script>window.location.href='".getUrl("TipoTanques","TipoTanques","getConsultar")."';</script>";
+        exit;
+    }
 }
-
 ?>
