@@ -1,11 +1,11 @@
 <?php
-    session_start();
-    if (isset($_SESSION['alert'])) {
-        $alert = $_SESSION['alert'];
-        // importante para que no se repita la alerta
-        unset($_SESSION['alert']);
-    }
-    ?>
+session_start();
+if (isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+    // importante para que no se repita la alerta
+    unset($_SESSION['alert']);
+}
+?>
 
 
 <!DOCTYPE html>
@@ -25,37 +25,28 @@
     <style>
         body {
             background-color: #f4f5f7;
+            min-height: 100vh;
         }
-        .page-content-fix {
-    position: relative;
-    top: 0 !important;
-    transform: none !important;
-    margin-top: 0 !important;
-    padding-top: 1rem;
-}
 
+        /* EVITA ESPACIOS EXTRA Y USA FLEXBOX */
+        .page-content-fix {
+            position: relative;
+            margin-top: 0 !important;
+            padding-top: 1rem;
+            flex: 1;
+            /* Se asegura que ocupe el espacio restante */
+        }
+
+        /* No sumar espacio innecesario */
         .main-panel,
         .content,
         .container-fluid {
             overflow: visible !important;
-        }
-        .page-content-fix {
-    position: relative;
-    top: 0 !important;
-    transform: none !important;
-    margin-top: 0 !important;
-    padding-top: 1rem;
-}
-
-        .main-panel,
-        .content,
-        .container-fluid {
-            overflow: visible !important;
+            padding-bottom: 0 !important;
         }
 
+        /* Hacer que el footer quede en la parte inferior sin espacio adicional */
         .page-header {
-            display: block !important;
-            display: block !important;
             background: white;
             padding: 1.5rem;
             border-radius: 0.5rem;
@@ -63,11 +54,14 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         }
 
-
-
         .card {
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             border: none;
+            margin-bottom: 0;
+        }
+
+        .table-responsive {
+            margin-bottom: 0;
         }
 
         .btn-morado {
@@ -86,22 +80,17 @@
             box-shadow: 0 0 0 0.2rem rgba(111, 99, 255, 0.4);
         }
 
-        
-
-        
+        /* FOOTER FIXED EN LA PARTE INFERIOR SI NECESITAMOS */
+        footer {
+            margin-top: auto;
+        }
     </style>
+
+
 </head>
 
 <body>
-    <!-- Alertas de éxito o error -->
-    <?php
-    session_start();
-    if (isset($_SESSION['alert'])) {
-        $alert = $_SESSION['alert'];
-        // importante para que no se repita la alerta
-        unset($_SESSION['alert']);
-    }
-    ?>
+
 
     <?php if (!empty($alert)) { ?>
         <div class="container-fluid px-4 pt-3">
@@ -116,163 +105,162 @@
         </div>
     <?php } ?>
 
-<div class="container-fluid px-4 py-4">
-    <div class="page-content-fix">
+    <div class="container-fluid px-4 py-4">
+        <div class="page-content-fix">
 
-        <div class="page-header">
-            <h1 class="h3 mb-2">
-                <i class="fas fa-tasks text-primary"></i> Gestión de Actividades
-            </h1>
-        </div>
+            <div class="page-header">
+                <h1 class="h3 mb-2">
+                    <i class="fas fa-tasks text-primary"></i> Gestión de Actividades
+                </h1>
+            </div>
 
-        <!-- CARD y TABLA -->
+            <!-- CARD y TABLA -->
 
-        <div class="card">
-            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-list text-primary"></i> Lista de Actividades
-                </h5>
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-list text-primary"></i> Lista de Actividades
+                    </h5>
 
-                <div class="d-flex gap-2">
-                    
-                <!-- ORDENAR -->
-                   <div class="dropdown">
-    <button class="btn btn-morado dropdown-toggle"
-        type="button"
-        id="btnOrdenar"
-        data-bs-toggle="dropdown"
-        aria-expanded="false">
-        <i class="fas fa-sort me-1"></i> Ordenar
-    </button>
+                    <div class="d-flex gap-2">
 
-    <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-            <a class="dropdown-item" href="#" onclick="ordenar('id_asc')">
-                ID Ascendente
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#" onclick="ordenar('id_desc')">
-                ID Descendente
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#" onclick="ordenar('nom_asc')">
-                Nombre Ascendente
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#" onclick="ordenar('nom_desc')">
-                Nombre Descendente
-            </a>
-        </li>
-    </ul>
-</div>
+                        <!-- ORDENAR -->
+                        <div class="dropdown">
+                            <button class="btn btn-morado dropdown-toggle"
+                                type="button"
+                                id="btnOrdenar"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fas fa-sort me-1"></i> Ordenar
+                            </button>
 
-
-                    <!-- NUEVA ACTIVIDAD -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
-                        <i class="fas fa-plus"></i> Nueva Actividad
-                    </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="ordenar('id_asc')">
+                                        ID Ascendente
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="ordenar('id_desc')">
+                                        ID Descendente
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="ordenar('nom_asc')">
+                                        Nombre Ascendente
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#" onclick="ordenar('nom_desc')">
+                                        Nombre Descendente
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
 
 
+                        <!-- NUEVA ACTIVIDAD -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
+                            <i class="fas fa-plus"></i> Nueva Actividad
+                        </button>
+
+
+                    </div>
                 </div>
-            </div>
-  
-            <form method="POST" action="<?php echo getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'postConsulta'); ?>">
 
-            </div>
-  
-            <form method="POST" action="<?php echo getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'postConsulta'); ?>">
+                <form method="POST" action="<?php echo getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'postConsulta'); ?>">
 
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Estado</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
+            
 
-                            <tbody>
-                                <?php
-                                $listaActividades = array();
-                                if ($actividades) {
-                                    while ($row = pg_fetch_assoc($actividades)) {
-                                        $listaActividades[] = $row;
-                                    }
+             <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            $listaActividades = array();
+                            if ($actividades) {
+                                while ($row = pg_fetch_assoc($actividades)) {
+                                    $listaActividades[] = $row;
                                 }
+                            }
 
-                                foreach ($listaActividades as $actividad) { ?>
-                                    <tr>
-                                        <td><?= $actividad['id_actividad'] ?></td>
-                                        <td><?= $actividad['nombre_actividad'] ?></td>
-                                        <td>
-                                            <?php if ($actividad['nombre_estado_actividades'] == 'Activo') { ?>
-                                                <span class="badge bg-success">Activo</span>
-                                            <?php } else { ?>
-                                                <span class="badge bg-danger">Inactivo</span>
-                                            <?php } ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center gap-1">
+                            foreach ($listaActividades as $actividad) { ?>
+                                <tr>
+                                    <td><?= $actividad['id_actividad'] ?></td>
+                                    <td><?= $actividad['nombre_actividad'] ?></td>
+                                    <td>
+                                        <?php if ($actividad['nombre_estado_actividades'] == 'Activo') { ?>
+                                            <span class="badge bg-success">Activo</span>
+                                        <?php } else { ?>
+                                            <span class="badge bg-danger">Inactivo</span>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-1">
 
 
 
-                                                <?php if ($actividad['nombre_estado_actividades'] === 'Activo') { ?>
-                                                    <button type="button"
-                                                        class="btn btn-warning btn-sm"
-                                                        onclick="editarActividad(
+                                            <?php if ($actividad['nombre_estado_actividades'] === 'Activo') { ?>
+                                                <button type="button"
+                                                    class="btn btn-warning btn-sm"
+                                                    onclick="editarActividad(
                                                            <?= $actividad['id_actividad'] ?>,
                                                            '<?= addslashes($actividad['nombre_actividad']) ?>',
                                                           '<?= $actividad['id_estado_actividad'] ?>'
                                                             )">
-                                                        <i class="fas fa-edit"></i> Editar
-                                                    </button>
-                                                <?php } else { ?>
-                                                    <button type="button"
-                                                        class="btn btn-warning btn-sm"
-                                                        onclick="actividadInhabilitada()">
-                                                        <i class="fas fa-edit"></i> Editar
-                                                    </button>
-                                                <?php } ?>
+                                                    <i class="fas fa-edit"></i> Editar
+                                                </button>
+                                            <?php } else { ?>
+                                                <button type="button"
+                                                    class="btn btn-warning btn-sm"
+                                                    onclick="actividadInhabilitada()">
+                                                    <i class="fas fa-edit"></i> Editar
+                                                </button>
+                                            <?php } ?>
 
 
 
-                                                <?php if ($actividad['nombre_estado_actividades'] === 'Activo') { ?>
-                                                    <button type="button"
-                                                        class="btn btn-danger btn-sm"
-                                                        onclick="eliminarActividad(<?= $actividad['id_actividad']; ?>)">
-                                                        <i class="fas fa-trash"></i> Inhabilitar
-                                                    </button>
-                                                <?php } else { ?>
-                                                    <button type="button"
-                                                        class="btn btn-secondary btn-sm"
-                                                        disabled>
-                                                        <i class="fas fa-ban"></i> Inhabilitada
-                                                    </button>
-                                                <?php } ?>
+                                            <?php if ($actividad['nombre_estado_actividades'] === 'Activo') { ?>
+                                                <button type="button"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="eliminarActividad(<?= $actividad['id_actividad']; ?>)">
+                                                    <i class="fas fa-trash"></i> Inhabilitar
+                                                </button>
+                                            <?php } else { ?>
+                                                <button type="button"
+                                                    class="btn btn-secondary btn-sm"
+                                                    disabled>
+                                                    <i class="fas fa-ban"></i> Inhabilitada
+                                                </button>
+                                            <?php } ?>
 
 
 
 
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
 
 
-                        </table>
-                    </div>
+                    </table>
                 </div>
+              </div>
             </form>
-        </div>
+            </div>
+        
 
-    </div>
+    
 
     <!-- MODAL NUEVO -->
     <div class="modal fade" id="modalNuevo" tabindex="-1">
@@ -327,7 +315,7 @@
                                         <?= $estado['nombre_estado_actividades'] ?>
                                     </option>
                                 <?php } ?>
-                            </select> 
+                            </select>
                         </div>
 
                     </div>
@@ -340,7 +328,7 @@
                     </div>
 
                 </form>
-                </form>
+
             </div>
         </div>
     </div>
@@ -430,13 +418,13 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
 
 
 
 
-</div>
+    </div>
 
 
 
