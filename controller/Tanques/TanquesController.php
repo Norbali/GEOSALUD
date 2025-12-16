@@ -16,6 +16,9 @@ class TanquesController {
     ============================ */
     public function getList() {
 
+        // Capturar búsqueda
+        $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
+
         $sql = "SELECT 
                     t.id_tanque,
                     t.nombre_tanque,
@@ -29,9 +32,19 @@ class TanquesController {
                 FROM tanque t
                 JOIN tipo_tanque tt ON t.id_tipo_tanque = tt.id_tipo_tanque";
 
+        // Agregar filtro de búsqueda si existe
+        if ($busqueda !== '') {
+            $sql .= " WHERE LOWER(t.nombre_tanque) LIKE LOWER('%".pg_escape_string($busqueda)."%')";
+        }
+
+        $sql .= " ORDER BY t.id_tanque DESC";
+
         $tanques = $this->model->select($sql);
 
         $tipos = $this->model->select("SELECT * FROM tipo_tanque");
+
+        // Obtener zoocriaderos para el select
+        $zoocriaderos = $this->model->select("SELECT * FROM zoocriadero WHERE id_estado_zoocriadero = 1");
 
         include_once "../view/tanques/listRegistroTanques.php";
     }
@@ -47,6 +60,20 @@ class TanquesController {
         $profundidad = isset($_POST['medida_profundidad']) ? trim($_POST['medida_profundidad']) : '';
         $tipo = isset($_POST['id_tipo_tanque']) ? trim($_POST['id_tipo_tanque']) : '';
         $cantidad = isset($_POST['cantidad_peces']) ? trim($_POST['cantidad_peces']) : '';
+        
+        // OBTENER ID_ZOOCRIADERO - Ajusta según tu caso:
+        // Opción 1: Desde el formulario (si agregaste el select)
+        $id_zoocriadero = isset($_POST['id_zoocriadero']) ? trim($_POST['id_zoocriadero']) : '';
+        
+        // Opción 2: Desde la sesión (si el usuario tiene un zoocriadero asignado)
+        if ($id_zoocriadero === '' && isset($_SESSION['id_zoocriadero'])) {
+            $id_zoocriadero = $_SESSION['id_zoocriadero'];
+        }
+        
+        // Opción 3: Valor por defecto (si solo hay un zoocriadero)
+        if ($id_zoocriadero === '') {
+            $id_zoocriadero = 1; // Cambia esto según tu necesidad
+        }
 
         // VALIDAR CAMPOS OBLIGATORIOS
         if (!$this->camposObligatorios($nombre, $alto, $ancho, $profundidad, $tipo, $cantidad)) {
@@ -95,7 +122,8 @@ class TanquesController {
                     medida_profundidad, 
                     id_tipo_tanque, 
                     cantidad_peces,
-                    id_estado_tanque
+                    id_estado_tanque,
+                    id_zoocriadero
                 ) VALUES (
                     $id,
                     '".pg_escape_string($nombre)."',
@@ -104,7 +132,8 @@ class TanquesController {
                     ".(float)$profundidad.",
                     ".(int)$tipo.",
                     ".(int)$cantidad.",
-                    1
+                    1,
+                    ".(int)$id_zoocriadero."
                 )";
 
         if ($this->model->insert($sql)) {

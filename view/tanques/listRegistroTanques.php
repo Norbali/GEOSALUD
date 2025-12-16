@@ -199,14 +199,45 @@ body {
 .btn-close {
     font-size: 0.875rem;
 }
+
 .main-title {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #1f2937;
-        }
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1f2937;
+}
+
+/* Estilos para modal Ver Detalle */
+.detail-item {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 3px solid #0d6efd;
+    height: 100%;
+}
+
+.detail-label {
+    display: block;
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.modal-body .row {
+    margin: 0;
+}
 </style>
+
 <div class="container mt-4">
 
 <!-- ALERTAS -->
@@ -222,17 +253,17 @@ body {
 <?php } ?>
 
 <!-- HEADER -->
-        <h1 class="main-title">Gestión de Tanques</h1>
+<h1 class="main-title">Gestión de Tanques</h1>
 
 <!-- LISTA -->
-    <div class="list-card">
+<div class="list-card">
     <div class="list-header">
         <h5><i class="fas fa-list text-primary"></i> Lista de Tanques</h5>
         <div class="header-actions">
             <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle sortable" type="button" data-bs-toggle="dropdown" aria-expanded="false"onclick="sortTable('id')" data-column="id" data-direction="<?php echo $order; ?>">
-                <i class="bi bi-sort-down"></i> Ordenar por ID
-            </button>
+                <button class="btn btn-secondary dropdown-toggle sortable" type="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="sortTable('id')" data-column="id" data-direction="<?php echo $order; ?>">
+                    <i class="bi bi-sort-down"></i> Ordenar por ID
+                </button>
             </div>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
                 <i class="fas fa-plus"></i> Nuevo Tanque
@@ -242,305 +273,320 @@ body {
 
     <div class="table-responsive">
         <table class="table table-hover" id="tablaTanques">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>NOMBRE</th>
-            <th>TIPO</th>
-            <th>ESTADO</th>
-            <th style="min-width: 280px;">ACCIONES</th>
-        </tr>
-        </thead>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE TANQUE</th>
+                    <th>TIPO TANQUE</th>
+                    <th>ESTADO</th>
+                    <th style="min-width: 280px;">ACCIONES</th>
+                </tr>
+            </thead>
 
-        <tbody>
-        <?php while ($t = pg_fetch_assoc($tanques)) { ?>
-        <tr>
-        <td><?php echo $t['id_tanque']; ?></td>
-        <td><?php echo $t['nombre_tanque']; ?></td>
-        <td><?php echo $t['nombre_tipo_tanque']; ?></td>
+            <tbody>
+                <?php while ($t = pg_fetch_assoc($tanques)) { ?>
+                <tr>
+                    <td><?php echo $t['id_tanque']; ?></td>
+                    <td><?php echo $t['nombre_tanque']; ?></td>
+                    <td><?php echo $t['nombre_tipo_tanque']; ?></td>
 
-        <td>
-        <?php if ($t['id_estado_tanque'] == 1) { ?>
-        <span class="badge bg-success">Habilitado</span>
-        <?php } else { ?>
-        <span class="badge bg-danger">Inhabilitado</span>
-        <?php } ?>
-        </td>
+                    <td>
+                        <?php if ($t['id_estado_tanque'] == 1) { ?>
+                        <span class="badge bg-success">Habilitado</span>
+                        <?php } else { ?>
+                        <span class="badge bg-danger">Inhabilitado</span>
+                        <?php } ?>
+                    </td>
 
-        <td style="white-space: nowrap;">
-        <!-- VER -->
-        <button class="btn btn-action btn-ver"
-        data-bs-toggle="modal"
-        data-bs-target="#modalVer"
-        data-nombre="<?php echo $t['nombre_tanque']; ?>"
-        data-tipo="<?php echo $t['nombre_tipo_tanque']; ?>"
-        data-alto="<?php echo $t['medida_alto']; ?>"
-        data-ancho="<?php echo $t['medida_ancho']; ?>"
-        data-profundidad="<?php echo $t['medida_profundidad']; ?>"
-        data-cantidad="<?php echo $t['cantidad_peces']; ?>">
-        <i class="fas fa-eye"></i> Ver Detalle
-        </button>
+                    <td style="white-space: nowrap;">
+                        <!-- VER -->
+                        <button class="btn btn-action btn-ver"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalVer"
+                            data-nombre="<?php echo $t['nombre_tanque']; ?>"
+                            data-tipo="<?php echo $t['nombre_tipo_tanque']; ?>"
+                            data-alto="<?php echo $t['medida_alto']; ?>"
+                            data-ancho="<?php echo $t['medida_ancho']; ?>"
+                            data-profundidad="<?php echo $t['medida_profundidad']; ?>"
+                            data-cantidad="<?php echo $t['cantidad_peces']; ?>">
+                            <i class="fas fa-eye"></i> Ver Detalle
+                        </button>
 
-        <!-- EDITAR -->
-        <button class="btn btn-action btn-edit"
-        data-bs-toggle="modal"
-        data-bs-target="#modalEditar"
-        data-id="<?php echo $t['id_tanque']; ?>"
-        data-nombre="<?php echo $t['nombre_tanque']; ?>"
-        data-alto="<?php echo $t['medida_alto']; ?>"
-        data-ancho="<?php echo $t['medida_ancho']; ?>"
-        data-profundidad="<?php echo $t['medida_profundidad']; ?>"
-        data-cantidad="<?php echo $t['cantidad_peces']; ?>"
-        data-tipo="<?php echo $t['id_tipo_tanque']; ?>">
-        <i class="fas fa-edit"></i> Editar
-        </button>
+                        <!-- EDITAR -->
+                        <button class="btn btn-action btn-edit"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalEditar"
+                            data-id="<?php echo $t['id_tanque']; ?>"
+                            data-nombre="<?php echo $t['nombre_tanque']; ?>"
+                            data-alto="<?php echo $t['medida_alto']; ?>"
+                            data-ancho="<?php echo $t['medida_ancho']; ?>"
+                            data-profundidad="<?php echo $t['medida_profundidad']; ?>"
+                            data-cantidad="<?php echo $t['cantidad_peces']; ?>"
+                            data-tipo="<?php echo $t['id_tipo_tanque']; ?>">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
 
-        <!-- INHABILITAR / HABILITAR -->
-        <?php if ($t['id_estado_tanque'] == 1) { ?>
-        <a class="btn btn-action btn-disable"
-        href="<?php echo getUrl(
-            'Tanques',
-            'Tanques',
-            'updateStatus',
-            array(
-                'id_tanque' => $t['id_tanque'],
-                'estado' => 2
-            )
-        ); ?>">
-        <i class="fas fa-trash"></i> Inhabilitar
-        </a>
-        <?php } else { ?>
-        <a class="btn btn-action btn-enable"
-        href="<?php echo getUrl(
-            'Tanques',
-            'Tanques',
-            'updateStatus',
-            array(
-                'id_tanque' => $t['id_tanque'],
-                'estado' => 1
-            )
-        ); ?>">
-        <i class="fas fa-check"></i> Habilitar
-        </a>
-        <?php } ?>
-        </td>
-        </tr>
-        <?php } ?>
-        </tbody>
+                        <!-- INHABILITAR / HABILITAR -->
+                        <?php if ($t['id_estado_tanque'] == 1) { ?>
+                        <a class="btn btn-action btn-disable"
+                            href="<?php echo getUrl('Tanques','Tanques','updateStatus',array('id_tanque' => $t['id_tanque'],'estado' => 2)); ?>">
+                            <i class="fas fa-trash"></i> Inhabilitar
+                        </a>
+                        <?php } else { ?>
+                        <a class="btn btn-action btn-enable"
+                            href="<?php echo getUrl('Tanques','Tanques','updateStatus',array('id_tanque' => $t['id_tanque'],'estado' => 1)); ?>">
+                            <i class="fas fa-check"></i> Habilitar
+                        </a>
+                        <?php } ?>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
         </table>
     </div>
 </div>
 
 </div>
 
-</div>
-
 <!-- ================= MODAL VER ================= -->
 <div class="modal fade" id="modalVer" tabindex="-1">
-<div class="modal-dialog modal-lg modal-dialog-centered">
-<div class="modal-content">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
 
-<div class="modal-header">
-<h5 class="modal-title">Detalles del Tanque</h5>
-<button class="btn-close" data-bs-dismiss="modal"></button>
-</div>
+            <div class="modal-header">
+                <h4 class="modal-title">Detalles del Tanque</h4>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-<div class="modal-body">
-<h6 class="text-muted mb-3">Datos del Tanque</h6>
-<p><strong>Nombre:</strong> <span id="v_nombre"></span></p>
-<p><strong>Tipo:</strong> <span id="v_tipo"></span></p>
-<p><strong>Alto:</strong> <span id="v_alto"></span></p>
-<p><strong>Ancho:</strong> <span id="v_ancho"></span></p>
-<p><strong>Profundidad:</strong> <span id="v_profundidad"></span></p>
-<p><strong>Cantidad peces:</strong> <span id="v_cantidad"></span></p>
-</div>
+            <div class="modal-body">
+                <h5 class="text-muted mb-4">Datos del Tanque</h5>
 
-</div>
-</div>
+                <div class="row g-4">
+                    <!-- Fila 1 -->
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <strong class="detail-label">Nombre Tanque:</strong>
+                            <p class="detail-value" id="v_nombre"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <strong class="detail-label">Tipo de Tanque:</strong>
+                            <p class="detail-value" id="v_tipo"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <strong class="detail-label">Alto (en CM):</strong>
+                            <p class="detail-value" id="v_alto"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Fila 2 -->
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <strong class="detail-label">Ancho (en CM):</strong>
+                            <p class="detail-value" id="v_ancho"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <strong class="detail-label">Profundidad (en CM):</strong>
+                            <p class="detail-value" id="v_profundidad"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <strong class="detail-label">Cantidad peces:</strong>
+                            <p class="detail-value" id="v_cantidad"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <!-- ================= MODAL NUEVO ================= -->
 <div class="modal fade" id="modalNuevo" tabindex="-1">
-<div class="modal-dialog modal-lg modal-dialog-centered">
-<div class="modal-content">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
 
-<div class="modal-header">
-<h5 class="modal-title">Registrar Tanque</h5>
-<button class="btn-close" data-bs-dismiss="modal"></button>
-</div>
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar Tanque</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-<div class="modal-body">
-<form action="<?php echo getUrl('Tanques','Tanques','postCreate'); ?>" method="post">
+            <div class="modal-body">
+                <form action="<?php echo getUrl('Tanques','Tanques','postCreate'); ?>" method="post">
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="nombre">Nombre Tanque *</label>
-            <input type="text" id="nombre" name="nombre_tanque" required>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nombre">Nombre Tanque *</label>
+                                <input type="text" id="nombre" name="nombre_tanque" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="alto">Alto (en CM) *</label>
+                                <input type="number" step="0.01" id="alto" name="medida_alto" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="ancho">Ancho (en CM) *</label>
+                                <input type="number" step="0.01" id="ancho" name="medida_ancho" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="profundidad">Profundidad (en CM) *</label>
+                                <input type="number" step="0.01" id="profundidad" name="medida_profundidad" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tipo">Tipo Tanque *</label>
+                                <select id="tipo" name="id_tipo_tanque" required>
+                                    <option value="">Seleccione...</option>
+                                    <?php 
+                                    pg_result_seek($tipos, 0);
+                                    while ($tp = pg_fetch_assoc($tipos)) { 
+                                    ?>
+                                    <option value="<?php echo $tp['id_tipo_tanque']; ?>">
+                                        <?php echo $tp['nombre_tipo_tanque']; ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="cantidad">Cantidad peces *</label>
+                                <input type="number" id="cantidad" name="cantidad_peces" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Guardar</button>
+                </form>
+            </div>
+
         </div>
     </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="alto">Alto *</label>
-            <input type="number" step="0.01" id="alto" name="medida_alto" required>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="ancho">Ancho *</label>
-            <input type="number" step="0.01" id="ancho" name="medida_ancho" required>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="profundidad">Profundidad *</label>
-            <input type="number" step="0.01" id="profundidad" name="medida_profundidad" required>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="tipo">Tipo Tanque *</label>
-            <select id="tipo" name="id_tipo_tanque" required>
-                <option value="">Seleccione...</option>
-                <?php 
-                pg_result_seek($tipos, 0);
-                while ($tp = pg_fetch_assoc($tipos)) { 
-                ?>
-                <option value="<?php echo $tp['id_tipo_tanque']; ?>">
-                <?php echo $tp['nombre_tipo_tanque']; ?>
-                </option>
-                <?php } ?>
-            </select>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="cantidad">Cantidad peces *</label>
-            <input type="number" id="cantidad" name="cantidad_peces" required>
-        </div>
-    </div>
-</div>
-
-<button type="submit" class="btn btn-primary w-100 mt-3">Guardar</button>
-</form>
-</div>
-
-</div>
-</div>
 </div>
 
 <!-- ================= MODAL EDITAR ================= -->
 <div class="modal fade" id="modalEditar" tabindex="-1">
-<div class="modal-dialog modal-lg modal-dialog-centered">
-<div class="modal-content">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
 
-<div class="modal-header">
-<h5 class="modal-title">Editar Tanque</h5>
-<button class="btn-close" data-bs-dismiss="modal"></button>
-</div>
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Tanque</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-<div class="modal-body">
-<form action="<?php echo getUrl('Tanques','Tanques','postUpdate'); ?>" method="post">
+            <div class="modal-body">
+                <form action="<?php echo getUrl('Tanques','Tanques','postUpdate'); ?>" method="post">
 
-<input type="hidden" id="e_id_tanque" name="id_tanque">
+                    <input type="hidden" id="e_id_tanque" name="id_tanque">
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="e_nombre">Nombre Tanque *</label>
-            <input type="text" id="e_nombre" name="nombre_tanque" required>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="e_nombre">Nombre Tanque *</label>
+                                <input type="text" id="e_nombre" name="nombre_tanque" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="e_alto">Alto (en CM) *</label>
+                                <input type="number" step="0.01" id="e_alto" name="medida_alto" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="e_ancho">Ancho (en CM) *</label>
+                                <input type="number" step="0.01" id="e_ancho" name="medida_ancho" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="e_profundidad">Profundidad (en CM) *</label>
+                                <input type="number" step="0.01" id="e_profundidad" name="medida_profundidad" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="e_tipo">Tipo Tanque *</label>
+                                <select id="e_tipo" name="id_tipo_tanque" required>
+                                    <option value="">Seleccione...</option>
+                                    <?php 
+                                    pg_result_seek($tipos, 0);
+                                    while ($tp = pg_fetch_assoc($tipos)) { 
+                                    ?>
+                                    <option value="<?php echo $tp['id_tipo_tanque']; ?>">
+                                        <?php echo $tp['nombre_tipo_tanque']; ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="e_cantidad">Cantidad peces *</label>
+                                <input type="number" id="e_cantidad" name="cantidad_peces" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-warning w-100 mt-3">Actualizar</button>
+                </form>
+            </div>
+
         </div>
     </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="e_alto">Alto *</label>
-            <input type="number" step="0.01" id="e_alto" name="medida_alto" required>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="e_ancho">Ancho *</label>
-            <input type="number" step="0.01" id="e_ancho" name="medida_ancho" required>
-        </div>
-    </div>
 </div>
-
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="e_profundidad">Profundidad *</label>
-            <input type="number" step="0.01" id="e_profundidad" name="medida_profundidad" required>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="e_tipo">Tipo Tanque *</label>
-            <select id="e_tipo" name="id_tipo_tanque" required>
-                <option value="">Seleccione...</option>
-                <?php 
-                pg_result_seek($tipos, 0);
-                while ($tp = pg_fetch_assoc($tipos)) { 
-                ?>
-                <option value="<?php echo $tp['id_tipo_tanque']; ?>">
-                <?php echo $tp['nombre_tipo_tanque']; ?>
-                </option>
-                <?php } ?>
-            </select>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="e_cantidad">Cantidad peces *</label>
-            <input type="number" id="e_cantidad" name="cantidad_peces" required>
-        </div>
-    </div>
-</div>
-
-<button type="submit" class="btn btn-warning w-100 mt-3">Actualizar</button>
-</form>
-</div>
-
-</div>
-</div>
-</div>
-
 
 <script>
 // Modal Ver
 document.getElementById('modalVer').addEventListener('show.bs.modal', function (e) {
-var b = e.relatedTarget;
-document.getElementById('v_nombre').innerHTML = b.getAttribute('data-nombre');
-document.getElementById('v_tipo').innerHTML = b.getAttribute('data-tipo');
-document.getElementById('v_alto').innerHTML = b.getAttribute('data-alto');
-document.getElementById('v_ancho').innerHTML = b.getAttribute('data-ancho');
-document.getElementById('v_profundidad').innerHTML = b.getAttribute('data-profundidad');
-document.getElementById('v_cantidad').innerHTML = b.getAttribute('data-cantidad');
-document.getElementById('v_documento').innerHTML = b.getAttribute('data-documento');
-document.getElementById('v_responsable').innerHTML = b.getAttribute('data-responsable');
-document.getElementById('v_rol').innerHTML = b.getAttribute('data-rol');
+    var b = e.relatedTarget;
+    document.getElementById('v_nombre').innerHTML = b.getAttribute('data-nombre');
+    document.getElementById('v_tipo').innerHTML = b.getAttribute('data-tipo');
+    document.getElementById('v_alto').innerHTML = b.getAttribute('data-alto');
+    document.getElementById('v_ancho').innerHTML = b.getAttribute('data-ancho');
+    document.getElementById('v_profundidad').innerHTML = b.getAttribute('data-profundidad');
+    document.getElementById('v_cantidad').innerHTML = b.getAttribute('data-cantidad');
 });
 
 // Modal Editar
 document.getElementById('modalEditar').addEventListener('show.bs.modal', function (e) {
-var b = e.relatedTarget;
-document.getElementById('e_id_tanque').value = b.getAttribute('data-id');
-document.getElementById('e_nombre').value = b.getAttribute('data-nombre');
-document.getElementById('e_alto').value = b.getAttribute('data-alto');
-document.getElementById('e_ancho').value = b.getAttribute('data-ancho');
-document.getElementById('e_profundidad').value = b.getAttribute('data-profundidad');
-document.getElementById('e_cantidad').value = b.getAttribute('data-cantidad');
-document.getElementById('e_tipo').value = b.getAttribute('data-tipo');
+    var b = e.relatedTarget;
+    document.getElementById('e_id_tanque').value = b.getAttribute('data-id');
+    document.getElementById('e_nombre').value = b.getAttribute('data-nombre');
+    document.getElementById('e_alto').value = b.getAttribute('data-alto');
+    document.getElementById('e_ancho').value = b.getAttribute('data-ancho');
+    document.getElementById('e_profundidad').value = b.getAttribute('data-profundidad');
+    document.getElementById('e_cantidad').value = b.getAttribute('data-cantidad');
+    document.getElementById('e_tipo').value = b.getAttribute('data-tipo');
 });
 
 // Función de ordenamiento
@@ -595,8 +641,6 @@ function sortTable(column, direction) {
     document.querySelectorAll('.sortable').forEach(th => {
         th.classList.remove('sort-asc', 'sort-desc');
     });
-    
-    
 }
 
 // Confirmación SweetAlert para inhabilitar
@@ -607,12 +651,12 @@ document.querySelectorAll('.btn-disable').forEach(btn => {
         
         Swal.fire({
             title: '¿Inhabilitar tanque?',
-            text: 'Esta accion cambiara el estado a INACTIVO',
+            text: 'Esta accion cambiara el estado a INHABILITADO',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#dc3545',
             cancelButtonColor: '#6c757d',
-            confirmButtonText: 'S&iacute;, inhabilitar',
+            confirmButtonText: 'Sí, inhabilitar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -630,12 +674,12 @@ document.querySelectorAll('.btn-enable').forEach(btn => {
         
         Swal.fire({
             title: '¿Habilitar tanque?',
-            text: 'Esta accion cambiara el estado a ACTIVO',
+            text: 'Esta accion cambiara el estado a HABILITADO',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#28a745',
             cancelButtonColor: '#6c757d',
-            confirmButtonText: 'S&iacute;, activar',
+            confirmButtonText: 'Sí, activar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
