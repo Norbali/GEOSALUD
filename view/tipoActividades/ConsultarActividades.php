@@ -4,8 +4,6 @@
     $permisos = $_SESSION['permisos'];
 
 
-    session_start();
-
     if (isset($_SESSION['alert'])) {
         $alert = $_SESSION['alert'];
         unset($_SESSION['alert']);

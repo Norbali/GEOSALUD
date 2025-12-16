@@ -8,14 +8,18 @@ class ConsultarTipoDeActividadesController{
             $sql= "SELECT 
   a.id_actividad,
   a.nombre_actividad,
+  a.id_estado_actividad,
   ea.nombre_estado_actividades
 FROM actividad a
 JOIN estado_actividad ea
-  ON a.id_estado_actividad = ea.id_estado_actividades;
+  ON a.id_estado_actividad = ea.id_estado_actividades
+ORDER BY a.id_actividad ASC;
+
 ";
             $actividades = $obj->select($sql);
             include_once '../view/tipoActividades/ConsultarActividades.php';
         } 
+
         public function postConsulta(){
             $obj = new ConsultarTipoDeActividadesModel();
 
@@ -36,6 +40,45 @@ JOIN estado_actividad ea
                 echo "error en la insercion";
             }
         }
+
+        public function postInhabilitar()
+{
+    $obj = new ConsultarTipoDeActividadesModel();
+
+    if (!isset($_GET['id'])) {
+        $_SESSION['alert'] = array(
+            'type' => 'danger',
+            'message' => 'ID no recibido'
+        );
+        redirect(getUrl('TipoActividades','ConsultarTipoDeActividades','getConsulta'));
+        return;
+    }
+
+    $id = $_GET['id'];
+
+    $sql = "
+        UPDATE actividad
+        SET id_estado_actividad = 2
+        WHERE id_actividad = $id
+    ";
+
+    $ejecutar = $obj->update($sql);
+
+    if ($ejecutar) {
+        $_SESSION['alert'] = array(
+            'type' => 'success',
+            'message' => 'Actividad inhabilitada correctamente'
+        );
+    } else {
+        $_SESSION['alert'] = array(
+            'type' => 'danger',
+            'message' => 'Error al inhabilitar la actividad'
+    );
+    }
+
+    redirect(getUrl('TipoActividades','ConsultarTipoDeActividades','getConsulta'));
+}
+
 
     }
 ?>
