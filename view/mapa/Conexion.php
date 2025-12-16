@@ -1,5 +1,5 @@
 <?php
-
+//conexion basica a postgis
 $server = "localhost";
 $port = "5432";
 $database = "prueba";

@@ -1,3 +1,7 @@
+<?php 
+    include_once '../lib/helpers.php';
+?>
+
 <div style="position: relative; top: -70px;">
     <div class="card">
         <div class="card-header">
@@ -81,11 +85,17 @@
                             </tr>
                         <?php } ?>
                     </tbody>
-
                 </table>
+                <?php
+                    if (isset($_SESSION['sinResultadoNacidosMuertos'])) {
+                        echo '<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                                ' . $_SESSION['sinResultadoNacidosMuertos'] . '
+                            </div>';
+                        unset($_SESSION['sinResultadoNacidosMuertos']);
+                    }
+                ?>
             </div>
-
-        </form>
+        </div>
     </div>
 </div>
 

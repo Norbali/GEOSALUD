@@ -11,7 +11,7 @@
 
 
     if (isset($_SESSION['sinResultados'])) {
-        echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        echo '<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
                 ' . $_SESSION['sinResultados'] . '
                 
             </div>';

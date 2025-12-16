@@ -60,7 +60,7 @@
                     </li>
                 <?php //}?>
 
-                <?php // if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
+                <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                            
                         <a href="<?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta");?>">
@@ -68,33 +68,34 @@
                             <p>Seguimiento de tanques</p>
                         </a>
                     </li>
-                <?php // }?>
-                <?php if (array_key_exists("TipoDeTanques", $permisos)){ ?>
+                <?php  }?>
+                <?php //if (array_key_exists("TipoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">
                             <i class="fas fa-th-large"></i>
                             <p>Tipo de tanques</p>
                         </a>
                     </li>
-                <?php }?> 
+                <?php// }?> 
 
-                <?php if (array_key_exists("PermisoDeRoles", $permisos)){ ?>
+                <?php //if (array_key_exists("PermisoRoles", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("PermisoRoles", "PermisoRoles", "getConsultar") ?>">
                             <i class="fas fa-th-large"></i>
                             <p>Permiso de roles</p>
                         </a>
                     </li>
-                <?php }?>
+                <?php// }?>
 
-                <?php if (array_key_exists("RegistroDeUsuarios", $permisos)){ ?>
+                
+                <?php //if (array_key_exists("RegistroDeUsuarios", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
                             <i class="fas fa-user"></i>
                             <p>Registro de usuarios</p>
                         </a>
                     </li>
-                <?php }?>
+                <?php //}?>
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#configuracion">

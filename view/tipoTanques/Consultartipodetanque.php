@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion de Tipo de Tanques - KaiAdmin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<div style="position: relative; top: -70px;">
     <style>
         body {
             background-color: #f4f5f7;
@@ -35,26 +26,31 @@
         .table-responsive {
             border-radius: 0 0 0.5rem 0.5rem;
         }
+        .main-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1f2937;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid px-4 py-4">
-        <div class="page-header">
-            <h1 class="h3 mb-2">
-                <i class="fas fa-water text-primary"></i> Gestión de Tipo de Tanques
-            </h1>
-        </div>
-
+  
+        <h1 class="main-title">Gestión de Tipo de Tanques</h1>
         <!-- Card y su tabla -->
         <div class="card">
             <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
                 <h5 class="card-title mb-0">
                     <i class="fas fa-list text-primary"></i> Lista de Tipos de Tanques
                 </h5>
+                    
+
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
                     <i class="fas fa-plus"></i> Nuevo Tipo de Tanque
                 </button>
+                
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -94,76 +90,22 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-1">
-                                            <button class="btn btn-info btn-sm" data-bs-toggle="modal" 
-                                                data-bs-target="#modalDetalle<?php echo $tipoTanque['id_tipo_tanque']; ?>">
-                                                <i class="fas fa-eye"></i> Ver Detalles
-                                            </button>
-
                                             <?php if ($tipoTanque['nombre_estado_tipo_tanques'] == 'activo') { ?>
                                                 <button class="btn btn-warning btn-sm" 
-                                                    onclick="confirmarEdicion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo $tipoTanque['nombre_tipo_tanque']; ?>')">
+                                                    onclick="confirmarEdicion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo addslashes($tipoTanque['nombre_tipo_tanque']); ?>')">
                                                     <i class="fas fa-edit"></i> Editar
                                                 </button>
-                                            <?php } else { ?>
-                                                <button class="btn btn-warning btn-sm" 
-                                                    onclick="mostrarAlertaInactivo('<?php echo $tipoTanque['nombre_tipo_tanque']; ?>')">
-                                                    <i class="fas fa-edit"></i> Editar
-                                                </button>
-                                            <?php } ?>
-
-                                            <?php if ($tipoTanque['nombre_estado_tipo_tanques'] == 'activo') { ?>
+                                                
                                                 <button class="btn btn-danger btn-sm" 
-                                                    onclick="confirmarInhabilitacion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo $tipoTanque['nombre_tipo_tanque']; ?>')">
+                                                    onclick="confirmarInhabilitacion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo addslashes($tipoTanque['nombre_tipo_tanque']); ?>')">
                                                     <i class="fas fa-ban"></i> Inhabilitar
                                                 </button>
                                             <?php } else { ?>
-                                                <button class="btn btn-success btn-sm" 
-                                                    onclick="confirmarActivacion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo $tipoTanque['nombre_tipo_tanque']; ?>')">
-                                                    <i class="fas fa-check-circle"></i> Activar
-                                                </button>
+                                                <span class="text-muted">Sin acciones disponibles</span>
                                             <?php } ?>
                                         </div>
                                     </td>
                                 </tr>
-
-                                <!-- Modal Ver Detalle individual -->
-                                <div class="modal fade" id="modalDetalle<?php echo $tipoTanque['id_tipo_tanque']; ?>" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">
-                                                    <i class="fas fa-info-circle text-info"></i> Detalle de Tipo de Tanque
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row mb-3">
-                                                    <div class="col-4 fw-bold">ID:</div>
-                                                    <div class="col-8"><?php echo $tipoTanque['id_tipo_tanque']; ?></div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-4 fw-bold">Nombre:</div>
-                                                    <div class="col-8"><?php echo $tipoTanque['nombre_tipo_tanque']; ?></div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-4 fw-bold">Estado:</div>
-                                                    <div class="col-8">
-                                                        <?php
-                                                        if ($tipoTanque['nombre_estado_tipo_tanques'] == 'activo') {
-                                                            echo '<span class="badge bg-success">Activo</span>';
-                                                        } else {
-                                                            echo '<span class="badge bg-danger">Inactivo</span>';
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <!-- Modal Editar individual -->
                                 <div class="modal fade" id="modalEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>" tabindex="-1">
@@ -180,7 +122,7 @@
                                                 <div class="modal-body">
                                                     <input type="hidden" name="id_tipo_tanque" value="<?php echo $tipoTanque['id_tipo_tanque']; ?>">
                                                     <div class="mb-3">
-                                                        <label class="form-label">Nombre del Tipo de Tanque</label>
+                                                        <label class="form-label">Nombre del Tipo de Tanque *</label>
                                                         <input type="text" class="form-control" name="nombre_tipo_tanque" 
                                                             id="nombreEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>"
                                                             value="<?php echo $tipoTanque['nombre_tipo_tanque']; ?>" required>
@@ -227,7 +169,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label class="form-label">Nombre del Tipo de Tanque</label>
+                            <label class="form-label">Nombre del Tipo de Tanque *</label>
                             <input type="text" class="form-control" name="nombre_tipo_tanque" id="nombreTanqueNuevo" required>
                         </div>
                         <div class="mb-3">
@@ -251,8 +193,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Mostrar mensajes
@@ -267,21 +207,10 @@
             });
         <?php } ?>
 
-        // Alerta para tanque inactivo
-        function mostrarAlertaInactivo(nombreTanque) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Tanque Inactivo',
-                text: 'Este tanque "' + nombreTanque + '" no se puede editar porque no está activo.',
-                confirmButtonColor: '#ffc107',
-                confirmButtonText: 'Entendido'
-            });
-        }
-
         // Confirmar edición con SweetAlert2
         function confirmarEdicion(idTanque, nombreTanque) {
             Swal.fire({
-                title: '¿Estas seguro?',
+                title: '¿Estás seguro?',
                 text: "¿Deseas editar el tipo de tanque '" + nombreTanque + "'?",
                 icon: 'question',
                 showCancelButton: true,
@@ -291,7 +220,6 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Abrir modal de edición
                     const modalEditar = new bootstrap.Modal(document.getElementById('modalEditar' + idTanque));
                     modalEditar.show();
                 }
@@ -301,7 +229,7 @@
         // Confirmar inhabilitación
         function confirmarInhabilitacion(idTanque, nombreTanque) {
             Swal.fire({
-                title: '¿Estas seguro?',
+                title: '¿Estás seguro?',
                 text: "¿Deseas inhabilitar el tipo de tanque '" + nombreTanque + "'?",
                 icon: 'warning',
                 showCancelButton: true,
@@ -311,7 +239,6 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Crear formulario y enviarlo
                     const form = document.createElement('form');
                     form.method = 'POST';
                     form.action = '<?php echo getUrl("TipoTanques", "TipoTanques", "postInhabilitar"); ?>';
@@ -327,37 +254,5 @@
                 }
             });
         }
-
-        // Confirmar activación
-        function confirmarActivacion(idTanque, nombreTanque) {
-            Swal.fire({
-                title: '¿Estas seguro?',
-                text: "¿Deseas activar el tipo de tanque '" + nombreTanque + "'?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Sí, activar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Crear formulario y enviarlo
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = '<?php echo getUrl("TipoTanques", "TipoTanques", "postHabilitar"); ?>';
-                    
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'id_tipo_tanque';
-                    input.value = idTanque;
-                    
-                    form.appendChild(input);
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            });
-        }
     </script>
-</body>
-
-</html>
+</div>
