@@ -1,5 +1,7 @@
 <?php
-
+//ver informacion del punto mas cercano a las coordenadas enviadas por get
+//este es un ejemplo basico, en el controlador deben adaptarlo a su modelo y vista
+//este ejemplo lo hizo norbali, no incluye lo que hizo jose fredy ni validaciones
 include_once "Conexion.php";
 
 $dir1 = $_GET['x']; 

@@ -1,3 +1,4 @@
+<!-- Vista intermediaria del mapa que carga el iframe con el mapa, se hizo con el fin de no romper kai -->
 <div class="content">
   <div class="page-inner">
 

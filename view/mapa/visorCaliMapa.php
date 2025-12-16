@@ -1,4 +1,4 @@
-
+<!-- Mapa "Original"-->
     <link rel="stylesheet" type="text/css" href="/GEOSALUD/view/mapa/misc/img/dc.css">
     <script src="/GEOSALUD/view/mapa/misc/lib/mscross-1.1.9.js" type="text/javascript"></script>
 

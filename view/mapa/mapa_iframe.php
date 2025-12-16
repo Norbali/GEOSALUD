@@ -87,27 +87,9 @@
             </div>
 
             <!-- MODALES --> 
-
+        <!-- Aqui pueden colocar todas las modales pero tiene que id diferente a cada modal-->
         
         <div class="modal fade" id="modalNombre" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Ingresar nombre</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" id="nombrePunto" class="form-control" placeholder="Nombre del punto">
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" id="btnGuardarNombre">Guardar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- MODAL PRUEBA--> 
-         <div class="modal fade" id="modalPrueba" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -142,6 +124,8 @@
 
         var $issertZoo = new msTool('InsertarCoordenadas', insertZ, '/GEOSALUD/view/mapa/misc/img/ubicacionZoocriadero.png', queryI);
         var $consultarZoo = new msTool('Obtener Informacion', consultaZ, '/GEOSALUD/view/mapa/misc/img/obtenerInformacion.png', queryII);
+        //aqui se agregan los botones al toolbar y se les asigna la funcion
+
 
         myMap1.getToolbar(0).addMapTool($issertZoo);
         myMap1.getToolbar(0).addMapTool($consultarZoo);
@@ -191,21 +175,20 @@
             seleccionado = true;
         }
 
+        //funcion para insertar zoocriadero
         function queryI(event, map, x, y, xx, yy) {
             if (seleccionado) {
 
                 //alert("Coordenadas mapa: x: " + x + " y: " + y + " reales: x " + xx + " y: " + yy);
-
                 // Mostrar modal
                 var modal = new bootstrap.Modal(document.getElementById('modalNombre'));
                 modal.show();
 
                 // Boton guardar dentro del modal
                 document.getElementById("btnGuardarNombre").onclick = function () {
-
+                    //recoger valor de input
                     let nombre = document.getElementById("nombrePunto").value;
 
-                    // AJAX con consulta1 (como tú lo tienes)
                     consulta1 = objetoAjax();
                     consulta1.open(
                         "GET",
@@ -229,6 +212,7 @@
             }
         }
 
+        //funcion para obtener informacion del zoocriadero
         function queryII(event, map, x, y, xx, yy) {
             if (seleccionado) {
                 alert("Coordenadas mapa: x: " + x + " y: " + y + "reales : x " + xx + " y: " + yy);
@@ -246,6 +230,10 @@
                 map.getTagMap().style.cursor = "default";
             }
         }
+
+        //demas funciones javascript para el mapa(actualizar, inhalitar)
+
+        // Inicializar mapas
         myMap1.redraw();
         myMap2.redraw();
     </script>
