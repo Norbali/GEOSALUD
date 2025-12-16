@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once '../model/TipoTanques/TipoTanquesModel.php';
 
 class TipoTanquesController {
@@ -257,6 +257,28 @@ class TipoTanquesController {
         redirect(getUrl("TipoTanques", "TipoTanques", "getConsultar"));
         exit;
     }
+
+    public function filtro(){
+        $buscar = $_GET['buscar']; 
+        
+        $sql = "
+            SELECT 
+            tt.id_tipo_tanque,
+            tt.nombre_tipo_tanque,
+            ett.nombre_estado_tipo_tanques
+        FROM tipo_tanque tt
+        JOIN estado_tipo_tanques ett
+            ON tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanques
+        WHERE tt.nombre_tipo_tanque ILIKE '%$buscar%'
+        ORDER BY tt.id_tipo_tanque;
+
+        ";
+
+        $tiposTanques = $this->model->select($sql); 
+       
+        include_once '../view/tipoTanques/filtroTipoTanques.php';
+    }
+    
 }
 
 ?>

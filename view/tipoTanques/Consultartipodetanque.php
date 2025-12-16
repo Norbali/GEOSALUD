@@ -41,13 +41,39 @@
         <h1 class="main-title">Gestión de Tipo de Tanques</h1>
         <!-- Card y su tabla -->
         <div class="card">
-            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                <h5 class="card-title mb-0">
+            <div class="card-header bg-white d-flex flex-column py-3">
+
+                <!-- TÍTULO -->
+                <h5 class="card-title m-3">
                     <i class="fas fa-list text-primary"></i> Lista de Tipos de Tanques
                 </h5>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
-                    <i class="fas fa-plus"></i> Nuevo Tipo de Tanque
-                </button>
+
+                <!-- FILA INFERIOR -->
+                <div class="d-flex justify-content-between align-items-end">
+                    
+                    <div class="col-md-4 p-0">
+                        <label class="form-label mb-1">Nombre tipo de tanque</label>
+                        <input 
+                            type="text" 
+                            class="form-control"
+                            placeholder="Ingrese el nombre de tipo de tanque..."
+                            id="filtro"
+                            style="max-width: 300px;"
+                            data-url="<?php echo getUrl('TipoTanques', 'TipoTanques', 'filtro', false, 'ajax'); ?>"
+                        >
+                       
+                    </div>
+
+                    <button 
+                        type="button" 
+                        class="btn btn-primary ms-3"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#modalNuevo"
+                    >
+                        <i class="fas fa-plus"></i> Nuevo Tipo de Tanque
+                    </button>
+
+                </div>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
