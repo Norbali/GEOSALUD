@@ -43,38 +43,30 @@
         <div class="card">
             <div class="card-header bg-white d-flex flex-column py-3">
 
-                <!-- TÍTULO -->
-                <h5 class="card-title m-3">
-                    <i class="fas fa-list text-primary"></i> Lista de Tipos de Tanques
-                </h5>
+    <!-- TÍTULO -->
+    <h5 class="card-title m-3">
+        <i class="fas fa-list text-primary"></i> Lista de Tipo Tanques
+    </h5>
 
-                <!-- FILA INFERIOR -->
-                <div class="d-flex justify-content-between align-items-end">
-                    
-                    <div class="col-md-4 p-0">
-                        <label class="form-label mb-1">Nombre tipo de tanque</label>
-                        <input 
-                            type="text" 
-                            class="form-control"
-                            placeholder="Ingrese el nombre de tipo de tanque..."
-                            id="filtro"
-                            style="max-width: 300px;"
-                            data-url="<?php echo getUrl('TipoTanques', 'TipoTanques', 'filtro', false, 'ajax'); ?>"
-                        >
-                       
-                    </div>
+    <!-- FILA INFERIOR -->
+    <div class="d-flex justify-content-between align-items-end px-3">
 
-                    <button 
-                        type="button" 
-                        class="btn btn-primary ms-3"
-                        data-bs-toggle="modal" 
-                        data-bs-target="#modalNuevo"
-                    >
-                        <i class="fas fa-plus"></i> Nuevo Tipo de Tanque
-                    </button>
+        <!-- FILTRO -->
+        
 
-                </div>
-            </div>
+        <!-- BOTÓN -->
+        <button 
+            type="button" 
+            class="btn btn-primary ms-3"
+            data-bs-toggle="modal" 
+            data-bs-target="#modalNuevo"
+        >
+            <i class="fas fa-plus"></i> Nuevo Tanque
+        </button>
+
+    </div>
+</div>
+
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">
