@@ -60,7 +60,7 @@
                     </li>
                 <?php //}?>
 
-                <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
+                <?php //if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                            
                         <a href="<?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta");?>">
@@ -68,7 +68,7 @@
                             <p>Seguimiento de tanques</p>
                         </a>
                     </li>
-                <?php  }?>
+                <?php//  }?>
                 <?php //if (array_key_exists("TipoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">
@@ -97,37 +97,7 @@
                     </li>
                 <?php //}?>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#configuracion">
-                        <i class="fas fa-cog"></i>
-                        <p>Ajustes</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="configuracion">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="<?php echo getUrl('InformacionPersonal','InformacionPersonal','getInformacion') ?>">
-                                    <span class="sub-item">Informaci&oacute;n Personal</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                    <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
-                                        <span class="sub-item">Manuales</span>
-                                    </a>
-                            </li>
-                            <li class="nav-item">
-                                    <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
-                                        <span class="sub-item">Autores</span>
-                                    </a>
-                            </li>
-                             
-                             
-                        </ul>
-                    </div>
-                </li>
-                
-
-                <li class="nav-item">
+                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#reportes">
                         <i class="fas fa-newspaper"></i>
                         <p>Reportes</p>
@@ -159,6 +129,37 @@
                             <?php }?>
                         </ul>
                     </div>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#configuracion">
+                        <i class="fas fa-cog"></i>
+                        <p>Ajustes</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="configuracion">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="<?php echo getUrl('InformacionPersonal','InformacionPersonal','getInformacion') ?>">
+                                    <span class="sub-item">Informaci&oacute;n Personal</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                    <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
+                                        <span class="sub-item">Manuales</span>
+                                    </a>
+                            </li>
+                            <li class="nav-item">
+                                    <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
+                                        <span class="sub-item">Autores</span>
+                                    </a>
+                            </li>
+                             
+                             
+                        </ul>
+                    </div>
+                </li>
+                
             </ul>
         </div>
     </div>

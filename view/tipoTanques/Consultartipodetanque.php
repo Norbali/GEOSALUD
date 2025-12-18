@@ -41,17 +41,32 @@
         <h1 class="main-title">Gestión de Tipo de Tanques</h1>
         <!-- Card y su tabla -->
         <div class="card">
-            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-list text-primary"></i> Lista de Tipos de Tanques
-                </h5>
-                    
+            <div class="card-header bg-white d-flex flex-column py-3">
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
-                    <i class="fas fa-plus"></i> Nuevo Tipo de Tanque
-                </button>
-                
-            </div>
+    <!-- TÍTULO -->
+    <h5 class="card-title m-3">
+        <i class="fas fa-list text-primary"></i> Lista de Tipo Tanques
+    </h5>
+
+    <!-- FILA INFERIOR -->
+    <div class="d-flex justify-content-between align-items-end px-3">
+
+        <!-- FILTRO -->
+        
+
+        <!-- BOTÓN -->
+        <button 
+            type="button" 
+            class="btn btn-primary ms-3"
+            data-bs-toggle="modal" 
+            data-bs-target="#modalNuevo"
+        >
+            <i class="fas fa-plus"></i> Nuevo Tanque
+        </button>
+
+    </div>
+</div>
+
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">
@@ -195,6 +210,32 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        // Función para limpiar espacios múltiples mientras el usuario escribe
+        function limpiarEspacios(input) {
+            // Eliminar espacios al inicio
+            input.value = input.value.replace(/^\s+/, '');
+            // Reemplazar múltiples espacios por uno solo
+            input.value = input.value.replace(/\s{2,}/g, ' ');
+        }
+
+        // Aplicar limpieza de espacios a los inputs al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Input del modal nuevo
+            const inputNuevo = document.getElementById('nombreTanqueNuevo');
+            if (inputNuevo) {
+                inputNuevo.addEventListener('input', function() {
+                    limpiarEspacios(this);
+                });
+            }
+
+            // Inputs de los modales de edición
+            document.querySelectorAll('[id^="nombreEditar"]').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    limpiarEspacios(this);
+                });
+            });
+        });
+
         // Mostrar mensajes
         <?php if (isset($mensaje) && isset($tipo_mensaje)) { ?>
             Swal.fire({

@@ -121,10 +121,8 @@
             $mensaje = "";
             if (empty($documento)) {
                 $mensaje = "El documento no puede estar vacío.";
-            } elseif (
-                !preg_match('/^[0-9]+$/', $documento) || strlen($documento) < 9 || strlen($documento) > 10
-            ) {
-                $mensaje = "El documento debe contener solo números enteros y tener entre 9 y 10 dígitos.";
+            } elseif ( !preg_match('/^[1-9][0-9]{5,11}$/', $documento)) {
+                $mensaje = "El documento debe contener solo números enteros, no puede empezar en 0 y tener entre 6 y 12 dígitos.";
             } else {
                 $mensaje = "true";
             }

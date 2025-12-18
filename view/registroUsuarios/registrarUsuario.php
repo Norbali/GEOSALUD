@@ -34,71 +34,73 @@
 
            <h1 class="main-title">Registro de Usuarios</h1>
  
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <form id="registroForm" class="" action="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","postCreate") ?>" method="POST">
+                    <div class="card-body">
 
-            <form id="registroForm" class="" action="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","postCreate") ?>" method="POST">
-                <div class="card-body">
+                        <div class="form-group">
+                            <label for="documento">Documento*</label>
+                            <input type="text" class="form-control" id="documento" name="documento" placeholder="Ingrese un número de documento" minlength="9" maxlength="10" required>
+                            <small id="error-documento" class="text-danger"></small>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="documento">Documento*</label>
-                        <input type="text" class="form-control" id="documento" name="documento" placeholder="Ingrese un número de documento" minlength="9" maxlength="10" required>
-                        <small id="error-documento" class="text-danger"></small>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre*</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese un nombre" minlength="2" maxlength="20" required>
+                                    <small id="error-nombre" class="text-danger"></small>
+                                </div>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nombre">Nombre*</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese un nombre" minlength="2" maxlength="20" required>
-                                <small id="error-nombre" class="text-danger"></small>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="apellido">Apellido*</label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese un apellido" minlength="2" maxlength="20" required>
+                                    <small id="error-apellido" class="text-danger"></small>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="apellido">Apellido*</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese un apellido" minlength="2" maxlength="20" required>
-                                <small id="error-apellido" class="text-danger"></small>
-                            </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono*</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un número de teléfono" minlength="9" maxlength="10" required>
+                            <small id="error-telefono" class="text-danger"></small>
                         </div>
+
+                        <div class="form-group">
+                            <label for="correo">Correo*</label>
+                            <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese un correo electronico" required>
+                            <small id="error-correo" class="text-danger"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contrasena">Contrasena*</label>
+                            <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese una contraseña" minlength="8" maxlength="16" required>
+                            <small id="error-contrasena" class="text-danger"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_rol">Rol*</label>
+                            <select class="form-control" id="id_rol" name="id_rol" required>
+                                <option value="">Seleccione un rol</option>
+                                <?php while ($rol = pg_fetch_assoc($roles)) { ?>
+                                    <option value="<?php echo $rol['id_rol']; ?>">
+                                        <?php echo $rol['nombre_rol']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                            <small id="error-id_rol" class="text-danger"></small>
+                        </div>
+
                     </div>
 
-                    <div class="form-group">
-                        <label for="telefono">Teléfono*</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese un número de teléfono" minlength="9" maxlength="10" required>
-                        <small id="error-telefono" class="text-danger"></small>
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="correo">Correo*</label>
-                        <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese un correo electronico" required>
-                        <small id="error-correo" class="text-danger"></small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="contrasena">Contrasena*</label>
-                        <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese una contraseña" minlength="8" maxlength="16" required>
-                        <small id="error-contrasena" class="text-danger"></small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="id_rol">Rol*</label>
-                        <select class="form-control" id="id_rol" name="id_rol" required>
-                            <option value="">Seleccione un rol</option>
-                            <?php while ($rol = pg_fetch_assoc($roles)) { ?>
-                                <option value="<?php echo $rol['id_rol']; ?>">
-                                    <?php echo $rol['nombre_rol']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                        <small id="error-id_rol" class="text-danger"></small>
-                    </div>
-
-                </div>
-
-                <div class="card-footer text-end">
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 <script>
