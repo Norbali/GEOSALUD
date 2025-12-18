@@ -63,36 +63,70 @@ class SeguimientoDeTanquesController
         $obj = new SeguimientoDeTanquesModel();
         $errores = array();
 
-        /* ===============================
-           VALIDACIONES USUARIO
-        ================================*/
-        if (empty($_POST['id_tanque'])) {
-            $errores[] = 'Debe seleccionar un tanque';
-        }
+       /* ===============================
+   VALIDACIONES OBLIGATORIAS
+===============================*/
 
-        if (empty($_POST['id_actividad'])) {
-            $errores[] = 'Debe seleccionar una actividad';
-        }
+$ph          = isset($_POST['ph']) ? floatval($_POST['ph']) : null;
+$cloro       = isset($_POST['cloro']) ? floatval($_POST['cloro']) : null;
+$temperatura = isset($_POST['temperatura']) ? floatval($_POST['temperatura']) : null;
 
-        if (isset($_POST['ph']) && $_POST['ph'] !== '' && $_POST['ph'] < 0) {
-            $errores[] = 'El pH no puede ser negativo';
-        }
+$num_alevines = isset($_POST['num_alevines']) ? intval($_POST['num_alevines']) : null;
+$num_machos   = isset($_POST['num_machos']) ? intval($_POST['num_machos']) : null;
+$num_hembras  = isset($_POST['num_hembras']) ? intval($_POST['num_hembras']) : null;
 
-        if (isset($_POST['cloro']) && $_POST['cloro'] !== '' && $_POST['cloro'] < 0) {
-            $errores[] = 'El cloro no puede ser negativo';
-        }
+/* TANQUE Y ACTIVIDAD */
+if (empty($_POST['id_tanque'])) {
+    $errores[] = 'Debe seleccionar un tanque';
+}
 
-        if ((int)$_POST['num_alevines'] < 0) {
-            $errores[] = 'Los alevines no pueden ser negativos';
-        }
+if (empty($_POST['id_actividad'])) {
+    $errores[] = 'Debe seleccionar una actividad';
+}
 
-        if ((int)$_POST['num_machos'] < 0 || (int)$_POST['num_hembras'] < 0) {
-            $errores[] = 'Las muertes no pueden ser negativas';
-        }
+/* PARÁMETROS */
+if ($_POST['ph'] === '') {
+    $errores[] = 'El pH es obligatorio';
+} elseif ($ph < 0) {
+    $errores[] = 'El pH no puede ser negativo';
+}
 
-        if (((int)$_POST['num_machos'] + (int)$_POST['num_hembras']) > (int)$_POST['num_alevines']) {
-            $errores[] = 'Las muertes no pueden ser mayores que los alevines';
-        }
+if ($_POST['temperatura'] === '') {
+    $errores[] = 'La temperatura es obligatoria';
+}
+
+if ($_POST['cloro'] === '') {
+    $errores[] = 'El cloro es obligatorio';
+} elseif ($cloro < 0) {
+    $errores[] = 'El cloro no puede ser negativo';
+}
+
+/* PECES */
+if ($_POST['num_alevines'] === '') {
+    $errores[] = 'Debe ingresar el número de alevines';
+} elseif ($num_alevines < 0) {
+    $errores[] = 'Los alevines no pueden ser negativos';
+}
+
+if ($_POST['num_machos'] === '') {
+    $errores[] = 'Debe ingresar las muertes de machos';
+} elseif ($num_machos < 0) {
+    $errores[] = 'Las muertes de machos no pueden ser negativas';
+}
+
+if ($_POST['num_hembras'] === '') {
+    $errores[] = 'Debe ingresar las muertes de hembras';
+} elseif ($num_hembras < 0) {
+    $errores[] = 'Las muertes de hembras no pueden ser negativas';
+}
+
+
+/* OBSERVACIONES */
+if (trim($_POST['observaciones']) === '') {
+    $errores[] = 'Las observaciones son obligatorias';
+}
+
+      
 
         /* ===============================
            SI HAY ERRORES → VOLVER
@@ -104,19 +138,23 @@ class SeguimientoDeTanquesController
         }
 
         /* ===============================
-           DATOS LIMPIOS
-        ================================*/
-        $id_tanque = (int)$_POST['id_tanque'];
-        $id_actividad = (int)$_POST['id_actividad'];
-        $ph = ($_POST['ph'] !== '') ? $_POST['ph'] : null;
-        $temperatura = ($_POST['temperatura'] !== '') ? $_POST['temperatura'] : null;
-        $cloro = ($_POST['cloro'] !== '') ? $_POST['cloro'] : null;
-        $num_alevines = (int)$_POST['num_alevines'];
-        $num_machos = (int)$_POST['num_machos'];
-        $num_hembras = (int)$_POST['num_hembras'];
-        $observaciones = $_POST['observaciones'];
-        $documento = $_SESSION['documento'];
-        $fecha = date('Y-m-d');
+   DATOS LIMPIOS
+===============================*/
+$id_tanque      = (int)$_POST['id_tanque'];
+$id_actividad   = (int)$_POST['id_actividad'];
+$ph             = $_POST['ph'];
+$temperatura    = $_POST['temperatura'];
+$cloro          = $_POST['cloro'];
+$num_alevines   = (int)$_POST['num_alevines'];
+$num_machos     = (int)$_POST['num_machos'];
+$num_hembras    = (int)$_POST['num_hembras'];
+
+/* 👇 AQUÍ VA LO DE OBSERVACIONES */
+$observaciones = pg_escape_string($_POST['observaciones']);
+
+$documento      = $_SESSION['documento'];
+$fecha          = date('Y-m-d');
+
 
         /* ===============================
            INSERT SEGUIMIENTO
@@ -157,9 +195,9 @@ class SeguimientoDeTanquesController
             ) VALUES (
                 $id_seguimiento,
                 $id_actividad,
-                " . ($ph !== null ? "'$ph'" : "NULL") . ",
-                " . ($temperatura !== null ? "'$temperatura'" : "NULL") . ",
-                " . ($cloro !== null ? "'$cloro'" : "NULL") . ",
+                '$ph',
+                '$temperatura',
+                '$cloro',
                 $num_alevines,
                 $num_muertes,
                 $num_machos,

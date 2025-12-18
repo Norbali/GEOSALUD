@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ==========================
-       VARIABLES GLOBALES TABLA
-    ========================== */
+    console.log('JS TipoActividades cargado');
+
+
     const buscador = document.getElementById('buscadorNombre');
     const tabla = document.getElementById('tablaActividades');
+    if (!tabla) return;
+
     const tbody = tabla.querySelector('tbody');
 
     let ordenActual = {
@@ -12,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
         asc: true
     };
 
-    /* ==========================
-       FILA "SIN RESULTADOS"
-    ========================== */
+
+    // FILA SIN RESULTADOS
+
     const filaMensaje = document.createElement('tr');
     filaMensaje.innerHTML = `
         <td colspan="5" class="text-center text-muted py-3">
@@ -22,88 +24,79 @@ document.addEventListener('DOMContentLoaded', () => {
         </td>
     `;
 
-    /* ==========================
-       BUSCADOR POR NOMBRE
-    ========================== */
-    if (buscador) {
-        buscador.addEventListener('keyup', () => {
-            const texto = buscador.value.toLowerCase().trim();
-            const filas = Array.from(tbody.querySelectorAll('tr'))
-                .filter(f => f !== filaMensaje);
 
-            let visibles = 0;
+    //BUSCADOR
 
-            filas.forEach(fila => {
-                const nombre = fila.cells[1].textContent.toLowerCase();
-                if (nombre.includes(texto)) {
-                    fila.style.display = '';
-                    visibles++;
-                } else {
-                    fila.style.display = 'none';
-                }
-            });
+    buscador.addEventListener('keyup', () => {
+        const texto = buscador.value.toLowerCase().trim();
+        const filas = Array.from(tbody.querySelectorAll('tr'));
 
-            if (visibles === 0) {
-                if (!tbody.contains(filaMensaje)) {
-                    tbody.appendChild(filaMensaje);
-                }
+        let visibles = 0;
+
+        filas.forEach(fila => {
+
+            if (fila.cells.length < 2) return;
+
+            const nombre = fila.cells[1].textContent.toLowerCase();
+
+            if (nombre.includes(texto)) {
+                fila.style.display = '';
+                visibles++;
             } else {
-                filaMensaje.remove();
+                fila.style.display = 'none';
             }
         });
-    }
 
-    /* ==========================
-       ORDENAR TABLA
-       0 = ID | 2 = FECHA
-    ========================== */
-    window.ordenarTabla = (columnaIndex) => {
-
-    const filas = Array.from(tbody.querySelectorAll('tr'))
-        .filter(f => f.style.display !== 'none');
-
-    if (ordenActual.columna === columnaIndex) {
-        ordenActual.asc = !ordenActual.asc;
-    } else {
-        ordenActual.columna = columnaIndex;
-        ordenActual.asc = true;
-    }
-
-    filas.sort((a, b) => {
-        let aVal = a.cells[columnaIndex].textContent.trim();
-        let bVal = b.cells[columnaIndex].textContent.trim();
-
-        // ID
-        if (columnaIndex === 0) {
-            aVal = Number(aVal);
-            bVal = Number(bVal);
+        if (visibles === 0) {
+            if (!tbody.contains(filaMensaje)) {
+                tbody.appendChild(filaMensaje);
+            }
+        } else {
+            filaMensaje.remove();
         }
-
-        // FECHA (PARSEO MANUAL)
-        if (columnaIndex === 2) {
-            const [ay, am, ad] = aVal.split('-');
-            const [by, bm, bd] = bVal.split('-');
-
-            aVal = new Date(ay, am - 1, ad);
-            bVal = new Date(by, bm - 1, bd);
-        }
-
-        if (aVal < bVal) return ordenActual.asc ? -1 : 1;
-        if (aVal > bVal) return ordenActual.asc ? 1 : -1;
-        return 0;
     });
 
-    tbody.innerHTML = '';
-    filas.forEach(fila => tbody.appendChild(fila));
-};
 
+    // ORDENAR TABLA
 
+    window.ordenarTabla = (columnaIndex) => {
+
+        const filas = Array.from(tbody.querySelectorAll('tr'))
+            .filter(f => f.cells.length > columnaIndex);
+
+        if (ordenActual.columna === columnaIndex) {
+            ordenActual.asc = !ordenActual.asc;
+        } else {
+            ordenActual.columna = columnaIndex;
+            ordenActual.asc = true;
+        }
+
+        filas.sort((a, b) => {
+            let aVal = a.cells[columnaIndex].textContent.trim();
+            let bVal = b.cells[columnaIndex].textContent.trim();
+
+            // ID
+            if (columnaIndex === 0) {
+                aVal = Number(aVal);
+                bVal = Number(bVal);
+            }
+
+            // FECHA
+            if (columnaIndex === 2) {
+                aVal = new Date(aVal);
+                bVal = new Date(bVal);
+            }
+
+            return ordenActual.asc ? aVal - bVal : bVal - aVal;
+        });
+
+        tbody.innerHTML = '';
+        filas.forEach(fila => tbody.appendChild(fila));
+    };
 });
 
-/* ==========================
-   MODALES Y BOTONES
-========================== */
 
+// MODALES Y BOTONES
 function verDetalle(id) {
     document.getElementById('detalleId').innerText = id;
     document.getElementById('detalleNombre').innerText = 'Actividad ' + id;
