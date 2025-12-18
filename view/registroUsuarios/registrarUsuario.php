@@ -96,7 +96,7 @@
 
                     </div>
 
-                    <div class="card-footer text-end">
+                    <div class="card-footer text-center">
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </form>
