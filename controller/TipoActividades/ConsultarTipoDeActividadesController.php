@@ -34,31 +34,27 @@ class ConsultarTipoDeActividadesController
         $id_estado_actividad = $_POST['id_estado_actividad'];
 
         // CAMPOS OBLIGATORIOS 
-        if (!$this->camposObligatorios($nombre, $estado)) {
-            $this->alerta(
-                'danger',
-                'Debe completar todos los campos antes de guardar la actividad'
+        if (empty($nombre_actividad) || empty($id_estado_actividad)) {
+            $_SESSION['alert'] = array(
+                'type' => 'danger',
+                'message' => 'Debe completar todos los campos antes de guardar la actividad'
             );
+            redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
             return;
         }
 
-        // VALIDACIÓN DE CARACTERES 
-        if (!$this->soloTexto($nombre)) {
-            $this->alerta(
-                'danger',
-                'Los datos ingresados contienen caracteres no permitidos, debe ingresar solo texto'
+
+
+        // VALIDAR DUPLICADOS
+        if ($this->existeActividad($obj, $nombre_actividad)) {
+            $_SESSION['alert'] = array(
+                'type' => 'danger',
+                'message' => 'Ya existe una actividad con este nombre, por favor ingresa un nombre diferente'
             );
+            redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
             return;
         }
 
-        //VALIDAR DUPLICADOS 
-        if ($this->existeActividad($obj, $nombre)) {
-            $this->alerta(
-                'danger',
-                'Ya existe una actividad con este nombre, por favor ingresa un nombre diferente'
-            );
-            return;
-        }
 
         //REGISTRO
         $sql = "
@@ -80,8 +76,72 @@ class ConsultarTipoDeActividadesController
             );
         }
 
-        redirect(getUrl('TipoActividades','ConsultarTipoDeActividades','getConsulta'));
+        redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
     }
+
+    // ACTUALIZAR ACTIVIDAD
+    public function postUpdate()
+    {
+        $obj = new ConsultarTipoDeActividadesModel();
+
+        $id_actividad = isset($_POST['id_actividad']) ? $_POST['id_actividad'] : null;
+        $nombre_actividad = isset($_POST['nombre_actividad']) ? $_POST['nombre_actividad'] : null;
+        $id_estado_actividad = isset($_POST['id_estado_actividad']) ? $_POST['id_estado_actividad'] : null;
+
+        // VALIDAR CAMPOS
+        if (empty($id_actividad) || empty($nombre_actividad)) {
+            $_SESSION['alert'] = array(
+                'type' => 'danger',
+                'message' => 'Debe completar todos los campos para actualizar la actividad'
+            );
+            redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
+            return;
+        }
+
+        // VALIDAR DUPLICADO 
+        $sqlDuplicado = "
+        SELECT 1
+        FROM actividad
+        WHERE LOWER(nombre_actividad) = LOWER('$nombre_actividad')
+          AND id_actividad <> $id_actividad
+        LIMIT 1
+    ";
+
+        $duplicado = $obj->select($sqlDuplicado);
+
+        if (pg_num_rows($duplicado) > 0) {
+            $_SESSION['alert'] = array(
+                'type' => 'danger',
+                'message' => 'Ya existe otra actividad con este nombre'
+            );
+            redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
+            return;
+        }
+
+        // ACTUALIZAR
+        $sql = "
+        UPDATE actividad
+        SET nombre_actividad = '$nombre_actividad'
+        WHERE id_actividad = $id_actividad
+    ";
+
+        $ejecutar = $obj->update($sql);
+
+        if ($ejecutar) {
+            $_SESSION['alert'] = array(
+                'type' => 'success',
+                'message' => 'Actividad actualizada correctamente'
+            );
+        } else {
+            $_SESSION['alert'] = array(
+                'type' => 'danger',
+                'message' => 'Error al actualizar la actividad'
+            );
+        }
+
+        redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
+    }
+
 
     // INHABILITAR
     public function postInhabilitar()
@@ -93,7 +153,7 @@ class ConsultarTipoDeActividadesController
                 'type' => 'danger',
                 'message' => 'ID no recibido'
             );
-            redirect(getUrl('TipoActividades','ConsultarTipoDeActividades','getConsulta'));
+            redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
             return;
         }
 
@@ -119,7 +179,19 @@ class ConsultarTipoDeActividadesController
             );
         }
 
-        redirect(getUrl('TipoActividades','ConsultarTipoDeActividades','getConsulta'));
+        redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
+    }
+    private function existeActividad($obj, $nombre_actividad)
+    {
+        $sql = "
+        SELECT 1
+        FROM actividad
+        WHERE LOWER(nombre_actividad) = LOWER('$nombre_actividad')
+        LIMIT 1
+    ";
+
+        $resultado = $obj->select($sql);
+
+        return pg_num_rows($resultado) > 0;
     }
 }
-?>
