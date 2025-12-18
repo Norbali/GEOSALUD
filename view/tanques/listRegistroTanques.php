@@ -236,6 +236,20 @@ body {
 .modal-body .row {
     margin: 0;
 }
+
+.form-control {
+    transition: all 0.2s;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    outline: none;
+}
+
+.form-label {
+    font-weight: 500;
+}
 </style>
 
 <div class="container mt-4">
@@ -257,20 +271,53 @@ body {
 
 <!-- LISTA -->
 <div class="list-card">
-    <div class="list-header">
-        <h5><i class="fas fa-list text-primary"></i> Lista de Tanques</h5>
-        <div class="header-actions">
+    <!-- TÍTULO -->
+    <div class="list-header mb-3">
+        <h5>
+            <i class="fas fa-list text-primary"></i> Lista de Tanques
+        </h5>
+    </div>
+
+    <!-- SECCIÓN DE FILTRO Y BOTONES -->
+    <div class="d-flex justify-content-between align-items-end mb-3 gap-3">
+        <!-- FILTRO IZQUIERDA -->
+        <div style="flex: 1; max-width: 400px;">
+            <label for="filtro" class="form-label mb-2" style="font-size: 0.875rem; color: #495057;">
+                Nombre del tanque
+            </label>
+            <input 
+                type="text" 
+                class="form-control"
+                placeholder="Ingrese el nombre del tanque..."
+                id="filtro"
+                data-url="<?php echo getUrl('Tanques', 'Tanques', 'filtro', false, 'ajax'); ?>"
+                style="border: 1px solid #ced4da; border-radius: 6px; padding: 8px 12px;"
+            >
+        </div>
+
+        <!-- BOTONES DERECHA -->
+        <div class="d-flex gap-2">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle sortable" type="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="sortTable('id')" data-column="id" data-direction="<?php echo $order; ?>">
+                <button class="btn btn-secondary dropdown-toggle sortable" 
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        onclick="sortTable('id')" 
+                        data-column="id" 
+                        data-direction="<?php echo $order; ?>">
                     <i class="bi bi-sort-down"></i> Ordenar por ID
                 </button>
             </div>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevo">
+
+            <button class="btn btn-primary" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modalNuevo">
                 <i class="fas fa-plus"></i> Nuevo Tanque
             </button>
         </div>
     </div>
 
+    <!-- TABLA -->
     <div class="table-responsive">
         <table class="table table-hover" id="tablaTanques">
             <thead>

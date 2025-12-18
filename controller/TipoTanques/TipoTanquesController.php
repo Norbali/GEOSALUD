@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include_once '../model/TipoTanques/TipoTanquesModel.php';
 
 class TipoTanquesController {
@@ -46,12 +45,22 @@ class TipoTanquesController {
         
         $nombre_tipo_tanque = isset($_POST['nombre_tipo_tanque']) ? trim($_POST['nombre_tipo_tanque']) : '';
         
+        // ELIMINAR ESPACIOS EXTRAS ENTRE PALABRAS Y AL INICIO/FINAL
+        $nombre_tipo_tanque = preg_replace('/\s+/', ' ', $nombre_tipo_tanque);
+        $nombre_tipo_tanque = trim($nombre_tipo_tanque);
+        
         // ESTADO ACTIVO POR DEFECTO (ID = 1)
         $id_estado_tipo_tanque = 1;
         
         // VALIDAR CAMPOS OBLIGATORIOS
         if ($nombre_tipo_tanque === '') {
             $this->alerta('warning', 'Debe ingresar el nombre del tipo de tanque');
+            return;
+        }
+        
+        // VALIDAR QUE NO SEA SOLO ESPACIOS
+        if (strlen($nombre_tipo_tanque) === 0) {
+            $this->alerta('warning', 'El nombre del tipo de tanque no puede estar vacío o contener solo espacios');
             return;
         }
         
@@ -95,9 +104,19 @@ class TipoTanquesController {
         $id_tipo_tanque = isset($_POST['id_tipo_tanque']) ? trim($_POST['id_tipo_tanque']) : '';
         $nombre_tipo_tanque = isset($_POST['nombre_tipo_tanque']) ? trim($_POST['nombre_tipo_tanque']) : '';
         
+        // ELIMINAR ESPACIOS EXTRAS ENTRE PALABRAS Y AL INICIO/FINAL
+        $nombre_tipo_tanque = preg_replace('/\s+/', ' ', $nombre_tipo_tanque);
+        $nombre_tipo_tanque = trim($nombre_tipo_tanque);
+        
         // VALIDAR CAMPOS OBLIGATORIOS
         if ($id_tipo_tanque === '' || $nombre_tipo_tanque === '') {
             $this->alerta('warning', 'Debe completar todos los campos antes de guardar los cambios');
+            return;
+        }
+        
+        // VALIDAR QUE NO SEA SOLO ESPACIOS
+        if (strlen($nombre_tipo_tanque) === 0) {
+            $this->alerta('warning', 'El nombre del tipo de tanque no puede estar vacío o contener solo espacios');
             return;
         }
         
@@ -218,23 +237,16 @@ class TipoTanquesController {
     private function validarTexto($texto) {
         return preg_match('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/u', $texto);
     }
-
-    public function filtro($nombre) {
-        $obj = new TipoTanquesModel();
-        $sql = "SELECT 
-                    tt.id_tipo_tanque,
-                    tt.nombre_tipo_tanque,
-                    ett.nombre_estado_tipo_tanques
-                FROM tipo_tanque tt
-                JOIN estado_tipo_tanques ett
-                    ON tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanques
-                WHERE tt.nombre_tipo_tanque ILIKE '%$nombre%'
-                ORDER BY tt.id_tipo_tanque";
-        $tiposTanques = $obj->select($sql);
-        if (pg_num_rows($tiposTanques) == 0) {
-            $_SESSION['sinResultadosTipoTanque'] = "No se encontraron resultados para la búsqueda \"$nombre\".";
-        }   
-        include_once '../view/tipoTanques/filtroTipoTanques.php';
+    
+    // VALIDAR DUPLICADOS
+    private function existeTipoTanque($nombre) {
+        $sql = "
+            SELECT 1
+            FROM tipo_tanque
+            WHERE LOWER(nombre_tipo_tanque) = LOWER('".pg_escape_string($nombre)."')
+        ";
+        $result = $this->model->select($sql);
+        return pg_num_rows($result) > 0;
     }
     
     // ALERTA Y REDIRECCIÓN
@@ -245,6 +257,28 @@ class TipoTanquesController {
         redirect(getUrl("TipoTanques", "TipoTanques", "getConsultar"));
         exit;
     }
+
+    public function filtro(){
+        $buscar = $_GET['buscar']; 
+        
+        $sql = "
+            SELECT 
+            tt.id_tipo_tanque,
+            tt.nombre_tipo_tanque,
+            ett.nombre_estado_tipo_tanques
+        FROM tipo_tanque tt
+        JOIN estado_tipo_tanques ett
+            ON tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanques
+        WHERE tt.nombre_tipo_tanque ILIKE '%$buscar%'
+        ORDER BY tt.id_tipo_tanque;
+
+        ";
+
+        $tiposTanques = $this->model->select($sql); 
+       
+        include_once '../view/tipoTanques/filtroTipoTanques.php';
+    }
+    
 }
 
 ?>

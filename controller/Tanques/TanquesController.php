@@ -310,4 +310,29 @@ class TanquesController {
         echo "<script>window.location.href='".getUrl("Tanques","Tanques","getList")."';</script>";
         exit;
     }
+    
+    public function filtro(){
+        $buscar = $_GET['buscar']; 
+        
+        $sql="
+            SELECT 
+            t.id_tanque,
+            t.nombre_tanque,
+            t.medida_alto,
+            t.medida_ancho,
+            t.medida_profundidad,
+            t.cantidad_peces,
+            t.id_estado_tanque,
+            t.id_tipo_tanque,
+            tt.nombre_tipo_tanque
+        FROM tanque t
+        JOIN tipo_tanque tt 
+            ON t.id_tipo_tanque = tt.id_tipo_tanque
+        WHERE t.nombre_tanque ILIKE '%$buscar%'
+        ORDER BY t.id_tanque;
+        ";
+        $tanques = $this->model->select($sql);
+        include_once '../view/tanques/filtroTanques.php';
+    }
+        
 }
