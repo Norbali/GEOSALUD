@@ -33,6 +33,34 @@ class ConsultarTipoDeActividadesController
         $nombre_actividad = $_POST['nombre_actividad'];
         $id_estado_actividad = $_POST['id_estado_actividad'];
 
+        // CAMPOS OBLIGATORIOS 
+        if (!$this->camposObligatorios($nombre, $estado)) {
+            $this->alerta(
+                'danger',
+                'Debe completar todos los campos antes de guardar la actividad'
+            );
+            return;
+        }
+
+        // VALIDACIÓN DE CARACTERES 
+        if (!$this->soloTexto($nombre)) {
+            $this->alerta(
+                'danger',
+                'Los datos ingresados contienen caracteres no permitidos, debe ingresar solo texto'
+            );
+            return;
+        }
+
+        //VALIDAR DUPLICADOS 
+        if ($this->existeActividad($obj, $nombre)) {
+            $this->alerta(
+                'danger',
+                'Ya existe una actividad con este nombre, por favor ingresa un nombre diferente'
+            );
+            return;
+        }
+
+        //REGISTRO
         $sql = "
             INSERT INTO actividad (nombre_actividad, fecha_creacion, id_estado_actividad)
             VALUES ('$nombre_actividad', NOW(), $id_estado_actividad)
