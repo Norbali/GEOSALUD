@@ -927,7 +927,7 @@ body {
 
 .sidebar .nav>.nav-item.active>a p,
 .sidebar[data-background-color=white] .nav>.nav-item.active>a p {
-   color: #2a2f5b !important;
+   color: #7aabaf !important;
    font-weight: 600
 }
 
@@ -2301,7 +2301,8 @@ body[data-background-color=dark] .border-top {
 .sidebar[data-background-color=dark].sidebar-style-2 .nav .nav-item.active>a[data-toggle=collapse][aria-expanded=true] .caret,
 .sidebar[data-background-color=dark].sidebar-style-2 .nav .nav-item.active>a[data-toggle=collapse][aria-expanded=true] i,
 .sidebar[data-background-color=dark].sidebar-style-2 .nav .nav-item.active>a[data-toggle=collapse][aria-expanded=true] p {
-   color: #1a2035 !important
+   color: #7aabaf !important
+   
 }
 
 .sidebar[data-background-color=dark] .scrollbar-inner>.scroll-element .scroll-bar {
@@ -2845,7 +2846,7 @@ body[data-background-color=dark] .border-top {
 
 .card-title {
    margin: 0;
-   color: #2a2f5b;
+   color: #7aabaf;
    font-size: 20px;
    font-weight: 600;
    line-height: 1.6
@@ -2854,7 +2855,7 @@ body[data-background-color=dark] .border-top {
 .card-title a,
 .card-title a:focus,
 .card-title a:hover {
-   color: #2a2f5b;
+   color: #7aabaf;
    text-decoration: none
 }
 
@@ -2863,7 +2864,7 @@ body[data-background-color=dark] .border-top {
    margin: 5px 0 10px 0;
    font-size: .9rem;
    background: #f7f8fa;
-   color: #2a2f5b;
+   color: #7aabaf;
    padding: .85rem 1.5rem;
    border-radius: 4px;
    line-height: 1.82
@@ -3475,13 +3476,13 @@ label {
 }
 
 .card-pricing2.card-black {
-   border-bottom-color: #1a2035
+   border-bottom-color: #7aabaf
 }
 
 .card-pricing2.card-black .price-value:before,
 .card-pricing2.card-black .value:before {
-   border-left-color: #1a2035;
-   border-top-color: #1a2035
+   border-left-color: #7aabaf;
+   border-top-color: 7aabaf
 }
 
 .card-pricing2.card-black .price-value,
@@ -3504,12 +3505,12 @@ label {
 }
 
 .card-pricing2.card-black:before {
-   background: #1a2035
+   background: #7aabaf
 }
 
 .card-pricing2.card-black .price-value,
 .card-pricing2.card-black .value {
-   border-left-color: #1a2035
+border-left-color: #7aabaf
 }
 
 .card-pricing2.card-primary {

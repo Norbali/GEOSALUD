@@ -38,12 +38,12 @@ class TipoTanquesController {
     
     /* ============================
        REGISTRAR NUEVO TIPO
-       ESTADO ACTIVO POR DEFECTO
     ============================ */
     public function postCrear() {
         @session_start();
         
         $nombre_tipo_tanque = isset($_POST['nombre_tipo_tanque']) ? trim($_POST['nombre_tipo_tanque']) : '';
+        $id_estado_tipo_tanque = isset($_POST['id_estado_tipo_tanque']) ? trim($_POST['id_estado_tipo_tanque']) : '';
         
         // ELIMINAR ESPACIOS EXTRAS ENTRE PALABRAS Y AL INICIO/FINAL
         $nombre_tipo_tanque = preg_replace('/\s+/', ' ', $nombre_tipo_tanque);
@@ -53,8 +53,8 @@ class TipoTanquesController {
         $id_estado_tipo_tanque = 1;
         
         // VALIDAR CAMPOS OBLIGATORIOS
-        if ($nombre_tipo_tanque === '') {
-            $this->alerta('warning', 'Debe ingresar el nombre del tipo de tanque');
+        if ($nombre_tipo_tanque === '' || $id_estado_tipo_tanque === '') {
+            $this->alerta('warning', 'Debe completar todos los campos antes de guardar el tipo de tanque');
             return;
         }
         
@@ -83,7 +83,7 @@ class TipoTanquesController {
         }
         
         $sql = "INSERT INTO tipo_tanque (nombre_tipo_tanque, id_estado_tipo_tanque)
-                VALUES ('".pg_escape_string($nombre_tipo_tanque)."', ".$id_estado_tipo_tanque.")";
+                VALUES ('".pg_escape_string($nombre_tipo_tanque)."', ".(int)$id_estado_tipo_tanque.")";
         
         $ejecutar = $this->model->insert($sql);
         
@@ -96,20 +96,20 @@ class TipoTanquesController {
     
     /* ============================
        ACTUALIZAR TIPO DE TANQUE
-       SOLO NOMBRE, ESTADO NO CAMBIA
     ============================ */
     public function postActualizar() {
         @session_start();
         
         $id_tipo_tanque = isset($_POST['id_tipo_tanque']) ? trim($_POST['id_tipo_tanque']) : '';
         $nombre_tipo_tanque = isset($_POST['nombre_tipo_tanque']) ? trim($_POST['nombre_tipo_tanque']) : '';
+        $id_estado_tipo_tanque = isset($_POST['id_estado_tipo_tanque']) ? trim($_POST['id_estado_tipo_tanque']) : '';
         
         // ELIMINAR ESPACIOS EXTRAS ENTRE PALABRAS Y AL INICIO/FINAL
         $nombre_tipo_tanque = preg_replace('/\s+/', ' ', $nombre_tipo_tanque);
         $nombre_tipo_tanque = trim($nombre_tipo_tanque);
         
         // VALIDAR CAMPOS OBLIGATORIOS
-        if ($id_tipo_tanque === '' || $nombre_tipo_tanque === '') {
+        if ($id_tipo_tanque === '' || $nombre_tipo_tanque === '' || $id_estado_tipo_tanque === '') {
             $this->alerta('warning', 'Debe completar todos los campos antes de guardar los cambios');
             return;
         }
@@ -145,7 +145,7 @@ class TipoTanquesController {
             
             // SI EL TANQUE ESTÁ INACTIVO, NO PERMITIR EDICIÓN
             if ($row['nombre_estado_tipo_tanques'] != 'activo') {
-                $this->alerta('warning', "Este tipo de tanque \"" . $row['nombre_tipo_tanque'] . "\" no se puede editar porque está inhabilitado");
+                $this->alerta('warning', "Este tipo de tanque \"" . $row['nombre_tipo_tanque'] . "\" no se puede editar porque no está activo");
                 return;
             }
         } else {
@@ -165,9 +165,10 @@ class TipoTanquesController {
             return;
         }
         
-        // ACTUALIZAR SOLO EL NOMBRE, EL ESTADO NO CAMBIA
+        // Si está activo, proceder con la actualización
         $sql = "UPDATE tipo_tanque 
-                SET nombre_tipo_tanque = '".pg_escape_string($nombre_tipo_tanque)."'
+                SET nombre_tipo_tanque = '".pg_escape_string($nombre_tipo_tanque)."',
+                    id_estado_tipo_tanque = ".(int)$id_estado_tipo_tanque."
                 WHERE id_tipo_tanque = ".(int)$id_tipo_tanque;
         
         $ejecutar = $this->model->update($sql);
@@ -181,7 +182,6 @@ class TipoTanquesController {
     
     /* ============================
        INHABILITAR TIPO DE TANQUE
-       NO SE PUEDE REVERTIR
     ============================ */
     public function postInhabilitar() {
         @session_start();
@@ -195,10 +195,7 @@ class TipoTanquesController {
         }
         
         // Obtener el nombre y estado del tanque antes de inhabilitar
-        $sqlValidar = "SELECT tt.nombre_tipo_tanque, ett.nombre_estado_tipo_tanques 
-                       FROM tipo_tanque tt
-                       JOIN estado_tipo_tanques ett ON tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanques
-                       WHERE tt.id_tipo_tanque = $id_tipo_tanque";
+        $sqlValidar = "SELECT nombre_tipo_tanque, id_estado_tipo_tanque FROM tipo_tanque WHERE id_tipo_tanque = $id_tipo_tanque";
         $resultado = $this->model->select($sqlValidar);
         
         if (!$resultado || pg_num_rows($resultado) === 0) {
@@ -210,12 +207,11 @@ class TipoTanquesController {
         $nombreTanque = $row['nombre_tipo_tanque'];
         
         // VALIDAR SI YA ESTÁ INACTIVO
-        if ($row['nombre_estado_tipo_tanques'] != 'activo') {
+        if ($row['id_estado_tipo_tanque'] == 2) {
             $this->alerta('warning', "El tipo de tanque \"$nombreTanque\" ya está inhabilitado");
             return;
         }
         
-        // INHABILITAR (CAMBIAR A ESTADO 2 = INACTIVO)
         $sql = "UPDATE tipo_tanque 
                 SET id_estado_tipo_tanque = 2
                 WHERE id_tipo_tanque = $id_tipo_tanque";
@@ -230,8 +226,26 @@ class TipoTanquesController {
     }
     
     /* ============================
-       MÉTODOS DE VALIDACIÓN
+       FILTRAR TIPOS DE TANQUES
     ============================ */
+    public function filtro($nombre) {
+        $sql = "SELECT 
+                    tt.id_tipo_tanque,
+                    tt.nombre_tipo_tanque,
+                    ett.nombre_estado_tipo_tanques
+                FROM tipo_tanque tt
+                JOIN estado_tipo_tanques ett
+                    ON tt.id_estado_tipo_tanque = ett.id_estado_tipo_tanques
+                WHERE tt.nombre_tipo_tanque ILIKE '%".pg_escape_string($nombre)."%'
+                ORDER BY tt.id_tipo_tanque";
+        
+        $tiposTanques = $this->model->select($sql);
+        
+        if (pg_num_rows($tiposTanques) == 0) {
+            $_SESSION['sinResultadosTipoTanque'] = "No se encontraron resultados para la búsqueda \"$nombre\".";
+        }
+        
+        include_once '../view/tipoTanques/filtroTipoTanques.php';
     
     // VALIDAR TEXTO (LETRAS, NÚMEROS Y ESPACIOS)
     private function validarTexto($texto) {
@@ -249,12 +263,32 @@ class TipoTanquesController {
         return pg_num_rows($result) > 0;
     }
     
+    /* ============================
+       MÉTODOS DE VALIDACIÓN
+    ============================ */
+    
+    // VALIDAR TEXTO (LETRAS, NÚMEROS Y ESPACIOS)
+    private function validarTexto($texto) {
+        return preg_match('/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/u', $texto);
+    }
+    
+    // VALIDAR DUPLICADOS - MÉTODO QUE FALTABA
+    private function existeTipoTanque($nombre) {
+        $sql = "
+            SELECT 1
+            FROM tipo_tanque
+            WHERE LOWER(nombre_tipo_tanque) = LOWER('".pg_escape_string($nombre)."')
+        ";
+        $result = $this->model->select($sql);
+        return pg_num_rows($result) > 0;
+    }
+    
     // ALERTA Y REDIRECCIÓN
     private function alerta($tipo, $mensaje) {
-        $_SESSION['mensaje'] = $mensaje;
         $_SESSION['tipo_mensaje'] = $tipo;
+        $_SESSION['mensaje'] = $mensaje;
         
-        redirect(getUrl("TipoTanques", "TipoTanques", "getConsultar"));
+        echo "<script>window.location.href='".getUrl("TipoTanques","TipoTanques","getConsultar")."';</script>";
         exit;
     }
 
@@ -280,5 +314,4 @@ class TipoTanquesController {
     }
     
 }
-
 ?>

@@ -92,7 +92,7 @@ body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, 
 
 body, html {
   font-size: 14px;
-  color: #2A2F5B; }
+  color: #348164 ; }
 
 a {
   color: #1572E8;
@@ -634,11 +634,11 @@ body {
       display: list-item; }
       .sidebar .nav > .nav-item.active > a, .sidebar[data-background-color="white"] .nav > .nav-item.active > a {
         background: rgba(0, 0, 0, 0.03);
-        color: #2A2F5B !important; }
+        color: #348164  !important; }
         .sidebar .nav > .nav-item.active > a:before, .sidebar[data-background-color="white"] .nav > .nav-item.active > a:before {
           background: #1d7af3; }
         .sidebar .nav > .nav-item.active > a p, .sidebar[data-background-color="white"] .nav > .nav-item.active > a p {
-          color: #2A2F5B !important;
+          color: #348164  !important;
           font-weight: 600; }
       .sidebar .nav > .nav-item.active:hover > a:before, .sidebar[data-background-color="white"] .nav > .nav-item.active:hover > a:before {
         background: #1d7af3; }
@@ -864,7 +864,7 @@ body {
       width: 35px;
       height: 35px; }
   .logo-header .logo {
-    color: #2A2F5B;
+    color: #348164 ;
     opacity: 1;
     position: relative;
     height: 100%;
