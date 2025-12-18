@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -245,13 +247,31 @@
             
             <!-- Form Body -->
             <div class="card-body">
+
+       <?php
+if (isset($_SESSION['errores_formulario'])) {
+?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul class="mb-0">
+            <?php foreach ($_SESSION['errores_formulario'] as $error) { ?>
+                <li><?php echo $error; ?></li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php
+    unset($_SESSION['errores_formulario']);
+}
+?>
+
+
+
 <form method="POST" action="<?php echo getUrl('SeguimientoDeTanques','SeguimientoDeTanques','postCreate'); ?>">
 
     <!-- Información del Tanque -->
     <div class="section-card">
         <h5 class="section-title">
             <i class="fas fa-water icon-label"></i>
-            Información del Tanque
+            Tipo del Tanque
         </h5>
 
         <div class="mb-3">
@@ -299,7 +319,7 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 <label class="form-label">pH</label>
-                <input type="number" step="0.1" class="form-control" name="ph">
+                <input type="number" step="0.1" min="0" max="5" class="form-control" name="ph" placeholder="Ej: 7.5">
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label">Temperatura (°C)</label>
@@ -307,7 +327,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label">Cloro (ppm)</label>
-                <input type="number" step="0.01" class="form-control" name="cloro">
+                <input type="number" step="0.01" min="0" max="5" class="form-control" name="cloro" placeholder="Ej: 0.5 ">
             </div>
         </div>
     </div>
@@ -316,21 +336,21 @@
     <div class="section-card">
         <h5 class="section-title">
             <i class="fas fa-chart-line icon-label"></i>
-            Registro de Población
+            Registro de Peces
         </h5>
 
         <div class="row">
             <div class="col-md-4 mb-3">
                 <label class="form-label">Alevines</label>
-                <input type="number" class="form-control" name="num_alevines" value="0">
+                <input type="number" min="0" class="form-control" name="num_alevines" value="0">
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label">Muertes Machos</label>
-                <input type="number" class="form-control" name="num_machos" value="0">
+                <input type="number" min="0" class="form-control" name="num_machos" value="0">
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label">Muertes Hembras</label>
-                <input type="number" class="form-control" name="num_hembras" value="0">
+                <input type="number" min="0" class="form-control" name="num_hembras" value="0">
             </div>
         </div>
     </div>
@@ -380,6 +400,23 @@
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/funcionesModalTipoActividades.js"></script>
+
+
+
+        <script>
+document.querySelector('form').addEventListener('submit', function (e) {
+    const alevines = parseInt(document.querySelector('[name="num_alevines"]').value) || 0;
+    const machos = parseInt(document.querySelector('[name="num_machos"]').value) || 0;
+    const hembras = parseInt(document.querySelector('[name="num_hembras"]').value) || 0;
+
+    if (machos + hembras > alevines) {
+        alert('Las muertes no pueden ser mayores que el número de alevines');
+        e.preventDefault();
+    }
+});
+</script>
+
     
     
 </body>

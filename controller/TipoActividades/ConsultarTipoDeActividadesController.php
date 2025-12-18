@@ -67,15 +67,6 @@ class ConsultarTipoDeActividadesController
             return;
         }
 
-        // VALIDACIÓN DE CARACTERES 
-        if (!$this->soloTexto($nombre)) {
-            $this->alerta(
-                'danger',
-                'Los datos ingresados contienen caracteres no permitidos, debe ingresar solo texto'
-            );
-            return;
-        }
-
         //VALIDAR DUPLICADOS 
         if ($this->existeActividad($obj, $nombre)) {
             $this->alerta(

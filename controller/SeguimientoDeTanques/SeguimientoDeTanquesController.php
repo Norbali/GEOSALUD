@@ -9,68 +9,49 @@ class SeguimientoDeTanquesController
     ================================*/
     public function getConsulta()
     {
-        if (!isset($_SESSION['documento'])) {
-            redirect(getUrl("Login", "Login", "index"));
-            exit;
-        }
-
         $obj = new SeguimientoDeTanquesModel();
 
-        /* ===============================
-           ACTIVIDADES
-        ================================*/
+        /* ACTIVIDADES */
         $actividades = array();
-
         $rsActividades = $obj->select("
             SELECT id_actividad, nombre_actividad
             FROM actividad
             WHERE id_estado_actividad = 1
             ORDER BY nombre_actividad
         ");
-
         if ($rsActividades) {
             while ($row = pg_fetch_assoc($rsActividades)) {
                 $actividades[] = $row;
             }
         }
 
-        /* ===============================
-           TANQUES
-        ================================*/
+        /* TANQUES */
         $tanques = array();
-
         $rsTanques = $obj->select("
             SELECT id_tanque, nombre_tanque
             FROM tanque
             WHERE id_estado_tanque = 1
             ORDER BY nombre_tanque
         ");
-
         if ($rsTanques) {
             while ($row = pg_fetch_assoc($rsTanques)) {
                 $tanques[] = $row;
             }
         }
 
-        /* ===============================
-           RESPONSABLE (NOMBRE + APELLIDO)
-        ================================*/
+        /* RESPONSABLE */
         $nombreResponsable = '';
-
-        $rsResponsable = $obj->select("
-            SELECT 
-                COALESCE(nombre,'') || ' ' || COALESCE(apellido,'') AS nombre_completo
-            FROM usuarios
-            WHERE documento = '{$_SESSION['documento']}'
-        ");
-
-        if ($rsResponsable && $row = pg_fetch_assoc($rsResponsable)) {
-            $nombreResponsable = $row['nombre_completo'];
+        if (isset($_SESSION['documento'])) {
+            $rsResp = $obj->select("
+                SELECT COALESCE(nombre,'') || ' ' || COALESCE(apellido,'') AS nombre
+                FROM usuarios
+                WHERE documento = '{$_SESSION['documento']}'
+            ");
+            if ($rsResp && $row = pg_fetch_assoc($rsResp)) {
+                $nombreResponsable = $row['nombre'];
+            }
         }
 
-        /* ===============================
-           CARGAR VISTA
-        ================================*/
         include_once '../view/seguimientoTanques/seguimientoDeTanques.php';
     }
 
@@ -79,51 +60,88 @@ class SeguimientoDeTanquesController
     ================================*/
     public function postCreate()
     {
-        if (!isset($_SESSION['documento'])) {
-            redirect(getUrl("Login", "Login", "index"));
+        $obj = new SeguimientoDeTanquesModel();
+        $errores = array();
+
+        /* ===============================
+           VALIDACIONES USUARIO
+        ================================*/
+        if (empty($_POST['id_tanque'])) {
+            $errores[] = 'Debe seleccionar un tanque';
+        }
+
+        if (empty($_POST['id_actividad'])) {
+            $errores[] = 'Debe seleccionar una actividad';
+        }
+
+        if (isset($_POST['ph']) && $_POST['ph'] !== '' && $_POST['ph'] < 0) {
+            $errores[] = 'El pH no puede ser negativo';
+        }
+
+        if (isset($_POST['cloro']) && $_POST['cloro'] !== '' && $_POST['cloro'] < 0) {
+            $errores[] = 'El cloro no puede ser negativo';
+        }
+
+        if ((int)$_POST['num_alevines'] < 0) {
+            $errores[] = 'Los alevines no pueden ser negativos';
+        }
+
+        if ((int)$_POST['num_machos'] < 0 || (int)$_POST['num_hembras'] < 0) {
+            $errores[] = 'Las muertes no pueden ser negativas';
+        }
+
+        if (((int)$_POST['num_machos'] + (int)$_POST['num_hembras']) > (int)$_POST['num_alevines']) {
+            $errores[] = 'Las muertes no pueden ser mayores que los alevines';
+        }
+
+        /* ===============================
+           SI HAY ERRORES → VOLVER
+        ================================*/
+        if (!empty($errores)) {
+            $_SESSION['errores_formulario'] = $errores;
+            redirect(getUrl("SeguimientoDeTanques", "SeguimientoDeTanques", "getConsulta"));
             exit;
         }
 
-        $obj = new SeguimientoDeTanquesModel();
-
-        $id_tanque     = $_POST['id_tanque'];
-        $id_actividad  = $_POST['id_actividad'];
-        $ph            = $_POST['ph'] !== '' ? $_POST['ph'] : null;
-        $temperatura   = $_POST['temperatura'] !== '' ? $_POST['temperatura'] : null;
-        $cloro         = $_POST['cloro'] !== '' ? $_POST['cloro'] : null;
-        $num_alevines  = (int)$_POST['num_alevines'];
-        $num_machos    = (int)$_POST['num_machos'];
-        $num_hembras   = (int)$_POST['num_hembras'];
+        /* ===============================
+           DATOS LIMPIOS
+        ================================*/
+        $id_tanque = (int)$_POST['id_tanque'];
+        $id_actividad = (int)$_POST['id_actividad'];
+        $ph = ($_POST['ph'] !== '') ? $_POST['ph'] : null;
+        $temperatura = ($_POST['temperatura'] !== '') ? $_POST['temperatura'] : null;
+        $cloro = ($_POST['cloro'] !== '') ? $_POST['cloro'] : null;
+        $num_alevines = (int)$_POST['num_alevines'];
+        $num_machos = (int)$_POST['num_machos'];
+        $num_hembras = (int)$_POST['num_hembras'];
         $observaciones = $_POST['observaciones'];
-
-        $documento_usuario = $_SESSION['documento'];
+        $documento = $_SESSION['documento'];
         $fecha = date('Y-m-d');
 
         /* ===============================
            INSERT SEGUIMIENTO
         ================================*/
-        $sqlSeguimiento = "
+        $sql = "
             INSERT INTO seguimiento (id_tanque, id_user_responsable, fecha)
-            VALUES ($id_tanque, '$documento_usuario', '$fecha')
+            VALUES ($id_tanque, '$documento', '$fecha')
         ";
 
-        if (!$obj->insert($sqlSeguimiento)) {
+        if (!$obj->insert($sql)) {
+            $_SESSION['errores_formulario'] = array(
+                'Error al registrar el seguimiento',
+                pg_last_error()
+            );
             redirect(getUrl("SeguimientoDeTanques", "SeguimientoDeTanques", "getConsulta"));
             exit;
         }
 
         /* ===============================
-           OBTENER ID (MISMA SESIÓN)
+           OBTENER ID
         ================================*/
-        $rsId = $obj->select("
+        $rs = $obj->select("
             SELECT currval(pg_get_serial_sequence('seguimiento','id_seguimiento')) AS id
         ");
-
-        if (!$rsId || !($row = pg_fetch_assoc($rsId))) {
-            redirect(getUrl("SeguimientoDeTanques", "SeguimientoDeTanques", "getConsulta"));
-            exit;
-        }
-
+        $row = pg_fetch_assoc($rs);
         $id_seguimiento = $row['id'];
 
         /* ===============================
@@ -134,17 +152,8 @@ class SeguimientoDeTanquesController
 
         $sqlDetalle = "
             INSERT INTO seguimiento_detalle (
-                id_seguimiento,
-                id_actividad,
-                ph,
-                temperatura,
-                cloro,
-                num_alevines,
-                num_muertes,
-                num_machos,
-                num_hembras,
-                total,
-                observaciones
+                id_seguimiento, id_actividad, ph, temperatura, cloro,
+                num_alevines, num_muertes, num_machos, num_hembras, total, observaciones
             ) VALUES (
                 $id_seguimiento,
                 $id_actividad,
@@ -160,8 +169,19 @@ class SeguimientoDeTanquesController
             )
         ";
 
-        $obj->insert($sqlDetalle);
+        if (!$obj->insert($sqlDetalle)) {
+            $_SESSION['errores_formulario'] = array(
+                'Error al registrar el detalle del seguimiento',
+                pg_last_error()
+            );
+            redirect(getUrl("SeguimientoDeTanques", "SeguimientoDeTanques", "getConsulta"));
+            exit;
+        }
 
+        /* ===============================
+           ÉXITO
+        ================================*/
+        $_SESSION['exito'] = 'Seguimiento registrado correctamente';
         redirect(getUrl("SeguimientoDeTanques", "SeguimientoDeTanques", "getConsulta"));
         exit;
     }
