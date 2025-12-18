@@ -23,7 +23,6 @@
             padding: 20px;
         }
 
-        /* Navegación de pestañas */
         .tabs-header {
             background: white;
             border-radius: 12px 12px 0 0;
@@ -72,7 +71,6 @@
             display: block;
         }
 
-        /* Formulario de registro */
         .form-header {
             margin-bottom: 30px;
         }
@@ -192,7 +190,6 @@
             background: #f8f9ff;
         }
 
-        /* Botón de acción */
         .btn-submit {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -217,7 +214,6 @@
             transform: translateY(0);
         }
 
-        /* Estilos de consulta de permisos */
         .permisos-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -385,8 +381,6 @@
             </button>
         </div>
 
-        <!-- TAB: Registro de Roles -->
-        <div id="registro" class="tab-content active">
             <div class="form-header">
                 <h1>Registro Roles</h1>
             </div>
@@ -564,7 +558,6 @@
             </form>
         </div>
 
-        <!-- TAB: Consultar Permisos -->
         <div id="consulta" class="tab-content">
             <div class="permisos-header">
                 <h1>
@@ -611,17 +604,14 @@
             // Eliminar números
             valor = valor.replace(/[0-9]/g, '');
             
-            // Eliminar caracteres especiales (mantener solo letras, acentos, ñ y espacios)
             valor = valor.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '');
             
-            // Eliminar múltiples espacios consecutivos
             valor = valor.replace(/\s+/g, ' ');
             
-            // Actualizar el valor del input
             input.value = valor;
         }
 
-        // Datos de ejemplo
+
         let roles = [
             { id: 1, nombre: 'Administrador', descripcion: 'Acceso total al sistema' },
             { id: 2, nombre: 'Auxiliar', descripcion: 'Acceso limitado' }
@@ -663,9 +653,8 @@
             }
         };
 
-        const totalAcciones = 4; // Registrar, Consultar, Editar, Eliminar
+        const totalAcciones = 4; 
 
-        // Cambiar de pestaña
         function switchTab(tabName) {
             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -678,7 +667,6 @@
             }
         }
 
-        // Enviar formulario
         document.getElementById('roleForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -686,19 +674,16 @@
             const descripcion = document.getElementById('descripcion').value;
             const checkboxes = document.querySelectorAll('input[name="permisos"]:checked');
             
-            // Validación adicional antes de enviar
             if (nombre.length < 3) {
                 alert('El nombre del rol debe tener al menos 3 caracteres');
                 return;
             }
             
-            // Verificar que no tenga números
             if (/[0-9]/.test(nombre)) {
                 alert('El nombre del rol no puede contener números');
                 return;
             }
             
-            // Verificar que no tenga caracteres especiales
             if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/.test(nombre)) {
                 alert('El nombre del rol solo puede contener letras y espacios');
                 return;
@@ -706,7 +691,6 @@
             
             const permisosSeleccionados = Array.from(checkboxes).map(cb => cb.value);
             
-            // Agregar nuevo rol
             const nuevoId = roles.length + 1;
             roles.push({
                 id: nuevoId,
@@ -714,7 +698,6 @@
                 descripcion: descripcion
             });
 
-            // Procesar permisos
             permisos[nuevoId] = {};
             permisosSeleccionados.forEach(permiso => {
                 const [modulo, accion] = permiso.split('-');
@@ -727,7 +710,6 @@
                 permisos[nuevoId][moduloNombre].push(accionNombre);
             });
 
-            // Mostrar mensaje de éxito
             mostrarAlerta('Rol registrado exitosamente', 'success');
             
             // Limpiar formulario
