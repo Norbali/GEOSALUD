@@ -56,7 +56,8 @@
                 $permisos = $this->cargarPermisos($idRol);
                 $_SESSION['permisos'] = $permisos;
 
-                redirect("index.php");
+                redirect("index.php?modulo=Mapa&controlador=Mapa&funcion=vistaIndex");
+
 
             }else{
                 redirect("login.php");
