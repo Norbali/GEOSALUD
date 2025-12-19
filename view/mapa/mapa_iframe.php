@@ -107,7 +107,7 @@
         </div>
 
         <script type="text/javascript">
-        myMap1 = new msMap(document.getElementById("dc_main"), "standardRight");
+        myMap1 = new msMap(document.getElementById("dc_main"), "standardLeft");
         myMap1.setCgi("/cgi-bin/mapserv.exe");
         myMap1.setMapFile("/ms4w/Apache/htdocs/GEOSALUD/view/mapa/caliregistrar.map");
         myMap1.setFullExtent(1053867, 1068491,  860190, 879411);
