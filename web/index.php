@@ -17,7 +17,8 @@ ob_start();
                         if(isset($_GET['modulo'])){
                             resolve();
                         }else{
-                            include_once '../view/partials/content.php';
+                            //include_once '../view/partials/content.php';
+                            include_once '../view/Mapa/vistaIndex.php';
                         }
                     echo "</div>";
                 echo "</div>";
