@@ -1886,11 +1886,12 @@ function msToolbar(p_msMap, _control, _default)
   var _tagMap = _msMap.getTagMap();
 
   // Toolbar Default Icons...
+
   var _iconFullExtentButton = 'misc/img/icons8-planeta-tierra-48.png';
-  var _iconZoomboxButton    = 'misc/img/icons8-zoom-para-extension-64.png';
-  var _iconPanButton        = 'misc/img/alpha_button_pan.png';
-  var _iconZoominButton     = 'misc/img/icons8-acercar-64.png';
-  var _iconZoomoutButton    = 'misc/img/icons8-alejar-64.png';
+  var _iconZoomboxButton    = 'misc/img/acercarse.png';
+  var _iconPanButton        = 'misc/img/agarrar.png';
+  var _iconZoominButton     = 'misc/img/simboloZoom.png';
+  var _iconZoomoutButton    = 'misc/img/disminuirZoom.png';
 
   this.getTag = function(){return _tagToolbar;}
   this.hide = function(){_tagToolbar.style.display = 'none';}

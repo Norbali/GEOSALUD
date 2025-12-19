@@ -50,7 +50,7 @@
     <body>
 
         <div class="mscross"
-                style="width: 1000px; height:1000px; margin:0 auto;" id="dc_main">
+                style="width: 870px; height:1000px; margin:0 auto;" id="dc_main">
         </div>
 
             <div id="Layer2" >
