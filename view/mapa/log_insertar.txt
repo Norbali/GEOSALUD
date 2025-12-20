@@ -1,0 +1,6 @@
+2025-12-20 03:47:10 - Inicio de inserción
+2025-12-20 03:47:10 - ❌ La extensión pdo_pgsql no está habilitada. Edita php.ini y habilita: extension=pdo_pgsql
+2025-12-20 03:47:29 - Inicio de inserción
+2025-12-20 03:47:29 - ❌ La extensión pdo_pgsql no está habilitada. Edita php.ini y habilita: extension=pdo_pgsql
+2025-12-20 03:47:32 - Inicio de inserción
+2025-12-20 03:47:32 - ❌ La extensión pdo_pgsql no está habilitada. Edita php.ini y habilita: extension=pdo_pgsql

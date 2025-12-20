@@ -37,7 +37,7 @@ class ConsultarTipoDeActividadesController
         if (empty($nombre_actividad) || empty($id_estado_actividad)) {
             $_SESSION['alert'] = array(
                 'type' => 'danger',
-                'message' => 'Debe completar todos los campos antes de guardar la actividad'
+                'message' => 'El campo nombre es obligatorio'
             );
             redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
             return;
@@ -92,7 +92,7 @@ class ConsultarTipoDeActividadesController
         if (empty($id_actividad) || empty($nombre_actividad)) {
             $_SESSION['alert'] = array(
                 'type' => 'danger',
-                'message' => 'Debe completar todos los campos para actualizar la actividad'
+                'message' => 'El campo nombre es obligatorio para actualizar la actividad'
             );
             redirect(getUrl('TipoActividades', 'ConsultarTipoDeActividades', 'getConsulta'));
             return;
