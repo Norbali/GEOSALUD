@@ -11,9 +11,9 @@ class TanquesController {
         $this->model = new TanquesModel();
     }
 
-    /* ============================
-       LISTAR TANQUES
-    ============================ */
+ 
+      // LISTAR TANQUES
+   
     public function getList() {
 
         // Capturar búsqueda
@@ -49,9 +49,9 @@ class TanquesController {
         include_once "../view/tanques/listRegistroTanques.php";
     }
 
-    /* ============================
-       REGISTRAR
-    ============================ */
+
+     //  REGISTRAR
+   
     public function postCreate() {
 
         $nombre = isset($_POST['nombre_tanque']) ? trim($_POST['nombre_tanque']) : '';
@@ -149,9 +149,9 @@ class TanquesController {
         }
     }
 
-    /* ============================
-       EDITAR
-    ============================ */
+   
+     //  EDITAR
+   
     public function postUpdate() {
 
         $id = isset($_POST['id_tanque']) ? trim($_POST['id_tanque']) : '';
@@ -227,9 +227,9 @@ class TanquesController {
         }
     }
 
-    /* ============================
-       INHABILITAR / ACTIVAR
-    ============================ */
+  
+     //  INHABILITAR / ACTIVAR
+
     public function updateStatus() {
 
         $id = isset($_GET['id_tanque']) ? (int)$_GET['id_tanque'] : 0;
@@ -269,9 +269,9 @@ class TanquesController {
         }
     }
 
-    /* ============================
-       MÉTODOS DE VALIDACIÓN
-    ============================ */
+   
+     //  MÉTODOS DE VALIDACIÓN
+  
 
     // CAMPOS OBLIGATORIOS
     private function camposObligatorios($nombre, $alto, $ancho, $profundidad, $tipo, $cantidad) {
