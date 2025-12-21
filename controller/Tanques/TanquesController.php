@@ -12,7 +12,7 @@ class TanquesController {
     }
 
  
-      // LISTAR TANQUES
+    // LISTAR TANQUES
    
     public function getList() {
 
@@ -41,7 +41,8 @@ class TanquesController {
 
         $tanques = $this->model->select($sql);
 
-        $tipos = $this->model->select("SELECT * FROM tipo_tanque");
+        // MODIFICADO: Solo traer tipos de tanque activos (estado = 1)
+        $tipos = $this->model->select("SELECT * FROM tipo_tanque WHERE id_estado_tipo_tanque = 1 ORDER BY nombre_tipo_tanque");
 
         // Obtener zoocriaderos para el select
         $zoocriaderos = $this->model->select("SELECT * FROM zoocriadero WHERE id_estado_zoocriadero = 1");
@@ -50,7 +51,7 @@ class TanquesController {
     }
 
 
-     //  REGISTRAR
+    // REGISTRAR
    
     public function postCreate() {
 
@@ -112,6 +113,15 @@ class TanquesController {
             return;
         }
 
+        // VALIDAR QUE EL TIPO DE TANQUE ESTÉ ACTIVO
+        if (!$this->tipoTanqueActivo($tipo)) {
+            $this->alerta(
+                'danger',
+                'El tipo de tanque seleccionado no está disponible'
+            );
+            return;
+        }
+
         $id = $this->model->autoIncrement("tanque", "id_tanque");
 
         $sql = "INSERT INTO tanque (
@@ -150,7 +160,7 @@ class TanquesController {
     }
 
    
-     //  EDITAR
+    // EDITAR
    
     public function postUpdate() {
 
@@ -205,6 +215,15 @@ class TanquesController {
             return;
         }
 
+        // VALIDAR QUE EL TIPO DE TANQUE ESTÉ ACTIVO
+        if (!$this->tipoTanqueActivo($tipo)) {
+            $this->alerta(
+                'danger',
+                'El tipo de tanque seleccionado no está disponible'
+            );
+            return;
+        }
+
         $sql = "UPDATE tanque SET
                     nombre_tanque='".pg_escape_string($nombre)."',
                     medida_alto=".(float)$alto.",
@@ -228,7 +247,7 @@ class TanquesController {
     }
 
   
-     //  INHABILITAR / ACTIVAR
+    // INHABILITAR / ACTIVAR
 
     public function updateStatus() {
 
@@ -270,7 +289,7 @@ class TanquesController {
     }
 
    
-     //  MÉTODOS DE VALIDACIÓN
+    // MÉTODOS DE VALIDACIÓN
   
 
     // CAMPOS OBLIGATORIOS
@@ -295,6 +314,18 @@ class TanquesController {
             SELECT 1
             FROM tanque
             WHERE LOWER(nombre_tanque) = LOWER('".pg_escape_string($nombre)."')
+        ";
+        $result = $this->model->select($sql);
+        return pg_num_rows($result) > 0;
+    }
+
+    // VALIDAR QUE EL TIPO DE TANQUE ESTÉ ACTIVO
+    private function tipoTanqueActivo($id_tipo) {
+        $sql = "
+            SELECT 1
+            FROM tipo_tanque
+            WHERE id_tipo_tanque = ".(int)$id_tipo."
+            AND id_estado_tipo_tanque = 1
         ";
         $result = $this->model->select($sql);
         return pg_num_rows($result) > 0;
