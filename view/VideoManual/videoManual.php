@@ -1,4 +1,4 @@
-    <div style="position: relative; top: -70px;">
+<div style="position: relative; top: -70px;">
     <style>
         body {
             min-height: 100vh;
@@ -104,15 +104,17 @@
             height: 0;
             overflow: hidden;
             border-radius: 15px;
+            background: #000;
         }
 
-        .video-container iframe {
+        .video-container video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: none;
+            object-fit: contain;
         }
 
         .divider {
@@ -124,7 +126,7 @@
     </style>
 <div class="container-fluid px-4">
 
-    <h1 class="main-title">Documentaci&oacute;n del Sistema</h1>
+    <h1 class="main-title">Documentación del Sistema</h1>
 
     <!-- SECCIÓN DE MANUALES -->
     <div class="manuales-container px-3">
@@ -137,7 +139,7 @@
                         <i class="fas fa-user-circle"></i>
                     </div>
                     <h3 class="manual-title">Manual de<br> Usuario</h3>
-                    <a href="descargar_pdf.php?tipo=usuario" class="btn btn-download" download>
+                    <a href="/view/documentos/ManualDeUsuario.pdf" class="btn btn-download" download="ManualDeUsuario.pdf" target="_blank">
                         <i class="fas fa-download"></i>
                         Descargar PDF
                     </a>
@@ -151,7 +153,7 @@
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3 class="manual-title">Manual de<br>Sistema</h3>
-                    <a href="descargar_pdf.php?tipo=sistema" class="btn btn-download" download>
+                    <a href="/view/documentos/ManualDelSistema.pdf" class="btn btn-download" download="ManualDelSistema.pdf" target="_blank">
                         <i class="fas fa-download"></i>
                         Descargar PDF
                     </a>
@@ -164,8 +166,8 @@
                     <div class="manual-icon">
                         <i class="fas fa-download"></i>
                     </div>
-                    <h3 class="manual-title">Manual de Instalaci&oacute;n</h3>
-                    <a href="descargar_pdf.php?tipo=instalacion" class="btn btn-download" download>
+                    <h3 class="manual-title">Manual de Instalación</h3>
+                    <a href="/view/documentos/ManualDeInstalación.pdf" class="btn btn-download" download="ManualDeInstalación.pdf" target="_blank">
                         <i class="fas fa-download"></i>
                         Descargar PDF
                     </a>
@@ -184,11 +186,10 @@
 
         <div class="video-card">
             <div class="video-container">
-                <!-- PEGA AQUÍ TU VIDEO -->
-                <iframe 
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    allowfullscreen>
-                </iframe>
+                <video controls controlsList="nodownload">
+                    <source src="view/documentos/VideoManualGEOSALUD.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video.
+                </video>
             </div>
         </div>
     </div>

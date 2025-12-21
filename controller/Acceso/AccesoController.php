@@ -92,6 +92,101 @@ class AccesoController
             }
 
             array_push($permisos[$row['nombre_modulo']], $row['nombre_accion']);
+            return $permisos;
+        }
+
+
+        //VALIDAR CAMPOS
+        //validar cntraseña
+        function validarContrasena($contrasena) {
+            $mensaje = "";
+
+            if (strlen($contrasena) < 8) {
+                $mensaje = "La contrasea debe tener m&iacute;nimo 8 caracteres.";
+            } elseif (
+                !preg_match('/[A-Z]/', $contrasena) ||
+                !preg_match('/[a-z]/', $contrasena) ||
+                !preg_match('/\d/', $contrasena) ||
+                !preg_match('/[\W_]/', $contrasena)
+            ) {
+                $mensaje = "La contraseña debe contener mayúscula, minúscula, número y carácter especial.";
+            } else {
+                $mensaje = "true";
+            }
+
+            return $mensaje;
+        }
+
+        //validar documento
+        function validarDocumento($documento) {
+            $mensaje = "";
+            if (empty($documento)) {
+                $mensaje = "El documento no puede estar vacío.";
+            } elseif ( !preg_match('/^[1-9][0-9]{5,11}$/', $documento)) {
+                $mensaje = "El documento debe contener solo números enteros, no puede empezar en 0 y tener entre 6 y 12 dígitos.";
+            } else {
+                $mensaje = "true";
+            }
+
+            return $mensaje;
+        }
+
+        //validar credenciales
+        //validar bd codumento
+        public function validarCredencialDocumento($documento){
+            $obj = new AccesoModel();
+
+            $sql = "SELECT * FROM usuarios WHERE documento = '$documento'";
+            $usuario = $obj->select($sql);
+
+            if(pg_num_rows($usuario)>0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        //validar bd contraseña
+        public function validarCredencialContraseña($documento, $contrasena){
+            $obj = new AccesoModel();
+            $hash = sha1($contrasena);
+
+            $sql = "SELECT * FROM usuarios WHERE documento = '$documento' AND contrasena = '$hash'";
+            $usuario = $obj->select($sql);
+
+            if(pg_num_rows($usuario)>0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function obtenerValorCampo($documento, $campo) {
+            $obj = new AccesoModel();
+
+            $sql = "SELECT $campo FROM usuarios WHERE documento = '$documento'";
+            $usuario = $obj->select($sql);
+
+            if (pg_num_rows($usuario) > 0) {
+                $row = pg_fetch_assoc($usuario);
+                return $row[$campo];  
+            } else {
+                return false;
+            }
+        }
+
+        public function obtenerNombreRol($idRol) {
+            $obj = new AccesoModel();
+            $sql = "SELECT nombre_rol FROM rol WHERE id_rol = $idRol";
+
+            $resultado = $obj->select($sql);
+
+            if (pg_num_rows($resultado) > 0) {
+                $row = pg_fetch_assoc($resultado);
+                return $row['nombre_rol'];
+            } else {
+                return null; 
+            }
         }
 
         return $permisos;
