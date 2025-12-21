@@ -53,7 +53,7 @@
                     </li>
                 <?php }?>
       
-                <?php if (array_key_exists("TipoActividades", $permisos)){?> 
+                <?php if (array_key_exists("TiposDeActividades", $permisos)){?> 
                     <li class="nav-item">
                             <a href=" <?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta")?>">
                             <i class="fas fa-list-alt"></i>

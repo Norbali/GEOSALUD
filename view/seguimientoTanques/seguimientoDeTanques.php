@@ -244,7 +244,8 @@
 
                     <!-- BOTONES -->
                     <div class="button-group">
-                       <?php if (in_array('registrar', $permisos['SeguimientoDeTanques'])) { ?>
+
+                  <?php if (isset($permisos['SeguimientoDeTanques']) && in_array('registrar', $permisos['SeguimientoDeTanques'])) { ?>
                         <button type="submit" class="btn btn-primary-custom me-2">
                             <i class="fas fa-save me-2"></i> Guardar
                         </button>
