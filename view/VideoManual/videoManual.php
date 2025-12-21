@@ -1,3 +1,8 @@
+<?php
+include_once '../lib/helpers.php';
+$permisos = $_SESSION['permisos'];
+?>
+
 <div style="position: relative; top: -70px;">
     <style>
         body {
@@ -146,21 +151,24 @@
                 </div>
             </div>
 
-            <!-- Manual del Sistema -->
+            <!-- Manual del Sistema -->                
+            <?php if (in_array('consultar', $permisos['videoManual'])) { ?>
             <div class="col-lg-4 col-md-6">
                 <div class="manual-card">
                     <div class="manual-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3 class="manual-title">Manual de<br>Sistema</h3>
-                    <a href="/view/documentos/ManualDelSistema.pdf" class="btn btn-download" download="ManualDelSistema.pdf" target="_blank">
+                    <a href="/view/documentos/ManualDelSist.pdf" class="btn btn-download" download="ManualDelSistema.pdf" target="_blank">
                         <i class="fas fa-download"></i>
                         Descargar PDF
                     </a>
                 </div>
             </div>
+            <?php } ?>
 
-            <!-- Manual de Instalación -->
+            <!-- Manual de Instalación -->                
+            <?php if (in_array('consultar', $permisos['videoManual'])) { ?>
             <div class="col-lg-4 col-md-6">
                 <div class="manual-card">
                     <div class="manual-icon">
@@ -173,6 +181,7 @@
                     </a>
                 </div>
             </div>
+            <?php } ?>
 
         </div>
     </div>

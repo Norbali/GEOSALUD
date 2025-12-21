@@ -111,12 +111,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                   <?php if (array_key_exists("VideoManual", $permisos)){?>
                                     <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
                                         <span class="sub-item">Manuales</span>
                                     </a>
                             </li>
-                            <?php }?>
                             <li class="nav-item">
                                     <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
                                         <span class="sub-item">Autores</span>
