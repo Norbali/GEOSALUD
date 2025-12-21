@@ -151,7 +151,6 @@ $permisos = $_SESSION['permisos'];
                 </div>
             </div>
 
-            <!-- Manual del Sistema -->                
             <!-- Manual del Sistema -->                |
             <?php if (in_array('consultar', $permisos['videoManual'])) { ?>
             <div class="col-lg-4 col-md-6">
