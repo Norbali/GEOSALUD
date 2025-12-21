@@ -54,7 +54,9 @@ class MapaController {
             $id_estado_zoocriadero,
             ST_SetSRID(ST_MakePoint($x, $y), 4326)
         )";
-           
+
+        echo "joal";
+           /*
             $obj->insert($sql);
             if ($obj) {
                 echo " Zoocriadero registrado exitosamente";
@@ -62,7 +64,7 @@ class MapaController {
                 echo "Error al registrar el zoocriadero";
             }
 
-      
+      */
     }
     
 }

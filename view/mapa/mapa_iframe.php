@@ -1,6 +1,4 @@
-<?php 
-    include_once('../../lib/helpers.php');
-?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -100,49 +98,9 @@
                         <h5 class="modal-title">Ingresar nombre</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                        <div class="form-group">
-                            <label for="id_zoocriadero">ID Zoocriadero</label>
-                            <input type="number" class="form-control" id="id_zoocriadero" name="id_zoocriadero" required>
+                        <div class="form-group m-4">
+                            <label for="id_zoocriadero">Opcion no dispoble por el momento</label>
                         </div>
-
-                        <div class="form-group">
-                            <label for="nombre_zoocriadero">Nombre del Zoocriadero</label>
-                            <input type="text" class="form-control" id="nombre_zoocriadero" name="nombre_zoocriadero" maxlength="150" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="direccion_zoocriadero">Dirección</label>
-                            <input type="text" class="form-control" id="direccion_zoocriadero" name="direccion_zoocriadero" maxlength="200" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="telefono_zoocriadero">Teléfono</label>
-                            <input type="number" class="form-control" id="telefono_zoocriadero" name="telefono_zoocriadero" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="correo_zoocriadero">Correo electrónico</label>
-                            <input type="email" class="form-control" id="correo_zoocriadero" name="correo_zoocriadero" maxlength="100" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="barrio">Barrio</label>
-                            <input type="text" class="form-control" id="barrio" name="barrio" maxlength="100" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="comuna">Comuna</label>
-                            <input type="text" class="form-control" id="comuna" name="comuna" maxlength="50" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="documento_responsable">Documento del Responsable</label>
-                            <input type="text" class="form-control" id="documento_responsable" name="documento_responsable" maxlength="20" required>
-                        </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" id="btnGuardarNombre">Guardar</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -240,19 +198,20 @@
                     consulta1 = objetoAjax();
                     consulta1.open(
                         "GET",
-                        "<?php echo getUrl('Mapa','Mapa','registrarZoocriadero', false, 'ajaxMapa'); ?>"
-                        + "?x=" + xx
+                        "/GEOSALUD/view/mapa/ajaxMapa.php"
+                        + "?id_zoocriadero=" + id_zoocriadero
+                        + "&x=" + xx
                         + "&y=" + yy
-                        + "&id_zoocriadero=" + id_zoocriadero
-                        + "&nombre_zoocriadero=" + nombre_zoocriadero
-                        + "&direccion_zoocriadero=" + direccion_zoocriadero
+                        + "&nombre_zoocriadero=" + encodeURIComponent(nombre_zoocriadero)
+                        + "&direccion_zoocriadero=" + encodeURIComponent(direccion_zoocriadero)
                         + "&telefono_zoocriadero=" + telefono_zoocriadero
-                        + "&correo_zoocriadero=" + correo_zoocriadero
-                        + "&barrio=" + barrio
-                        + "&comuna=" + comuna
-                        + "&documento_responsable=" + documento_responsable,
+                        + "&correo_zoocriadero=" + encodeURIComponent(correo_zoocriadero)
+                        + "&barrio=" + encodeURIComponent(barrio)
+                        + "&comuna=" + encodeURIComponent(comuna)
+                        + "&documento_responsable=" + encodeURIComponent(documento_responsable),
                         true
                     );
+
 
                     consulta1.onreadystatechange = function () {
                         if (consulta1.readyState == 4) {
