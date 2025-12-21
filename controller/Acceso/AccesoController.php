@@ -102,7 +102,7 @@
             $mensaje = "";
 
             if (strlen($contrasena) < 8) {
-                $mensaje = "La contraseña debe tener mínimo 8 caracteres.";
+                $mensaje = "La contrasea debe tener m&iacute;nimo 8 caracteres.";
             } elseif (
                 !preg_match('/[A-Z]/', $contrasena) ||
                 !preg_match('/[a-z]/', $contrasena) ||
