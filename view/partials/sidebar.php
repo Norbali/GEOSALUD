@@ -44,12 +44,14 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="<?php echo getUrl("Tanques","Tanques","getList")?>">
-                        <i class="fas fa-fish"></i>
-                        <p>Tanques</p>
-                    </a>
-                </li>
+                 <?php if (array_key_exists("Tanques", $permisos)){?> 
+                    <li class="nav-item">
+                        <a href="<?php echo getUrl("Tanques","Tanques","getList")?>">
+                            <i class="fas fa-fish"></i>
+                            <p>Tanques</p>
+                        </a>
+                    </li>
+                <?php }?>
       
                 <?php if (array_key_exists("TipoActividades", $permisos)){?> 
                     <li class="nav-item">

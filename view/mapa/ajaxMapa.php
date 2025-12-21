@@ -1,9 +1,11 @@
 <?php
-header('Content-Type: application/json');
+require_once dirname(dirname(dirname(__FILE__))) . '/lib/helpers.php';
 
-require_once dirname(__DIR__) . '../lib/helpers.php';
-require_once dirname(__DIR__) . '../model/Mapa/MapaModel.php';
+$x = $_GET['x'];
+$y = $_GET['y'];
 
-$url = getUrl('Mapa','Mapa','registrarZoocriadero');
-// puedes usar helpers aquí sin problema
-?>
+$id_zoocriadero = $_GET['id_zoocriadero'];
+$nombre = $_GET['nombre_zoocriadero'];
+
+// aquí llamas al modelo o al controlador
+echo getUrl('Mapa','Mapa','registrarZoocriadero');

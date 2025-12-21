@@ -152,7 +152,7 @@ $permisos = $_SESSION['permisos'];
             </div>
 
             <!-- Manual del Sistema -->                
-            <?php if (in_array('consultar', $permisos['videoManual'])) { ?>
+            <?php if ( isset($permisos['videoManual']) && is_array($permisos['videoManual']) && in_array('consultar', $permisos['videoManual'])) { ?>
             <div class="col-lg-4 col-md-6">
                 <div class="manual-card">
                     <div class="manual-icon">
@@ -168,7 +168,7 @@ $permisos = $_SESSION['permisos'];
             <?php } ?>
 
             <!-- Manual de Instalación -->                
-            <?php if (in_array('consultar', $permisos['videoManual'])) { ?>
+            <?php  if(isset($permisos['videoManual']) && is_array($permisos['videoManual']) && in_array('consultar', $permisos['videoManual'])) { ?>
             <div class="col-lg-4 col-md-6">
                 <div class="manual-card">
                     <div class="manual-icon">
