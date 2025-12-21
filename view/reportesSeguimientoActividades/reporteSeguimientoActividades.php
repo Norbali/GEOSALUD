@@ -1,5 +1,5 @@
-<?php 
-    include_once '../lib/helpers.php';
+<?php
+include_once '../lib/helpers.php';
 ?>
 <div style="position: relative; top: -70px;">
     <div class="card mx-auto mt-0">
@@ -7,14 +7,14 @@
             <h4 class="card-title">Filtros Reporte Seguimiento de Tanques</h4>
         </div>
 
-        <div class="card-body"> 
-            <form method="POST" action="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","filtro" ); ?>" id="filtrosReporte">
+        <div class="card-body">
+            <form method="POST" action="<?php echo getUrl("ReporteSeguimientoActividades", "ReporteSeguimientoActividades", "filtro"); ?>" id="filtrosReporte">
                 <div class="row g-3">
 
                     <!-- Fecha inicio -->
                     <div class="col-md-3">
                         <label class="form-label">Fecha inicio</label>
-                        <input type="date" name="fecha_inicio"  id="fecha_inicio"class="form-control"
+                        <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control"
                             value="<?php echo $fecha_inicio; ?>">
                         <small id="error-fechaInicio" class="text-danger"></small>
                     </div>
@@ -22,7 +22,7 @@
                     <!-- Fecha fin -->
                     <div class="col-md-3">
                         <label class="form-label">Fecha fin</label>
-                        <input type="date" name="fecha_fin"  id="fecha_fin" class="form-control"
+                        <input type="date" name="fecha_fin" id="fecha_fin" class="form-control"
                             value="<?php echo $fecha_fin; ?>">
                         <small id="error-fechaFin" class="text-danger"></small>
                     </div>
@@ -68,7 +68,7 @@
                     <!-- Botones -->
                     <div class="col-12 d-flex justify-content-end gap-2 mt-2">
                         <button type="submit" name="tipo" value="reporte"
-                                class="btn btn-primary btn-sm">
+                            class="btn btn-primary btn-sm">
                             Generar Reporte
                         </button>
                     </div>
@@ -83,7 +83,7 @@
             <h4 class="card-title">Resultados del Reporte</h4>
         </div>
         <div class="text-end mt-2 me-4">
-           <button type="button" onclick="exportarExcelXLSX()" class="btn btn-success btn-sm">
+            <button type="button" onclick="exportarExcelXLSX()" class="btn btn-success btn-sm">
                 Generar Excel
             </button>
         </div>
@@ -102,74 +102,74 @@
                     </thead>
                     <tbody>
                         <?php
-                            while ($row = pg_fetch_assoc($consultaSeguimiento)) {
-                                echo "<tr>";
-                                echo "<td>".$row['fecha']."</td>";
-                                echo "<td>".$row['nombre_actividad']."</td>";
-                                echo "<td>".$row['nombre_zoocriadero']."</td>";
-                                echo "<td>".$row['id_tanque']."</td>";
-                                echo "<td>";
-                            ?>
+                        while ($row = pg_fetch_assoc($consultaSeguimiento)) {
+                            echo "<tr>";
+                            echo "<td>" . $row['fecha'] . "</td>";
+                            echo "<td>" . $row['nombre_actividad'] . "</td>";
+                            echo "<td>" . $row['nombre_zoocriadero'] . "</td>";
+                            echo "<td>" . $row['id_tanque'] . "</td>";
+                            echo "<td>";
+                        ?>
 
-                                <!-- BOTÓN MODAL -->
-                                <button 
-                                    type="button" 
-                                    class="btn btn-primary btn-sm" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalDetalle<?= $row['id_seguimiento'] ?>">
-                                    Ver detalle
-                                </button>
+                            <!-- BOTÓN MODAL -->
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalDetalle<?= $row['id_seguimiento'] ?>">
+                                Ver detalle
+                            </button>
 
-                                <!-- MODAL -->
-                                <div class="modal fade" id="modalDetalle<?= $row['id_seguimiento'] ?>" tabindex="-1">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
+                            <!-- MODAL -->
+                            <div class="modal fade" id="modalDetalle<?= $row['id_seguimiento'] ?>" tabindex="-1">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
 
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Detalle del seguimiento</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-
-                                            <div class="modal-body">
-                                                <p><strong>Fecha:</strong> <?= $row['fecha'] ?></p>
-                                                <p><strong>Actividad:</strong> <?= $row['nombre_actividad'] ?></p>
-                                                <p><strong>Zoocriadero:</strong> <?= $row['nombre_zoocriadero'] ?></p>
-                                                <p><strong>Tanque:</strong> <?= $row['id_tanque'] ?></p>
-
-                                                <hr>
-
-                                                <p><strong>PH:</strong> <?= $row['ph'] ?></p>
-                                                <p><strong>Temperatura:</strong> <?= $row['temperatura'] ?></p>
-                                                <p><strong>Cloro:</strong> <?= $row['cloro'] ?></p>
-                                                <p><strong>Nacidos:</strong> <?= $row['num_alevines'] ?></p>
-                                                <p><strong>Muertes:</strong> <?= $row['num_muertes'] ?></p>
-                                                <p><strong>Machos:</strong> <?= $row['num_machos'] ?></p>
-                                                <p><strong>Hembras:</strong> <?= $row['num_hembras'] ?></p>
-                                                <p><strong>Observaciones:</strong> <?= $row['observaciones'] ?></p>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            </div>
-
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Detalle del seguimiento</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
+
+                                        <div class="modal-body">
+                                            <p><strong>Fecha:</strong> <?= $row['fecha'] ?></p>
+                                            <p><strong>Actividad:</strong> <?= $row['nombre_actividad'] ?></p>
+                                            <p><strong>Zoocriadero:</strong> <?= $row['nombre_zoocriadero'] ?></p>
+                                            <p><strong>Tanque:</strong> <?= $row['id_tanque'] ?></p>
+
+                                            <hr>
+
+                                            <p><strong>PH:</strong> <?= $row['ph'] ?></p>
+                                            <p><strong>Temperatura:</strong> <?= $row['temperatura'] ?></p>
+                                            <p><strong>Cloro:</strong> <?= $row['cloro'] ?></p>
+                                            <p><strong>Nacidos:</strong> <?= $row['num_alevines'] ?></p>
+                                            <p><strong>Muertes:</strong> <?= $row['num_muertes'] ?></p>
+                                            <p><strong>Machos:</strong> <?= $row['num_machos'] ?></p>
+                                            <p><strong>Hembras:</strong> <?= $row['num_hembras'] ?></p>
+                                            <p><strong>Observaciones:</strong> <?= $row['observaciones'] ?></p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+
                                     </div>
                                 </div>
+                            </div>
 
-                            <?php
-                                echo "</td>";
-                                echo "</tr>";
-                            }
-                            ?>
+                        <?php
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
                 <?php
-                    if (isset($_SESSION['sinResultadoSeguimientoTanques'])) {
-                        echo '<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                if (isset($_SESSION['sinResultadoSeguimientoTanques'])) {
+                    echo '<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
                                 ' . $_SESSION['sinResultadoSeguimientoTanques'] . '
                             </div>';
-                        unset($_SESSION['sinResultadoSeguimientoTanques']);
-                    }
+                    unset($_SESSION['sinResultadoSeguimientoTanques']);
+                }
                 ?>
 
             </div>
@@ -180,7 +180,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <script>
-    
     function exportarExcelXLSX() {
         // Obtener los datos de los filtros
         const fechaInicio = document.getElementById('fecha_inicio').value;
@@ -214,7 +213,7 @@
             if (celdas.length > 0) {
                 const botonModal = fila.querySelector('button[data-bs-target]');
                 const modalId = botonModal?.getAttribute('data-bs-target');
-                
+
                 if (modalId) {
                     const modal = document.querySelector(modalId);
                     const fecha = celdas[0].textContent.trim();
@@ -224,9 +223,16 @@
 
                     const modalBody = modal.querySelector('.modal-body');
                     const parrafos = modalBody.querySelectorAll('p');
-                    
-                    let ph = '', temperatura = '', cloro = '', nacidos = '', muertes = '', machos = '', hembras = '', observaciones = '';
-                    
+
+                    let ph = '',
+                        temperatura = '',
+                        cloro = '',
+                        nacidos = '',
+                        muertes = '',
+                        machos = '',
+                        hembras = '',
+                        observaciones = '';
+
                     parrafos.forEach(p => {
                         const texto = p.textContent;
                         if (texto.includes('PH:')) ph = texto.split(':')[1]?.trim() || '';
@@ -249,19 +255,42 @@
         const ws = XLSX.utils.aoa_to_sheet(datos);
 
         // Ajustar ancho de columnas
-        ws['!cols'] = [
-            { wch: 12 }, // Fecha
-            { wch: 20 }, // Actividad
-            { wch: 20 }, // Zoocriadero
-            { wch: 10 }, // Tanque
-            { wch: 8 },  // PH
-            { wch: 12 }, // Temperatura
-            { wch: 8 },  // Cloro
-            { wch: 10 }, // Nacidos
-            { wch: 10 }, // Muertes
-            { wch: 10 }, // Machos
-            { wch: 10 }, // Hembras
-            { wch: 30 }  // Observaciones
+        ws['!cols'] = [{
+                wch: 12
+            }, // Fecha
+            {
+                wch: 20
+            }, // Actividad
+            {
+                wch: 20
+            }, // Zoocriadero
+            {
+                wch: 10
+            }, // Tanque
+            {
+                wch: 8
+            }, // PH
+            {
+                wch: 12
+            }, // Temperatura
+            {
+                wch: 8
+            }, // Cloro
+            {
+                wch: 10
+            }, // Nacidos
+            {
+                wch: 10
+            }, // Muertes
+            {
+                wch: 10
+            }, // Machos
+            {
+                wch: 10
+            }, // Hembras
+            {
+                wch: 30
+            } // Observaciones
         ];
 
         // Agregar la hoja al libro
@@ -272,7 +301,7 @@
         XLSX.writeFile(wb, `Reporte_Seguimiento_Tanques_${fechaActual}.xlsx`);
     }
 
-    document.getElementById('filtrosReporte').addEventListener('submit', function (e) {
+    document.getElementById('filtrosReporte').addEventListener('submit', function(e) {
         e.preventDefault();
 
         // Limpiar errores
@@ -284,7 +313,7 @@
         const fechaInicio = document.getElementById('fecha_inicio').value;
         const fechaFin = document.getElementById('fecha_fin').value;
 
-        
+
         if (fechaInicio && fechaFin && fechaInicio > fechaFin) {
             document.getElementById('error-fechaFin').textContent =
                 'La fecha fin no puede ser menor que la fecha inicio';
@@ -324,5 +353,4 @@
         // Enviar formulario
         this.submit();
     });
-    
 </script>

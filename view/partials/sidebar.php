@@ -85,7 +85,7 @@
                             <p>Permiso de roles</p>
                         </a>
                     </li>
-                <?php }?>
+                <?php  }?>
 
                 
                 <?php if (array_key_exists("RegistroDeUsuarios", $permisos)){ ?>
@@ -96,40 +96,6 @@
                         </a>
                     </li>
                 <?php }?>
-
-                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#reportes">
-                        <i class="fas fa-newspaper"></i>
-                        <p>Reportes</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="reportes">
-                        <ul class="nav nav-collapse">
-                            <?php if (array_key_exists("ReporteSeguimientoAc", $permisos)){ ?>
-                                <li>
-                                    <a href="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","getConsulta")?>">
-                                        <span class="sub-item">Seguimiento de actividades</span>
-                                    </a>
-                                </li>
-                            <?php }?>
-
-                            <?php if (array_key_exists("ReporteNacidosOMuert", $permisos)){ ?>
-                                <li>
-                                    <a href="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","getConsulta")?>">
-                                        <span class="sub-item">Peces Nacidos y muertos </span>
-                                    </a>
-                                </li>
-                            <?php }?>
-                            <?php if (array_key_exists("ReporteTanquesPorZoo", $permisos)){ ?>
-                                <li>
-                                    <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
-                                        <span class="sub-item">Tanques por zoocriadero</span>
-                                    </a>
-                                </li>
-                            <?php }?>
-                        </ul>
-                    </div>
-                </li>
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#configuracion">
@@ -160,6 +126,39 @@
                     </div>
                 </li>
                 
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#reportes">
+                        <i class="fas fa-newspaper"></i>
+                        <p>Reportes</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="reportes">
+                        <ul class="nav nav-collapse">
+                            <?php //if (array_key_exists("ReporteSeguimiento", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","getConsulta")?>">
+                                        <span class="sub-item">Seguimiento de actividades</span>
+                                    </a>
+                                </li>
+                            <?php //}?>
+
+                            <?php //if (array_key_exists("ReporteNacidosOMuertos", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","getConsulta")?>">
+                                        <span class="sub-item">Peces Nacidos y muertos </span>
+                                    </a>
+                                </li>
+                            <?php //}?>
+                            <?php //if (array_key_exists("ReporteTanquesPorZoo", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
+                                        <span class="sub-item">Tanques por zoocriadero</span>
+                                    </a>
+                                </li>
+                            <?php //}?>
+                        </ul>
+                    </div>
             </ul>
         </div>
     </div>

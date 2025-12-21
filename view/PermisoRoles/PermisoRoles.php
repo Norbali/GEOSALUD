@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +27,7 @@
         .tabs-header {
             background: white;
             border-radius: 12px 12px 0 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             overflow: hidden;
         }
@@ -63,7 +64,7 @@
             display: none;
             background: white;
             border-radius: 0 0 12px 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 40px;
         }
 
@@ -368,6 +369,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="tabs-header">
@@ -381,36 +383,36 @@
             </button>
         </div>
 
-            <div class="form-header">
-                <h1>Registro Roles</h1>
+        <div class="form-header">
+            <h1>Registro Roles</h1>
+        </div>
+
+        <form id="roleForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre_rol"
+                        placeholder="Auxiliar"
+                        required
+                        maxlength="50"
+                        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+"
+                        title="Solo se permiten letras y espacios (sin números ni caracteres especiales)"
+                        oninput="validarSoloLetras(this)"
+                        onpaste="return false">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" id="descripcion" placeholder="Ingrese la descripción">
+                </div>
             </div>
 
-            <form id="roleForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nombre">Nombre:</label>
-                        <input 
-                            type="text" 
-                            id="nombre" 
-                            name="nombre_rol"
-                            placeholder="Auxiliar" 
-                            required
-                            maxlength="50"
-                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+"
-                            title="Solo se permiten letras y espacios (sin números ni caracteres especiales)"
-                            oninput="validarSoloLetras(this)"
-                            onpaste="return false">
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcion">Descripción:</label>
-                        <input type="text" id="descripcion" placeholder="Ingrese la descripción">
-                    </div>
-                </div>
-
-                <div class="permissions-section">
-                    <div class="section-title">Acción/Módulo</div>
-                    <div class="table-wrapper">
-                        <table class="permissions-table">
+            <div class="permissions-section">
+                <div class="section-title">Acción/Módulo</div>
+                <div class="table-wrapper">
+                    <table class="permissions-table">
                         <thead>
                             <tr>
                                 <th style="width: 200px;">Acción</th>
@@ -548,51 +550,51 @@
                             </tr>
                         </tbody>
                     </table>
-                    </div>
                 </div>
-
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-save"></i>
-                    Registrar
-                </button>
-            </form>
-        </div>
-
-        <div id="consulta" class="tab-content">
-            <div class="permisos-header">
-                <h1>
-                    <i class="fas fa-shield-alt"></i>
-                    Gestión de Permisos de Roles
-                </h1>
-                <p>Consulta los permisos y accesos del sistema por rol</p>
             </div>
 
-            <div id="alertContainer"></div>
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-save"></i>
+                Registrar
+            </button>
+        </form>
+    </div>
 
-            <h2 class="section-title">Selecciona un Rol</h2>
-            <div class="roles-grid" id="rolesGrid"></div>
-
-            <h2 class="section-title">
-                Permisos de: <span id="rolNombre">...</span>
-            </h2>
-
-            <table class="permisos-table">
-                <thead>
-                    <tr>
-                        <th><i class="fas fa-cube"></i> Módulo</th>
-                        <th><i class="fas fa-key"></i> Permisos Asignados</th>
-                        <th><i class="fas fa-chart-pie"></i> Estado</th>
-                    </tr>
-                </thead>
-                <tbody id="permisosTableBody">
-                    <tr>
-                        <td colspan="3" style="text-align: center; padding: 40px; color: #999;">
-                            Selecciona un rol para ver sus permisos
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div id="consulta" class="tab-content">
+        <div class="permisos-header">
+            <h1>
+                <i class="fas fa-shield-alt"></i>
+                Gestión de Permisos de Roles
+            </h1>
+            <p>Consulta los permisos y accesos del sistema por rol</p>
         </div>
+
+        <div id="alertContainer"></div>
+
+        <h2 class="section-title">Selecciona un Rol</h2>
+        <div class="roles-grid" id="rolesGrid"></div>
+
+        <h2 class="section-title">
+            Permisos de: <span id="rolNombre">...</span>
+        </h2>
+
+        <table class="permisos-table">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-cube"></i> Módulo</th>
+                    <th><i class="fas fa-key"></i> Permisos Asignados</th>
+                    <th><i class="fas fa-chart-pie"></i> Estado</th>
+                </tr>
+            </thead>
+            <tbody id="permisosTableBody">
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 40px; color: #999;">
+                        Selecciona un rol para ver sus permisos
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     </div>
 
     <script>
@@ -600,21 +602,28 @@
         function validarSoloLetras(input) {
             // Remover números y caracteres especiales en tiempo real
             let valor = input.value;
-            
+
             // Eliminar números
             valor = valor.replace(/[0-9]/g, '');
-            
+
             valor = valor.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '');
-            
+
             valor = valor.replace(/\s+/g, ' ');
-            
+
             input.value = valor;
         }
 
 
-        let roles = [
-            { id: 1, nombre: 'Administrador', descripcion: 'Acceso total al sistema' },
-            { id: 2, nombre: 'Auxiliar', descripcion: 'Acceso limitado' }
+        let roles = [{
+                id: 1,
+                nombre: 'Administrador',
+                descripcion: 'Acceso total al sistema'
+            },
+            {
+                id: 2,
+                nombre: 'Auxiliar',
+                descripcion: 'Acceso limitado'
+            }
         ];
 
         let permisos = {
@@ -653,12 +662,12 @@
             }
         };
 
-        const totalAcciones = 4; 
+        const totalAcciones = 4;
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
+
             event.target.closest('.tab-button').classList.add('active');
             document.getElementById(tabName).classList.add('active');
 
@@ -669,28 +678,28 @@
 
         document.getElementById('roleForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const nombre = document.getElementById('nombre').value.trim();
             const descripcion = document.getElementById('descripcion').value;
             const checkboxes = document.querySelectorAll('input[name="permisos"]:checked');
-            
+
             if (nombre.length < 3) {
                 alert('El nombre del rol debe tener al menos 3 caracteres');
                 return;
             }
-            
+
             if (/[0-9]/.test(nombre)) {
                 alert('El nombre del rol no puede contener números');
                 return;
             }
-            
+
             if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/.test(nombre)) {
                 alert('El nombre del rol solo puede contener letras y espacios');
                 return;
             }
-            
+
             const permisosSeleccionados = Array.from(checkboxes).map(cb => cb.value);
-            
+
             const nuevoId = roles.length + 1;
             roles.push({
                 id: nuevoId,
@@ -703,7 +712,7 @@
                 const [modulo, accion] = permiso.split('-');
                 const moduloNombre = modulo.charAt(0).toUpperCase() + modulo.slice(1);
                 const accionNombre = accion.charAt(0).toUpperCase() + accion.slice(1);
-                
+
                 if (!permisos[nuevoId][moduloNombre]) {
                     permisos[nuevoId][moduloNombre] = [];
                 }
@@ -711,10 +720,10 @@
             });
 
             mostrarAlerta('Rol registrado exitosamente', 'success');
-            
+
             // Limpiar formulario
             this.reset();
-            
+
             // Cambiar a pestaña de consulta
             setTimeout(() => {
                 document.querySelectorAll('.tab-button')[1].click();
@@ -773,7 +782,7 @@
             for (const [modulo, acciones] of Object.entries(permisosRol)) {
                 const numAcciones = acciones.length;
                 let estadoBadge = '';
-                
+
                 if (numAcciones === 0) {
                     estadoBadge = '<span class="estado-badge estado-sin-acceso">Sin acceso</span>';
                 } else if (numAcciones === totalAcciones) {
@@ -782,7 +791,7 @@
                     estadoBadge = '<span class="estado-badge estado-parcial">Acceso parcial</span>';
                 }
 
-                const permisosHTML = acciones.map(accion => 
+                const permisosHTML = acciones.map(accion =>
                     `<span class="permiso-badge"><i class="fas fa-check"></i> ${accion}</span>`
                 ).join('');
 
@@ -802,7 +811,7 @@
         function mostrarAlerta(mensaje, tipo) {
             const container = document.getElementById('alertContainer');
             const icon = tipo === 'success' ? 'check-circle' : 'exclamation-triangle';
-            
+
             container.innerHTML = `
                 <div class="alert-message alert-${tipo}">
                     <i class="fas fa-${icon}"></i>
@@ -816,4 +825,5 @@
         }
     </script>
 </body>
+
 </html>

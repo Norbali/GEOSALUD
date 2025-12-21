@@ -1,23 +1,26 @@
 <?php
-    session_start();
-    include_once '../model/ReportesTanquesZoocriadero/ReportesTanquesZoocriaderoModel.php';
+session_start();
+include_once '../model/ReportesTanquesZoocriadero/ReportesTanquesZoocriaderoModel.php';
 
-    class ReportesTanquesZoocriaderoController{
+class ReportesTanquesZoocriaderoController
+{
 
-        public function getConsulta(){
-            $obj = new ReportesTanquesZoocriaderoModel();
-            $sqlZoocriaderos = "SELECT *FROM zoocriadero";
-            $zoocriaderos = $obj->select($sqlZoocriaderos);
+    public function getConsulta()
+    {
+        $obj = new ReportesTanquesZoocriaderoModel();
+        $sqlZoocriaderos = "SELECT *FROM zoocriadero";
+        $zoocriaderos = $obj->select($sqlZoocriaderos);
 
-            $cosultaTanquesZoocriadero = $this->cosultaTanquesZoocriadero();
+        $cosultaTanquesZoocriadero = $this->cosultaTanquesZoocriadero();
 
-            include_once '../view/reportesTanquesZoocriadero/reporteTanquesZoocriadero.php';
-        } 
+        include_once '../view/reportesTanquesZoocriadero/reporteTanquesZoocriadero.php';
+    }
 
-        public function cosultaTanquesZoocriadero(){
-            $obj = new ReportesTanquesZoocriaderoModel();
+    public function cosultaTanquesZoocriadero()
+    {
+        $obj = new ReportesTanquesZoocriaderoModel();
 
-            $sql = "
+        $sql = "
                     SELECT
                     z.id_zoocriadero,
                     z.nombre_zoocriadero,
@@ -35,15 +38,16 @@
 
             ";
 
-            return $obj->select($sql);
-        }
+        return $obj->select($sql);
+    }
 
-        public function filtro(){
-            $obj = new ReportesTanquesZoocriaderoModel();
+    public function filtro()
+    {
+        $obj = new ReportesTanquesZoocriaderoModel();
 
-            $buscar = $_GET['buscar'];
+        $buscar = $_GET['buscar'];
 
-            $sql = "
+        $sql = "
                    SELECT
                     z.id_zoocriadero,
                     z.nombre_zoocriadero,
@@ -61,14 +65,11 @@
                 ORDER BY z.nombre_zoocriadero, t.id_tanque
                 ";
 
-            $cosultaTanquesZoocriadero = $obj->select($sql);
-            if(pg_affected_rows($cosultaTanquesZoocriadero) == 0){
-                $_SESSION['sinResultados'] = "No se encontraron registros.";
-            }
-
-            include_once "../view/reportesTanquesZoocriadero/filtro.php";
+        $cosultaTanquesZoocriadero = $obj->select($sql);
+        if (pg_affected_rows($cosultaTanquesZoocriadero) == 0) {
+            $_SESSION['sinResultados'] = "No se encontraron registros.";
         }
 
+        include_once "../view/reportesTanquesZoocriadero/filtro.php";
     }
-
-?>
+}

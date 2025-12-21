@@ -26,6 +26,7 @@
         .table-responsive {
             border-radius: 0 0 0.5rem 0.5rem;
         }
+
         .main-title {
             font-size: 3rem;
             font-weight: 700;
@@ -34,38 +35,37 @@
             color: #1f2937;
         }
     </style>
-</head>
+    </head>
 
-<body>
-  
+    <body>
+
         <h1 class="main-title">Gestión de Tipo de Tanques</h1>
         <!-- Card y su tabla -->
         <div class="card">
             <div class="card-header bg-white d-flex flex-column py-3">
 
-    <!-- TÍTULO -->
-    <h5 class="card-title m-3">
-        <i class="fas fa-list text-primary"></i> Lista de Tipo Tanques
-    </h5>
+                <!-- TÍTULO -->
+                <h5 class="card-title m-3">
+                    <i class="fas fa-list text-primary"></i> Lista de Tipo Tanques
+                </h5>
 
-    <!-- FILA INFERIOR -->
-    <div class="d-flex justify-content-between align-items-end px-3">
+                <!-- FILA INFERIOR -->
+                <div class="d-flex justify-content-between align-items-end px-3">
 
-        <!-- FILTRO -->
-        
+                    <!-- FILTRO -->
 
-        <!-- BOTÓN -->
-        <button 
-            type="button" 
-            class="btn btn-primary ms-3"
-            data-bs-toggle="modal" 
-            data-bs-target="#modalNuevo"
-        >
-            <i class="fas fa-plus"></i> Nuevo Tanque
-        </button>
 
-    </div>
-</div>
+                    <!-- BOTÓN -->
+                    <button
+                        type="button"
+                        class="btn btn-primary ms-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalNuevo">
+                        <i class="fas fa-plus"></i> Nuevo Tanque
+                    </button>
+
+                </div>
+            </div>
 
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -106,12 +106,12 @@
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-1">
                                             <?php if ($tipoTanque['nombre_estado_tipo_tanques'] == 'activo') { ?>
-                                                <button class="btn btn-warning btn-sm" 
+                                                <button class="btn btn-warning btn-sm"
                                                     onclick="confirmarEdicion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo addslashes($tipoTanque['nombre_tipo_tanque']); ?>')">
                                                     <i class="fas fa-edit"></i> Editar
                                                 </button>
-                                                
-                                                <button class="btn btn-danger btn-sm" 
+
+                                                <button class="btn btn-danger btn-sm"
                                                     onclick="confirmarInhabilitacion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo addslashes($tipoTanque['nombre_tipo_tanque']); ?>')">
                                                     <i class="fas fa-ban"></i> Inhabilitar
                                                 </button>
@@ -126,7 +126,7 @@
                                 <div class="modal fade" id="modalEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>" tabindex="-1">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <form id="formEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>" 
+                                            <form id="formEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>"
                                                 action="<?php echo getUrl("TipoTanques", "TipoTanques", "postActualizar"); ?>" method="POST">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">
@@ -138,7 +138,7 @@
                                                     <input type="hidden" name="id_tipo_tanque" value="<?php echo $tipoTanque['id_tipo_tanque']; ?>">
                                                     <div class="mb-3">
                                                         <label class="form-label">Nombre del Tipo de Tanque *</label>
-                                                        <input type="text" class="form-control" name="nombre_tipo_tanque" 
+                                                        <input type="text" class="form-control" name="nombre_tipo_tanque"
                                                             id="nombreEditar<?php echo $tipoTanque['id_tipo_tanque']; ?>"
                                                             value="<?php echo $tipoTanque['nombre_tipo_tanque']; ?>" required>
                                                     </div>
@@ -169,131 +169,131 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
 
-    <!-- Modal Nuevo Tipo de Tanque -->
-    <div class="modal fade" id="modalNuevo" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="formNuevo" action="<?php echo getUrl("TipoTanques", "TipoTanques", "postCrear"); ?>" method="POST">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            <i class="fas fa-plus-circle text-primary"></i> Nuevo Tipo de Tanque
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<!-- Modal Nuevo Tipo de Tanque -->
+<div class="modal fade" id="modalNuevo" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formNuevo" action="<?php echo getUrl("TipoTanques", "TipoTanques", "postCrear"); ?>" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-plus-circle text-primary"></i> Nuevo Tipo de Tanque
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre del Tipo de Tanque *</label>
+                        <input type="text" class="form-control" name="nombre_tipo_tanque" id="nombreTanqueNuevo" required>
                     </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label">Nombre del Tipo de Tanque *</label>
-                            <input type="text" class="form-control" name="nombre_tipo_tanque" id="nombreTanqueNuevo" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Estado</label>
-                            <select class="form-select" name="id_estado_tipo_tanque">
-                                <option value="1" selected>Activo</option>
-                                <option value="2">Inactivo</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Estado</label>
+                        <select class="form-select" name="id_estado_tipo_tanque">
+                            <option value="1" selected>Activo</option>
+                            <option value="2">Inactivo</option>
+                        </select>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="fas fa-times"></i> Cancelar
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Guardar
-                        </button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        // Función para limpiar espacios múltiples mientras el usuario escribe
-        function limpiarEspacios(input) {
-            // Eliminar espacios al inicio
-            input.value = input.value.replace(/^\s+/, '');
-            // Reemplazar múltiples espacios por uno solo
-            input.value = input.value.replace(/\s{2,}/g, ' ');
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Función para limpiar espacios múltiples mientras el usuario escribe
+    function limpiarEspacios(input) {
+        // Eliminar espacios al inicio
+        input.value = input.value.replace(/^\s+/, '');
+        // Reemplazar múltiples espacios por uno solo
+        input.value = input.value.replace(/\s{2,}/g, ' ');
+    }
+
+    // Aplicar limpieza de espacios a los inputs al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        // Input del modal nuevo
+        const inputNuevo = document.getElementById('nombreTanqueNuevo');
+        if (inputNuevo) {
+            inputNuevo.addEventListener('input', function() {
+                limpiarEspacios(this);
+            });
         }
 
-        // Aplicar limpieza de espacios a los inputs al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            // Input del modal nuevo
-            const inputNuevo = document.getElementById('nombreTanqueNuevo');
-            if (inputNuevo) {
-                inputNuevo.addEventListener('input', function() {
-                    limpiarEspacios(this);
-                });
-            }
-
-            // Inputs de los modales de edición
-            document.querySelectorAll('[id^="nombreEditar"]').forEach(function(input) {
-                input.addEventListener('input', function() {
-                    limpiarEspacios(this);
-                });
+        // Inputs de los modales de edición
+        document.querySelectorAll('[id^="nombreEditar"]').forEach(function(input) {
+            input.addEventListener('input', function() {
+                limpiarEspacios(this);
             });
         });
+    });
 
-        // Mostrar mensajes
-        <?php if (isset($mensaje) && isset($tipo_mensaje)) { ?>
-            Swal.fire({
-                icon: '<?php echo $tipo_mensaje == "success" ? "success" : ($tipo_mensaje == "warning" ? "warning" : "error"); ?>',
-                title: '<?php echo $tipo_mensaje == "success" ? "¡Éxito!" : ($tipo_mensaje == "warning" ? "Advertencia" : "Error"); ?>',
-                text: '<?php echo $mensaje; ?>',
-                confirmButtonColor: '#3085d6',
-                timer: 3000,
-                timerProgressBar: true
-            });
-        <?php } ?>
+    // Mostrar mensajes
+    <?php if (isset($mensaje) && isset($tipo_mensaje)) { ?>
+        Swal.fire({
+            icon: '<?php echo $tipo_mensaje == "success" ? "success" : ($tipo_mensaje == "warning" ? "warning" : "error"); ?>',
+            title: '<?php echo $tipo_mensaje == "success" ? "¡Éxito!" : ($tipo_mensaje == "warning" ? "Advertencia" : "Error"); ?>',
+            text: '<?php echo $mensaje; ?>',
+            confirmButtonColor: '#3085d6',
+            timer: 3000,
+            timerProgressBar: true
+        });
+    <?php } ?>
 
-        // Confirmar edición con SweetAlert2
-        function confirmarEdicion(idTanque, nombreTanque) {
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¿Deseas editar el tipo de tanque '" + nombreTanque + "'?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#ffc107',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Sí, editar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const modalEditar = new bootstrap.Modal(document.getElementById('modalEditar' + idTanque));
-                    modalEditar.show();
-                }
-            });
-        }
+    // Confirmar edición con SweetAlert2
+    function confirmarEdicion(idTanque, nombreTanque) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Deseas editar el tipo de tanque '" + nombreTanque + "'?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#ffc107',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, editar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const modalEditar = new bootstrap.Modal(document.getElementById('modalEditar' + idTanque));
+                modalEditar.show();
+            }
+        });
+    }
 
-        // Confirmar inhabilitación
-        function confirmarInhabilitacion(idTanque, nombreTanque) {
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¿Deseas inhabilitar el tipo de tanque '" + nombreTanque + "'?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Sí, inhabilitar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = '<?php echo getUrl("TipoTanques", "TipoTanques", "postInhabilitar"); ?>';
-                    
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'id_tipo_tanque';
-                    input.value = idTanque;
-                    
-                    form.appendChild(input);
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            });
-        }
-    </script>
+    // Confirmar inhabilitación
+    function confirmarInhabilitacion(idTanque, nombreTanque) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Deseas inhabilitar el tipo de tanque '" + nombreTanque + "'?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, inhabilitar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '<?php echo getUrl("TipoTanques", "TipoTanques", "postInhabilitar"); ?>';
+
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'id_tipo_tanque';
+                input.value = idTanque;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    }
+</script>
 </div>

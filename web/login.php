@@ -1,9 +1,11 @@
-<?php 
-    include_once '../lib/helpers.php';
+<?php
+include_once '../lib/helpers.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="UTF-8">
+
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Login</title>
@@ -12,7 +14,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css">
     <link rel="stylesheet" href="assets/css/fonts.min.css">
-    
+
 </head>
 
 <body class="login">
@@ -33,7 +35,7 @@
                 </div>
             <?php endif; ?>
 
-            <form action="<?php echo getUrl("Acceso","Acceso","login", false, "ajax")?>" method="post">
+            <form action="<?php echo getUrl("Acceso", "Acceso", "login", false, "ajax") ?>" method="post">
                 <div class="form-group">
                     <label class=""><b>Documento*</b></label>
                     <input type="text" class="form-control" id="documento" name="documento" minlength="9" maxlength="10" required>
@@ -47,13 +49,14 @@
                 <div class="text-center">
                      <button type="submit" class="btn btn-primary" >Iniciar Sesi&oacute;n</button>
                 </div>
-                </form>
+            </form>
         </div>
     </div>
 
     <script src="assets/js/core/jquery-3.7.1.min.js"></script>
     <script src="assets/js/core/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
-    
+
 </body>
+
 </html>

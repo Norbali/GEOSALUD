@@ -1,19 +1,22 @@
 <?php
-    session_start();
-    include_once '../model/ReportesNacidosMuertos/ReportesNacidosMuertosModel.php';
+session_start();
+include_once '../model/ReportesNacidosMuertos/ReportesNacidosMuertosModel.php';
 
-class ReportesNacidosMuertosController{
+class ReportesNacidosMuertosController
+{
 
-    public function getConsulta(){
+    public function getConsulta()
+    {
         $obj = new ReportesNacidosMuertosModel();
         $sqlZoocriaderos = "SELECT * FROM zoocriadero";
         $zoocriaderos = $obj->select($sqlZoocriaderos);
 
         $listadoNacidosMuertos = $this->listarNacidosMuertos();
         include_once '../view/reportesNacidosMuertos/reporteNacidosMuertos.php';
-    } 
+    }
 
-    public function listarNacidosMuertos(){
+    public function listarNacidosMuertos()
+    {
         $obj = new ReportesNacidosMuertosModel();
 
         $sql = "
@@ -55,7 +58,8 @@ class ReportesNacidosMuertosController{
         return $obj->select($sql);
     }
 
-    public function filtro(){
+    public function filtro()
+    {
         $obj = new ReportesNacidosMuertosModel();
 
         // Inicializar variables
@@ -127,7 +131,4 @@ class ReportesNacidosMuertosController{
         // Mostrar vista
         include_once '../view/reportesNacidosMuertos/reporteNacidosMuertos.php';
     }
-
 }
-
-?>
