@@ -54,8 +54,8 @@
 
                     <!-- FILTRO -->
 
+<?php if (isset($permisos['TipoDeTanques']) && in_array('registrar', $permisos['TipoDeTanques'])) { ?>
 
-                    <!-- BOTÓN -->
                     <button
                         type="button"
                         class="btn btn-primary ms-3"
@@ -106,16 +106,24 @@
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-1">
                                             <?php if ($tipoTanque['nombre_estado_tipo_tanques'] == 'activo') { ?>
+                                                            <?php if (isset($permisos['TipoDeTanques']) && in_array('actualizar', $permisos['TipoDeTanques'])) { ?>
+                                                
+
                                                 <button class="btn btn-warning btn-sm"
                                                     onclick="confirmarEdicion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo addslashes($tipoTanque['nombre_tipo_tanque']); ?>')">
                                                     <i class="fas fa-edit"></i> Editar
                                                 </button>
+            <?php if (isset($permisos['TipoDeTanques']) && in_array('inhabilitar', $permisos['TipoDeTanques'])) { ?>
 
                                                 <button class="btn btn-danger btn-sm"
                                                     onclick="confirmarInhabilitacion('<?php echo $tipoTanque['id_tipo_tanque']; ?>', '<?php echo addslashes($tipoTanque['nombre_tipo_tanque']); ?>')">
                                                     <i class="fas fa-ban"></i> Inhabilitar
                                                 </button>
-                                            <?php } else { ?>
+                                            <?php } ?>
+                                            <?php if (
+                (!isset($permisos['TipoDeTanques']) || !in_array('actualizar', $permisos['TipoDeTanques'])) &&
+                (!isset($permisos['TipoDeTanques']) || !in_array('inhabilitar', $permisos['TipoDeTanques']))
+            ) { ?>
                                                 <span class="text-muted">Sin acciones disponibles</span>
                                             <?php } ?>
                                         </div>
