@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-    
         * {
             margin: 0;
             padding: 0;
@@ -37,7 +36,7 @@
             border: 2px solid #7c3aed;
         }
 
-     
+
         .card-header-custom {
             background: #7c3aed;
             color: white;
@@ -50,8 +49,8 @@
             font-size: 3rem;
         }
 
-       
-      
+
+
         .card-body {
             padding: 20px;
         }
@@ -100,14 +99,14 @@
             border-radius: 8px;
         }
 
-        
-       #alerta-sistema {
-    position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-    border-left: 6px solid;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
-}
+
+        #alerta-sistema {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+            border-left: 6px solid;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+        }
 
 
         #alerta-sistema.alert-danger {
@@ -118,28 +117,27 @@
             border-left-color: #22c55e;
         }
     </style>
-</head>
-<?php if (!empty($_SESSION['errores_formulario'])) { ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            mostrarAlerta(`<?php echo implode(' | ', $_SESSION['errores_formulario']); ?>`);
-        });
-    </script>
-<?php unset($_SESSION['errores_formulario']); } ?>
+   </head>
+        <?php if (!empty($_SESSION['errores_formulario'])) { ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    mostrarAlerta(`<?php echo implode(' | ', $_SESSION['errores_formulario']); ?>`);
+                });
+            </script>
+        <?php unset($_SESSION['errores_formulario']);
+        } ?>
 
-<?php if (!empty($_SESSION['exito'])) { ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            mostrarAlerta('<?php echo $_SESSION['exito']; ?>', 'success');
-        });
-    </script>
-<?php unset($_SESSION['exito']); } ?>
+        <?php if (!empty($_SESSION['exito'])) { ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    mostrarAlerta('<?php echo $_SESSION['exito']; ?>', 'success');
+                });
+            </script>
+        <?php unset($_SESSION['exito']);
+        } ?>
 
 
 <body>
-
-   
-
 
     <div class="container-fluid">
         <div class="main-card">
@@ -246,9 +244,11 @@
 
                     <!-- BOTONES -->
                     <div class="button-group">
+                       <?php if (in_array('registrar', $permisos['SeguimientoDeTanques'])) { ?>
                         <button type="submit" class="btn btn-primary-custom me-2">
                             <i class="fas fa-save me-2"></i> Guardar
                         </button>
+                        <?php } ?>
                         <button type="reset" class="btn btn-secondary-custom">
                             <i class="fas fa-redo me-2"></i> Limpiar
                         </button>
@@ -263,96 +263,96 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-function mostrarAlerta(mensaje, tipo = 'danger') {
-    const alerta = document.getElementById('alerta-sistema');
-    const texto = document.getElementById('alerta-texto');
+        function mostrarAlerta(mensaje, tipo = 'danger') {
+            const alerta = document.getElementById('alerta-sistema');
+            const texto = document.getElementById('alerta-texto');
 
-    alerta.classList.remove('d-none', 'alert-success', 'alert-danger');
-    alerta.classList.add(`alert-${tipo}`);
-    texto.textContent = mensaje;
+            alerta.classList.remove('d-none', 'alert-success', 'alert-danger');
+            alerta.classList.add(`alert-${tipo}`);
+            texto.textContent = mensaje;
 
-    setTimeout(() => alerta.classList.add('d-none'), 3000);
-}
-
-document.querySelector('form').addEventListener('submit', function (e) {
-
-    
-      // VALIDAR CAMPOS VACÍOS
-
-    const campos = [
-        'id_tanque',
-        'id_actividad',
-        'ph',
-        'temperatura',
-        'cloro',
-        'num_alevines',
-        'num_machos',
-        'num_hembras',
-        'observaciones'
-    ];
-
-    for (let campo of campos) {
-        const input = document.querySelector(`[name="${campo}"]`);
-        if (!input || !input.value.trim()) {
-            mostrarAlerta('Todos los campos son obligatorios');
-            e.preventDefault();
-            return;
+            setTimeout(() => alerta.classList.add('d-none'), 3000);
         }
-    }
 
-   
-      // OBTENER INPUTS PARA VALIDAR
- 
-    const phInput = document.querySelector('[name="ph"]');
-    const tempInput = document.querySelector('[name="temperatura"]');
-    const cloroInput = document.querySelector('[name="cloro"]');
-
-    const alevinesInput = document.querySelector('[name="num_alevines"]');
-    const machosInput = document.querySelector('[name="num_machos"]');
-    const hembrasInput = document.querySelector('[name="num_hembras"]');
-
-    
-       // VALIDAR CARACTERES
-
-    const decimal = /^[0-9]+(\.[0-9]+)?$/;
-    const decimalNeg = /^-?[0-9]+(\.[0-9]+)?$/;
-    const entero = /^[0-9]+$/;
-
-    if (!decimal.test(phInput.value)) {
-        mostrarAlerta('El pH solo admite números y decimales');
-        e.preventDefault(); return;
-    }
-
-    if (!decimal.test(cloroInput.value)) {
-        mostrarAlerta('El cloro solo admite números y decimales');
-        e.preventDefault(); return;
-    }
-
-    if (!decimalNeg.test(tempInput.value)) {
-        mostrarAlerta('La temperatura solo admite números');
-        e.preventDefault(); return;
-    }
-
-    if (
-        !entero.test(alevinesInput.value) ||
-        !entero.test(machosInput.value) ||
-        !entero.test(hembrasInput.value)
-    ) {
-        mostrarAlerta('Los datos de peces solo admiten números enteros');
-        e.preventDefault(); return;
-    }
-
-    const alevines = parseInt(alevinesInput.value);
-    const machos = parseInt(machosInput.value);
-    const hembras = parseInt(hembrasInput.value);
-
-    
-});
-</script>
+        document.querySelector('form').addEventListener('submit', function(e) {
 
 
+            // VALIDAR CAMPOS VACÍOS
 
+            const campos = [
+                'id_tanque',
+                'id_actividad',
+                'ph',
+                'temperatura',
+                'cloro',
+                'num_alevines',
+                'num_machos',
+                'num_hembras',
+                'observaciones'
+            ];
+
+            for (let campo of campos) {
+                const input = document.querySelector(`[name="${campo}"]`);
+                if (!input || !input.value.trim()) {
+                    mostrarAlerta('Todos los campos son obligatorios');
+                    e.preventDefault();
+                    return;
+                }
+            }
+
+
+            // OBTENER INPUTS PARA VALIDAR
+
+            const phInput = document.querySelector('[name="ph"]');
+            const tempInput = document.querySelector('[name="temperatura"]');
+            const cloroInput = document.querySelector('[name="cloro"]');
+
+            const alevinesInput = document.querySelector('[name="num_alevines"]');
+            const machosInput = document.querySelector('[name="num_machos"]');
+            const hembrasInput = document.querySelector('[name="num_hembras"]');
+
+
+            // VALIDAR CARACTERES
+
+            const decimal = /^[0-9]+(\.[0-9]+)?$/;
+            const decimalNeg = /^-?[0-9]+(\.[0-9]+)?$/;
+            const entero = /^[0-9]+$/;
+
+            if (!decimal.test(phInput.value)) {
+                mostrarAlerta('El pH solo admite números y decimales');
+                e.preventDefault();
+                return;
+            }
+
+            if (!decimal.test(cloroInput.value)) {
+                mostrarAlerta('El cloro solo admite números y decimales');
+                e.preventDefault();
+                return;
+            }
+
+            if (!decimalNeg.test(tempInput.value)) {
+                mostrarAlerta('La temperatura solo admite números');
+                e.preventDefault();
+                return;
+            }
+
+            if (
+                !entero.test(alevinesInput.value) ||
+                !entero.test(machosInput.value) ||
+                !entero.test(hembrasInput.value)
+            ) {
+                mostrarAlerta('Los datos de peces solo admiten números enteros');
+                e.preventDefault();
+                return;
+            }
+
+            const alevines = parseInt(alevinesInput.value);
+            const machos = parseInt(machosInput.value);
+            const hembras = parseInt(hembrasInput.value);
+
+
+        });
+    </script>
 
 </body>
-
 </html>

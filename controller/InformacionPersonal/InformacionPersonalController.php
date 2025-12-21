@@ -8,15 +8,18 @@ if (!isset($_SESSION['auth'])) {
 
 include_once '../model/InformacionPersonal/InformacionPersonalModel.php';
 
-class InformacionPersonalController {
+class InformacionPersonalController
+{
 
     private $model;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->model = new InformacionPersonalModel();
     }
 
-    public function getInformacion() {
+    public function getInformacion()
+    {
         $documento = $_SESSION['documento'];
 
         $sql = "SELECT 
@@ -30,7 +33,7 @@ class InformacionPersonalController {
                     r.nombre_rol
                 FROM usuarios u
                 LEFT JOIN rol r ON u.id_rol = r.id_rol
-                WHERE u.documento = '".$documento."'";
+                WHERE u.documento = '" . $documento . "'";
 
         $usuario = $this->model->select($sql);
 
@@ -43,7 +46,8 @@ class InformacionPersonalController {
         include_once "C:/ms4w/Apache/htdocs/GEOSALUD/view/informacionPersonal/InformacionPersonal.php";
     }
 
-    public function postUpdate() {
+    public function postUpdate()
+    {
         $documento = $_SESSION['documento'];
         $nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : '';
         $apellido = isset($_POST['apellido']) ? trim($_POST['apellido']) : '';
@@ -73,11 +77,11 @@ class InformacionPersonalController {
         }
 
         $sql = "UPDATE usuarios SET 
-                    nombre = '".pg_escape_string($nombre)."', 
-                    apellido = '".pg_escape_string($apellido)."', 
-                    telefono = '".pg_escape_string($telefono)."', 
-                    correo = '".pg_escape_string(strtolower($correo))."' 
-                WHERE documento = '".$documento."'";
+                    nombre = '" . pg_escape_string($nombre) . "', 
+                    apellido = '" . pg_escape_string($apellido) . "', 
+                    telefono = '" . pg_escape_string($telefono) . "', 
+                    correo = '" . pg_escape_string(strtolower($correo)) . "' 
+                WHERE documento = '" . $documento . "'";
 
         if ($this->model->update($sql)) {
             $_SESSION['nombreCompleto'] = $nombre . ' ' . $apellido;
@@ -87,7 +91,8 @@ class InformacionPersonalController {
         }
     }
 
-    public function postCambiarContrasena() {
+    public function postCambiarContrasena()
+    {
         $documento = $_SESSION['documento'];
         $contrasenaActual = isset($_POST['contrasena_actual']) ? trim($_POST['contrasena_actual']) : '';
         $contrasenaNueva = isset($_POST['contrasena_nueva']) ? trim($_POST['contrasena_nueva']) : '';
@@ -98,14 +103,14 @@ class InformacionPersonalController {
             return;
         }
 
-        $sqlVerificar = "SELECT contrasena FROM usuarios WHERE documento = '".$documento."'";
+        $sqlVerificar = "SELECT contrasena FROM usuarios WHERE documento = '" . $documento . "'";
         $result = $this->model->select($sqlVerificar);
-        
+
         if (!$result || pg_num_rows($result) == 0) {
             $this->alerta('danger', 'Usuario no encontrado');
             return;
         }
-        
+
         $row = pg_fetch_assoc($result);
 
         if ($row['contrasena'] !== $contrasenaActual) {
@@ -123,7 +128,7 @@ class InformacionPersonalController {
             return;
         }
 
-        $sql = "UPDATE usuarios SET contrasena = '".pg_escape_string($contrasenaNueva)."' WHERE documento = '".$documento."'";
+        $sql = "UPDATE usuarios SET contrasena = '" . pg_escape_string($contrasenaNueva) . "' WHERE documento = '" . $documento . "'";
 
         if ($this->model->update($sql)) {
             $this->alerta('success', 'Contrasena actualizada correctamente');
@@ -132,24 +137,28 @@ class InformacionPersonalController {
         }
     }
 
-    /* ============================
-       MÉTODOS DE VALIDACIÓN
-    ============================ */
 
-    private function camposObligatorios($nombre, $apellido, $telefono, $correo) {
+    // MÉTODOS DE VALIDACIÓN
+
+
+    private function camposObligatorios($nombre, $apellido, $telefono, $correo)
+    {
         return !empty($nombre) && !empty($apellido) && !empty($telefono) && !empty($correo);
     }
 
-    private function soloTexto($texto) {
+    private function soloTexto($texto)
+    {
         return preg_match('/^[a-zA-Z\s]+$/', $texto);
     }
 
-    private function soloNumeros($numero) {
+    private function soloNumeros($numero)
+    {
         return preg_match('/^[0-9]+$/', $numero);
     }
 
-    private function validarCorreoProfesional($correo) {
-        
+    private function validarCorreoProfesional($correo)
+    {
+
         if (empty($correo)) {
             return 'El correo electronico es obligatorio';
         }
@@ -159,7 +168,7 @@ class InformacionPersonalController {
         if (strlen($correo) < 10) {
             return 'El correo electronico debe tener al menos 10 caracteres';
         }
-        
+
         if (strlen($correo) > 100) {
             return 'El correo electronico es demasiado largo (maximo 100 caracteres)';
         }
@@ -221,7 +230,7 @@ class InformacionPersonalController {
         }
 
         $partesDominio = explode('.', $dominio);
-        
+
         if (count($partesDominio) < 2) {
             return 'El dominio debe tener al menos un punto (ejemplo: gmail.com)';
         }
@@ -230,14 +239,14 @@ class InformacionPersonalController {
             if (strlen($parte) < 2) {
                 return 'Cada parte del dominio debe tener al menos 2 caracteres';
             }
-            
+
             if (!preg_match('/[a-z]/', $parte)) {
                 return 'Cada parte del dominio debe contener al menos una letra';
             }
         }
 
         $extension = end($partesDominio);
-        
+
         if (strlen($extension) < 2 || strlen($extension) > 6) {
             return 'La extension del dominio debe tener entre 2 y 6 caracteres';
         }
@@ -247,14 +256,68 @@ class InformacionPersonalController {
         }
 
         $extensionesValidas = array(
-            'com', 'net', 'org', 'edu', 'gov', 'mil', 'int',
-            'info', 'biz', 'name', 'pro', 'aero', 'coop', 'museum',
-            'travel', 'mobi', 'tel', 'asia', 'cat', 'jobs', 'post',
-            'tech', 'io', 'ai', 'app', 'dev', 'cloud', 'digital',
-            'co', 'mx', 'ar', 'cl', 'pe', 'uy', 'ec', 've', 'py', 'bo',
-            'cr', 'pa', 'gt', 'hn', 'sv', 'ni', 'do', 'cu', 'pr',
-            'es', 'uk', 'fr', 'de', 'it', 'ca', 'au', 'nz', 'jp', 'cn',
-            'in', 'br', 'ru', 'za', 'us'
+            'com',
+            'net',
+            'org',
+            'edu',
+            'gov',
+            'mil',
+            'int',
+            'info',
+            'biz',
+            'name',
+            'pro',
+            'aero',
+            'coop',
+            'museum',
+            'travel',
+            'mobi',
+            'tel',
+            'asia',
+            'cat',
+            'jobs',
+            'post',
+            'tech',
+            'io',
+            'ai',
+            'app',
+            'dev',
+            'cloud',
+            'digital',
+            'co',
+            'mx',
+            'ar',
+            'cl',
+            'pe',
+            'uy',
+            'ec',
+            've',
+            'py',
+            'bo',
+            'cr',
+            'pa',
+            'gt',
+            'hn',
+            'sv',
+            'ni',
+            'do',
+            'cu',
+            'pr',
+            'es',
+            'uk',
+            'fr',
+            'de',
+            'it',
+            'ca',
+            'au',
+            'nz',
+            'jp',
+            'cn',
+            'in',
+            'br',
+            'ru',
+            'za',
+            'us'
         );
 
         if (!in_array($extension, $extensionesValidas)) {
@@ -262,14 +325,24 @@ class InformacionPersonalController {
         }
 
         $nombreDominio = $partesDominio[count($partesDominio) - 2];
-        
+
         if (strlen($nombreDominio) < 3) {
             return 'El nombre del dominio es demasiado corto';
         }
 
         $dominiosGenericos = array(
-            'correo', 'email', 'mail', 'test', 'prueba', 'ejemplo',
-            'example', 'demo', 'temp', 'temporal', 'fake', 'falso'
+            'correo',
+            'email',
+            'mail',
+            'test',
+            'prueba',
+            'ejemplo',
+            'example',
+            'demo',
+            'temp',
+            'temporal',
+            'fake',
+            'falso'
         );
 
         if (in_array($nombreDominio, $dominiosGenericos)) {
@@ -286,9 +359,19 @@ class InformacionPersonalController {
         }
 
         $dominiosTemporales = array(
-            'tempmail', '10minutemail', 'guerrillamail', 'mailinator',
-            'maildrop', 'throwaway', 'trash-mail', 'getnada', 'yopmail',
-            'fakeinbox', 'trashmail', 'mailnesia', 'spamgourmet'
+            'tempmail',
+            '10minutemail',
+            'guerrillamail',
+            'mailinator',
+            'maildrop',
+            'throwaway',
+            'trash-mail',
+            'getnada',
+            'yopmail',
+            'fakeinbox',
+            'trashmail',
+            'mailnesia',
+            'spamgourmet'
         );
 
         foreach ($dominiosTemporales as $tempDomain) {
@@ -300,10 +383,10 @@ class InformacionPersonalController {
         return true;
     }
 
-    private function alerta($tipo, $mensaje) {
+    private function alerta($tipo, $mensaje)
+    {
         $_SESSION['alert'] = array('type' => $tipo, 'message' => $mensaje);
-        echo "<script>window.location.href='".getUrl("InformacionPersonal","InformacionPersonal","getInformacion")."';</script>";
+        echo "<script>window.location.href='" . getUrl("InformacionPersonal", "InformacionPersonal", "getInformacion") . "';</script>";
         exit;
     }
 }
-?>

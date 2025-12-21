@@ -90,13 +90,14 @@ if (isset($_SESSION['alert'])) {
                 <!-- BOTONES DE NUEVA ACTIVIDAD, ORDEN POR ID Y FECHA) -->
                 <div class="col-md-6 col-12">
                     <div class="d-flex justify-content-md-end align-items-center gap-1 mt-5">
-
+                       <?php if (in_array('registrar', $permisos['TiposDeActividades'])) { ?>
                         <button
                             class="btn btn-primary"
                             data-bs-toggle="modal"
                             data-bs-target="#modalNuevo">
                             <i class="fas fa-plus"></i> Nueva Actividad
                         </button>
+                        <?php } ?>
 
                         <button
                             class="btn btn-outline-primary"
@@ -145,19 +146,23 @@ if (isset($_SESSION['alert'])) {
                                 <td class="text-center">
                                     <?php if ($actividad['nombre_estado_actividades'] === 'Activo') { ?>
                                         <div class="d-flex justify-content-center gap-2 flex-nowrap acciones-btns">
+                                         <?php if (in_array('actualizar', $permisos['TiposDeActividades'])) { ?>
                                             <button class="btn btn-warning btn-sm"
                                                 onclick="editarActividad(
-                    <?= $actividad['id_actividad'] ?>,
-                    '<?= addslashes($actividad['nombre_actividad']) ?>',
-                    <?= $actividad['id_estado_actividad'] ?>
-                )">
+                                                 <?= $actividad['id_actividad'] ?>,
+                                                '<?= addslashes($actividad['nombre_actividad']) ?>',
+                                                <?= $actividad['id_estado_actividad'] ?>
+                                                )">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
+                                            <?php } ?>
 
+                                             <?php if (in_array('inhabilitar', $permisos['TiposDeActividades'])) { ?>
                                             <button class="btn btn-danger btn-sm"
                                                 onclick="eliminarActividad(<?= $actividad['id_actividad'] ?>)">
                                                 <i class="fas fa-trash"></i> Inhabilitar
                                             </button>
+                                            <?php } ?>
                                         </div>
                                     <?php } else { ?>
                                         <span class="text-muted fst-italic">

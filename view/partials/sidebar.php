@@ -51,16 +51,16 @@
                     </a>
                 </li>
       
-                <?php //if (array_key_exists("TipoActividades", $permisos)){?> 
+                <?php if (array_key_exists("TipoActividades", $permisos)){?> 
                     <li class="nav-item">
                             <a href=" <?php echo getUrl("TipoActividades","ConsultarTipoDeActividades","getConsulta")?>">
                             <i class="fas fa-list-alt"></i>
                             <p>Tipos de actividades</p>
                         </a>
                     </li>
-                <?php //}?>
+                <?php }?>
 
-                <?php //if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
+                <?php if (array_key_exists("SeguimientoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                            
                         <a href="<?php echo getUrl("SeguimientoDeTanques","SeguimientoDeTanques","getConsulta");?>">
@@ -68,7 +68,7 @@
                             <p>Seguimiento de tanques</p>
                         </a>
                     </li>
-                <?php//  }?>
+                <?php  }?>
                 <?php //if (array_key_exists("TipoDeTanques", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("TipoTanques", "TipoTanques", "getConsultar") ?>">
@@ -76,19 +76,19 @@
                             <p>Tipo de tanques</p>
                         </a>
                     </li>
-                <?php// }?> 
+                <?php  //}?> 
 
-                <?php //if (array_key_exists("PermisoRoles", $permisos)){ ?>
+                <?php //if (array_key_exists("PermisoRolesss", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("PermisoRoles", "PermisoRoles", "getConsultar") ?>">
                             <i class="fas fa-th-large"></i>
                             <p>Permiso de roles</p>
                         </a>
                     </li>
-                <?php// }?>
+                <?php  //}?>
 
                 
-                <?php //if (array_key_exists("RegistroDeUsuarios", $permisos)){ ?>
+                <?php // if (array_key_exists("RegistroDeUsuarios", $permisos)){ ?>
                     <li class="nav-item">
                         <a href="<?php echo getUrl("RegistroUsuarios","RegistroUsuarios","getCreate")?>">
                             <i class="fas fa-user"></i>
@@ -96,40 +96,6 @@
                         </a>
                     </li>
                 <?php //}?>
-
-                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#reportes">
-                        <i class="fas fa-newspaper"></i>
-                        <p>Reportes</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="reportes">
-                        <ul class="nav nav-collapse">
-                            <?php if (array_key_exists("ReporteSeguimientoAc", $permisos)){ ?>
-                                <li>
-                                    <a href="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","getConsulta")?>">
-                                        <span class="sub-item">Seguimiento de actividades</span>
-                                    </a>
-                                </li>
-                            <?php }?>
-
-                            <?php if (array_key_exists("ReporteNacidosOMuert", $permisos)){ ?>
-                                <li>
-                                    <a href="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","getConsulta")?>">
-                                        <span class="sub-item">Peces Nacidos y muertos </span>
-                                    </a>
-                                </li>
-                            <?php }?>
-                            <?php if (array_key_exists("ReporteTanquesPorZoo", $permisos)){ ?>
-                                <li>
-                                    <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
-                                        <span class="sub-item">Tanques por zoocriadero</span>
-                                    </a>
-                                </li>
-                            <?php }?>
-                        </ul>
-                    </div>
-                </li>
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#configuracion">
@@ -145,10 +111,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                   <?php if (array_key_exists("VideoManual", $permisos)){?>
                                     <a href="<?php echo getUrl('VideoManual', 'VideoManual', 'index'); ?>">
                                         <span class="sub-item">Manuales</span>
                                     </a>
                             </li>
+                            <?php }?>
                             <li class="nav-item">
                                     <a href="<?php echo getUrl('Autores', 'Autores', 'index'); ?>">
                                         <span class="sub-item">Autores</span>
@@ -160,6 +128,39 @@
                     </div>
                 </li>
                 
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#reportes">
+                        <i class="fas fa-newspaper"></i>
+                        <p>Reportes</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="reportes">
+                        <ul class="nav nav-collapse">
+                            <?php //if (array_key_exists("ReporteSeguimiento", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReporteSeguimientoActividades","ReporteSeguimientoActividades","getConsulta")?>">
+                                        <span class="sub-item">Seguimiento de actividades</span>
+                                    </a>
+                                </li>
+                            <?php //}?>
+
+                            <?php //if (array_key_exists("ReporteNacidosOMuertos", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","getConsulta")?>">
+                                        <span class="sub-item">Peces Nacidos y muertos </span>
+                                    </a>
+                                </li>
+                            <?php //}?>
+                            <?php //if (array_key_exists("ReporteTanquesPorZoo", $permisos)){ ?>
+                                <li>
+                                    <a href="<?php echo getUrl("ReportesTanquesZoocriadero", "ReportesTanquesZoocriadero", "getConsulta");?>">
+                                        <span class="sub-item">Tanques por zoocriadero</span>
+                                    </a>
+                                </li>
+                            <?php //}?>
+                        </ul>
+                    </div>
             </ul>
         </div>
     </div>

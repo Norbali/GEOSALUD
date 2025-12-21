@@ -1,5 +1,5 @@
-<?php 
-    include_once '../lib/helpers.php';
+<?php
+include_once '../lib/helpers.php';
 ?>
 
 <div style="position: relative; top: -70px;">
@@ -9,7 +9,7 @@
         </div>
 
         <div class="card-body">
-            <form id="filtrosReporte" class="row g-3" method="POST" action="<?php echo getUrl("ReportesNacidosMuertos","ReportesNacidosMuertos","filtro")?>">
+            <form id="filtrosReporte" class="row g-3" method="POST" action="<?php echo getUrl("ReportesNacidosMuertos", "ReportesNacidosMuertos", "filtro") ?>">
 
                 <!-- Fecha inicio -->
                 <div class="col-md-4">
@@ -44,7 +44,7 @@
                     <button type="submit" name="accion" value="reporte" class="btn btn-primary btn-sm">
                         Generar Reporte
                     </button>
-                </div>   
+                </div>
             </form>
         </div>
     </div>
@@ -87,12 +87,12 @@
                     </tbody>
                 </table>
                 <?php
-                    if (isset($_SESSION['sinResultadoNacidosMuertos'])) {
-                        echo '<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+                if (isset($_SESSION['sinResultadoNacidosMuertos'])) {
+                    echo '<div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
                                 ' . $_SESSION['sinResultadoNacidosMuertos'] . '
                             </div>';
-                        unset($_SESSION['sinResultadoNacidosMuertos']);
-                    }
+                    unset($_SESSION['sinResultadoNacidosMuertos']);
+                }
                 ?>
             </div>
         </div>
@@ -166,14 +166,27 @@
         const ws = XLSX.utils.aoa_to_sheet(datos);
 
         //ANCHO DE COLUMNAS
-        ws['!cols'] = [
-            { wch: 12 }, // Fecha
-            { wch: 25 }, // Zoocriadero
-            { wch: 10 }, // Id Tanque
-            { wch: 10 }, // Nacidos
-            { wch: 18 }, // Muertes Hembras
-            { wch: 18 }, // Muertes Machos
-            { wch: 15 }  // Total Muertes
+        ws['!cols'] = [{
+                wch: 12
+            }, // Fecha
+            {
+                wch: 25
+            }, // Zoocriadero
+            {
+                wch: 10
+            }, // Id Tanque
+            {
+                wch: 10
+            }, // Nacidos
+            {
+                wch: 18
+            }, // Muertes Hembras
+            {
+                wch: 18
+            }, // Muertes Machos
+            {
+                wch: 15
+            } // Total Muertes
         ];
 
         XLSX.utils.book_append_sheet(wb, ws, 'Nacidos y Muertos');
@@ -186,7 +199,7 @@
     }
 
 
-    document.getElementById('filtrosReporte').addEventListener('submit', function (e) {
+    document.getElementById('filtrosReporte').addEventListener('submit', function(e) {
         e.preventDefault();
 
         // Limpiar errores

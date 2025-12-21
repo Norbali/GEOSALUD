@@ -18,7 +18,7 @@ ob_start();
                             resolve();
                         }else{
                             //include_once '../view/partials/content.php';
-                            include_once '../view/Mapa/vistaIndex.php';
+                            include_once '../view/Mapa/indexMapa.php';
                         }
                     echo "</div>";
                 echo "</div>";

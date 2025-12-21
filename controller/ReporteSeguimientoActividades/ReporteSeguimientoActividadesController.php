@@ -2,9 +2,11 @@
 
 include_once '../model/ReportesSeguimientoActividades/ReporteSeguimientoActividadesModel.php';
 
-class ReporteSeguimientoActividadesController{
+class ReporteSeguimientoActividadesController
+{
 
-    public function getConsulta(){
+    public function getConsulta()
+    {
         $obj = new ReporteSeguimientoActividadesModel();
 
         $sqlActividades = "SELECT * FROM actividad WHERE id_estado_actividad=1";
@@ -14,11 +16,12 @@ class ReporteSeguimientoActividadesController{
         $zoocriaderos = $obj->select($sqlZoocriaderos);
 
         $consultaSeguimiento = $this->listarSeguimiento();
-        
-        include_once '../view/reportesSeguimientoActividades/reporteSeguimientoActividades.php';
-    } 
 
-    public function listarSeguimiento(){
+        include_once '../view/reportesSeguimientoActividades/reporteSeguimientoActividades.php';
+    }
+
+    public function listarSeguimiento()
+    {
         $obj = new ReporteSeguimientoActividadesModel();
 
         $sql = "
@@ -54,7 +57,8 @@ class ReporteSeguimientoActividadesController{
         return $obj->select($sql);
     }
 
-    public function filtro(){
+    public function filtro()
+    {
         $obj = new ReporteSeguimientoActividadesModel();
 
         $fecha_inicio = isset($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : '';
@@ -106,8 +110,4 @@ class ReporteSeguimientoActividadesController{
 
         include_once '../view/reportesSeguimientoActividades/reporteSeguimientoActividades.php';
     }
-      
-    
 }
-
-?>

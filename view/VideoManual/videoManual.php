@@ -77,7 +77,7 @@
             margin-right: 8px;
         }
 
-        /* VIDEO SECTION */
+        /* VIDEO SECCION */
         .video-section {
             max-width: 1200px;
             margin: 0 auto;
