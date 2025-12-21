@@ -1,3 +1,7 @@
+<?php 
+    include_once('../../lib/helpers.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -96,9 +100,46 @@
                         <h5 class="modal-title">Ingresar nombre</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="modal-body">
-                        <input type="text" id="nombrePunto" class="form-control" placeholder="Nombre del punto">
-                    </div>
+                        <div class="form-group">
+                            <label for="id_zoocriadero">ID Zoocriadero</label>
+                            <input type="number" class="form-control" id="id_zoocriadero" name="id_zoocriadero" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre_zoocriadero">Nombre del Zoocriadero</label>
+                            <input type="text" class="form-control" id="nombre_zoocriadero" name="nombre_zoocriadero" maxlength="150" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="direccion_zoocriadero">Dirección</label>
+                            <input type="text" class="form-control" id="direccion_zoocriadero" name="direccion_zoocriadero" maxlength="200" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono_zoocriadero">Teléfono</label>
+                            <input type="number" class="form-control" id="telefono_zoocriadero" name="telefono_zoocriadero" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correo_zoocriadero">Correo electrónico</label>
+                            <input type="email" class="form-control" id="correo_zoocriadero" name="correo_zoocriadero" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="barrio">Barrio</label>
+                            <input type="text" class="form-control" id="barrio" name="barrio" maxlength="100" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comuna">Comuna</label>
+                            <input type="text" class="form-control" id="comuna" name="comuna" maxlength="50" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="documento_responsable">Documento del Responsable</label>
+                            <input type="text" class="form-control" id="documento_responsable" name="documento_responsable" maxlength="20" required>
+                        </div>
+
                     <div class="modal-footer">
                         <button class="btn btn-primary" id="btnGuardarNombre">Guardar</button>
                     </div>
@@ -187,13 +228,29 @@
                 // Boton guardar dentro del modal
                 document.getElementById("btnGuardarNombre").onclick = function () {
                     //recoger valor de input
-                    let nombre = document.getElementById("nombrePunto").value;
+                    let id_zoocriadero = document.getElementById("id_zoocriadero").value;
+                    let nombre_zoocriadero = document.getElementById("nombre_zoocriadero").value;
+                    let direccion_zoocriadero = document.getElementById("direccion_zoocriadero").value;
+                    let telefono_zoocriadero = document.getElementById("telefono_zoocriadero").value;
+                    let correo_zoocriadero = document.getElementById("correo_zoocriadero").value;
+                    let barrio = document.getElementById("barrio").value;
+                    let comuna = document.getElementById("comuna").value;
+                    let documento_responsable = document.getElementById("documento_responsable").value;
 
                     consulta1 = objetoAjax();
                     consulta1.open(
                         "GET",
-                        "insertar_punto.php?x=" + xx + "&y=" + yy + "&nombre=" + nombre,
-                        //AQUI COLOCAR LOS VALORES QUE SE VA HACER EL REGISTRO
+                        "<?php echo getUrl('Mapa','Mapa','registrarZoocriadero', false, 'ajaxMapa'); ?>"
+                        + "?x=" + xx
+                        + "&y=" + yy
+                        + "&id_zoocriadero=" + id_zoocriadero
+                        + "&nombre_zoocriadero=" + nombre_zoocriadero
+                        + "&direccion_zoocriadero=" + direccion_zoocriadero
+                        + "&telefono_zoocriadero=" + telefono_zoocriadero
+                        + "&correo_zoocriadero=" + correo_zoocriadero
+                        + "&barrio=" + barrio
+                        + "&comuna=" + comuna
+                        + "&documento_responsable=" + documento_responsable,
                         true
                     );
 
