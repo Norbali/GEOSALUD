@@ -131,64 +131,6 @@ class AccesoController
             return $mensaje;
         }
 
-        //validar credenciales
-        //validar bd codumento
-        public function validarCredencialDocumento($documento){
-            $obj = new AccesoModel();
-
-            $sql = "SELECT * FROM usuarios WHERE documento = '$documento'";
-            $usuario = $obj->select($sql);
-
-            if(pg_num_rows($usuario)>0){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        //validar bd contraseña
-        public function validarCredencialContraseña($documento, $contrasena){
-            $obj = new AccesoModel();
-            $hash = sha1($contrasena);
-
-            $sql = "SELECT * FROM usuarios WHERE documento = '$documento' AND contrasena = '$hash'";
-            $usuario = $obj->select($sql);
-
-            if(pg_num_rows($usuario)>0){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        public function obtenerValorCampo($documento, $campo) {
-            $obj = new AccesoModel();
-
-            $sql = "SELECT $campo FROM usuarios WHERE documento = '$documento'";
-            $usuario = $obj->select($sql);
-
-            if (pg_num_rows($usuario) > 0) {
-                $row = pg_fetch_assoc($usuario);
-                return $row[$campo];  
-            } else {
-                return false;
-            }
-        }
-
-        public function obtenerNombreRol($idRol) {
-            $obj = new AccesoModel();
-            $sql = "SELECT nombre_rol FROM rol WHERE id_rol = $idRol";
-
-            $resultado = $obj->select($sql);
-
-            if (pg_num_rows($resultado) > 0) {
-                $row = pg_fetch_assoc($resultado);
-                return $row['nombre_rol'];
-            } else {
-                return null; 
-            }
-        }
-
         return $permisos;
     }
 
